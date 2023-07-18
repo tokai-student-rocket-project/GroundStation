@@ -1,6 +1,6 @@
 export const FlightModePanel = () => {
   return (
-    <div className="tile is-child box has-background-dark">
+    <div className="tile is-child box has-background-dark p-3">
       <div className="is-flex is-justify-content-center">
         <p className="heading has-text-light">Flight Mode</p>
       </div>
