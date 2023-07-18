@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Router } from "../../router/Router";
 
+import "bulma/css/bulma.css";
 import "./styles.css";
 
 export const App = () => {
