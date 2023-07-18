@@ -6,14 +6,14 @@ export const Main = () => {
   return (
     <div>
       <TopPanel />
-      <div className="tile is-ancestor m-4">
-        <div className="tile is-4 is-vertical is-parent">
+      <div className="columns is-multiline m-2">
+        <div className="column is-one-third">
           <CommunicationPanel />
         </div>
-        <div className="tile is-4 is-vertical is-parent">
+        <div className="column is-one-third">
           <FlightModePanel />
         </div>
-        <div className="tile is-4 is-vertical is-parent"></div>
+        <div className="column is-one-third"></div>
       </div>
     </div>
   );

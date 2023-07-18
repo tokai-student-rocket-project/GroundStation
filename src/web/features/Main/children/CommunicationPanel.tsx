@@ -1,6 +1,6 @@
 export const CommunicationPanel = () => {
   return (
-    <div className="tile is-child box has-background-dark p-3">
+    <div className="box has-background-dark p-3">
       <h2 className="title has-text-light has-text-weight-light">
         COMMUNICATION
       </h2>
