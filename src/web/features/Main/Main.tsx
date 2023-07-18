@@ -1,26 +1,16 @@
-import { TopLeftPanel } from "./children/TopLeftPanel";
-import { TopCenterPanel } from "./children/TopCenterPanel";
-import { TopRightPanel } from "./children/TopRightPanel";
+import { TopPanel } from "./children/TopPanel";
+import { FlightModePanel } from "./children/FlightModePanel";
 
 export const Main = () => {
   return (
-    <div className="has-background-dark px-6 py-4">
-      <div className="columns">
-        <div
-          className="column pb-2 m-2"
-          style={{ borderBottom: `solid 1px hsl(0, 0%, 96%)` }}
-        >
-          <TopLeftPanel />
+    <div>
+      <TopPanel />
+      <div className="tile is-ancestor m-4">
+        <div className="tile is-4 is-vertical is-parent"></div>
+        <div className="tile is-4 is-vertical is-parent">
+          <FlightModePanel />
         </div>
-        <div className="column is-2 is-flex is-justify-content-center mb-3">
-          <TopCenterPanel />
-        </div>
-        <div
-          className="column pb-2 m-2"
-          style={{ borderBottom: `solid 1px hsl(0, 0%, 96%)` }}
-        >
-          <TopRightPanel />
-        </div>
+        <div className="tile is-4 is-vertical is-parent"></div>
       </div>
     </div>
   );
