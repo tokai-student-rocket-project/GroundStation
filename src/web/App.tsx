@@ -1,13 +1,14 @@
-import { useState } from "react";
-import "./App.css";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+
+import { Dummy } from "./components/Dummy/Dummy";
 
 export const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="container">
-      <h1>{count}</h1>
-      <button onClick={() => setCount((count) => count + 1)}>Count</button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dummy />} />
+      </Routes>
+      <Link to="/">Back To Top</Link>
+    </BrowserRouter>
   );
 };
