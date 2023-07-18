@@ -12,7 +12,7 @@ export const FlightModePanel = () => {
         </div>
         <div className="column is-1">
           <p className="is-size-4 has-text-grey-light has-text-weight-semibold has-text-centered">
-            {"<"}
+            {">"}
           </p>
         </div>
         <div className="column">
@@ -22,7 +22,7 @@ export const FlightModePanel = () => {
         </div>
         <div className="column is-1">
           <p className="is-size-4 has-text-grey-light has-text-weight-semibold has-text-centered">
-            {"<"}
+            {">"}
           </p>
         </div>
         <div className="column">
