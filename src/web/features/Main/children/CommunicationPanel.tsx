@@ -7,7 +7,7 @@ export const CommunicationPanel = () => {
       <div className="columns is-variable is-1">
         <div className="column is-4">
           <p className="has-text-centered has-text-light">Mission Data</p>
-          <div className="box has-background-black-ter p-1">
+          <div className="box has-background-black-ter p-1 mb-2">
             <div className="is-flex is-justify-content-space-evenly">
               <p className=" has-text-light has-text-right is-size-7">
                 925.8 MHz
@@ -15,10 +15,77 @@ export const CommunicationPanel = () => {
               <p className=" has-text-light has-text-left is-size-7">500 kHz</p>
             </div>
           </div>
+          <div className="box has-background-black-ter p-2">
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      RSSI :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"----"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      dBm
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      SNR :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"--"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      dBm
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      DR :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"--"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      Hz
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+
         <div className="column is-4">
           <p className="has-text-centered has-text-light">Air Data</p>
-          <div className="box has-background-black-ter p-1">
+          <div className="box has-background-black-ter p-1 mb-2">
             <div className="is-flex is-justify-content-space-evenly">
               <p className=" has-text-light has-text-right is-size-7">
                 923.8 MHz
@@ -26,16 +93,149 @@ export const CommunicationPanel = () => {
               <p className=" has-text-light has-text-left is-size-7">500 kHz</p>
             </div>
           </div>
+          <div className="box has-background-black-ter p-2">
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      RSSI :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"----"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      dBm
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      SNR :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"--"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      dBm
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      DR :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"--"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      Hz
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+
         <div className="column is-4">
           <p className="has-text-centered has-text-light">System Data</p>
-          <div className="box has-background-black-ter p-1">
+          <div className="box has-background-black-ter p-1 mb-2">
             <div className="is-flex is-justify-content-space-evenly">
               <p className=" has-text-light has-text-right is-size-7">
                 921.8 MHz
               </p>
               <p className=" has-text-light has-text-left is-size-7">250 kHz</p>
             </div>
+          </div>
+          <div className="box has-background-black-ter p-2">
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      RSSI :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"----"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      dBm
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      SNR :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"--"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      dBm
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      DR :
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      {"--"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-light has-text-right is-size-7">
+                      Hz
+                    </p>
+                  </td>
+                  <td>
+                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
