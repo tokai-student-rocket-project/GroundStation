@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Router } from "./router/Router";
+import { Router } from "../../router/Router";
 
-import "./App.css";
+import "./styles.css";
 
 export const App = () => {
   const navigate = useNavigate();
