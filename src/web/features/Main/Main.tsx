@@ -1,3 +1,5 @@
+import { TopPanel } from "./children/TopPanel";
+
 export const Main = () => {
-  return <></>;
+  return <TopPanel />;
 };
