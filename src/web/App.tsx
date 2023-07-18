@@ -1,17 +1,19 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Dummy } from "./components/Dummy/Dummy";
-import { Welcome } from "./components/Welcome/Welcome";
+import { Router } from "./router/Router";
 
 import "./App.css";
 
 export const App = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/*" element={<Welcome />} />
-        <Route path="/dummy" element={<Dummy />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 起動から3秒経ったらコンテンツに遷移する処理
+    setTimeout(() => {
+      navigate("/dummy");
+    }, 3000);
+  }, []);
+
+  return <Router />;
 };
