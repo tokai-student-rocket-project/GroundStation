@@ -11,7 +11,7 @@ export const App = () => {
   useEffect(() => {
     // 起動から3秒経ったらコンテンツに遷移する処理
     setTimeout(() => {
-      navigate("/dummy");
+      navigate("/main");
     }, 3000);
   }, []);
 
