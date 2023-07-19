@@ -1,7 +1,7 @@
 export const CommunicationPanel = () => {
   return (
     <div className="box has-background-dark p-3">
-      <h2 className="title has-text-light has-text-weight-light">
+      <h2 className="title is-4 has-text-light has-text-weight-light">
         COMMUNICATION
       </h2>
       <div className="columns is-variable is-1">
