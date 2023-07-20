@@ -13,7 +13,7 @@ export const App = () => {
     // 起動から3秒経ったらコンテンツに遷移する処理
     setTimeout(() => {
       navigate("/main");
-    }, 200);
+    }, 500);
   }, []);
 
   return <Router />;
