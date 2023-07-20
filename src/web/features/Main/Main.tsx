@@ -10,10 +10,13 @@ import { ValveSystemPanel } from "./children/ValveSystemPanel";
 
 export const Main = () => {
   return (
-    <div>
+    <div
+      className="is-flex is-flex-direction-column"
+      style={{ height: "100%" }}
+    >
       <TopPanel />
-      <div className="columns is-multiline m-2">
-        <div className="column is-one-third">
+      <div className="columns is-multiline m-2" style={{ height: "100%" }}>
+        <div className="column is-one-third is-flex is-flex-direction-column">
           <CommunicationPanel />
           <CommandPanel />
           <PowerSystemPanel />
@@ -21,7 +24,7 @@ export const Main = () => {
         <div className="column is-one-third">
           <FlightModePanel />
         </div>
-        <div className="column is-one-third">
+        <div className="column is-one-third is-flex is-flex-direction-column">
           <MissionPanel />
           <div className="columns">
             <div className="column is-half">
