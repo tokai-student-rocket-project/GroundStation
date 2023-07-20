@@ -10,7 +10,7 @@ export const CommandPanel = () => {
       >
         <div>FLIGHT MODE ON</div>
       </button>
-      <header className="header has-text-light is-flex is-justify-content-flex-end mx-4">
+      <header className="header has-text-light is-flex is-justify-content-center mx-4 my-2">
         Ctrl + Opt + F
       </header>
     </div>

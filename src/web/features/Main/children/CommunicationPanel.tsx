@@ -239,9 +239,6 @@ export const CommunicationPanel = () => {
           </div>
         </div>
       </div>
-      <h3 className="title is-5 has-text-light has-text-weight-light">
-        Downlink
-      </h3>
       <div className="box has-background-black-ter p-2">
         <table width="100%">
           <tbody>

@@ -18,7 +18,13 @@ export const Main = () => {
       <div className="columns is-multiline m-2" style={{ height: "100%" }}>
         <div className="column is-one-third is-flex is-flex-direction-column">
           <CommunicationPanel />
-          <CommandPanel />
+          <div className="columns">
+            <div className="column is-half">
+              <CommandPanel />
+            </div>
+            <div className="column is-half"></div>
+          </div>
+
           <PowerSystemPanel />
         </div>
         <div className="column is-one-third">
