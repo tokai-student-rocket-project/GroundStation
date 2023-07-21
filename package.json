@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "postinstall": "electron-rebuild -f -w serialport",
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -24,6 +25,7 @@
     "@vitejs/plugin-react": "^4.0.0",
     "electron": "^24.4.0",
     "electron-builder": "^24.6.1",
+    "electron-rebuild": "^3.2.9",
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
@@ -32,5 +34,7 @@
     "vite-plugin-electron": "^0.11.2",
     "vite-plugin-electron-renderer": "^0.14.5"
   },
-  "main": "dist-electron/main.js"
+  "main": "dist-electron/main.js",
+  "buildDependenciesFromSource": true,
+  "npmRebuild": false
 }

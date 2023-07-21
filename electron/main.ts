@@ -24,6 +24,10 @@ function createWindow() {
     icon: path.join(process.env.PUBLIC, "electron-vite.svg"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      nodeIntegrationInWorker: true,
+      contextIsolation: false,
+      nodeIntegration: true,
+      webSecurity: false,
     },
   });
 
@@ -47,14 +51,3 @@ app.on("window-all-closed", () => {
 });
 
 app.whenReady().then(createWindow);
-
-// ----------------------------------------------------------------------
-import { SerialPort } from "serialport";
-
-SerialPort.list().then((ports) => {
-  ports.forEach((port) => {
-    console.log(port.path);
-    console.log(port.pnpId);
-    console.log(port.manufacturer);
-  });
-});

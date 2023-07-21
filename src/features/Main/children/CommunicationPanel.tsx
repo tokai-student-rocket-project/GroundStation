@@ -1,3 +1,13 @@
+import { SerialPort } from "serialport";
+
+SerialPort.list().then((ports) => {
+  ports.forEach((port) => {
+    console.log(port.path);
+    console.log(port.pnpId);
+    console.log(port.manufacturer);
+  });
+});
+
 export const CommunicationPanel = () => {
   return (
     <div className="box has-background-dark p-3">
