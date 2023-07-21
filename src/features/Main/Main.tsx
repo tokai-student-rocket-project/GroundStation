@@ -1,5 +1,5 @@
 import { TopPanel } from "./children/TopPanel";
-import { CommunicationPanel } from "./children/CommunicationPanel";
+import { CommunicationPanel } from "./children/CommunicationPanel/CommunicationPanel";
 import { CommandPanel } from "./children/CommandPanel";
 import { PowerSystemPanel } from "./children/PowerSystemPanel";
 import { FlightModePanel } from "./children/FlightModePanel";
