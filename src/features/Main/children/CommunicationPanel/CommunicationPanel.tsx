@@ -8,39 +8,133 @@ import { SpecBox } from "./children/SpecBox";
 import { SpecStatusBox } from "./children/SpecStatusBox";
 import { RxStatusBox } from "./children/RxStatusBox";
 
+type SpecStatus = {
+  rssi?: number;
+  snr?: number;
+  dataRate: number;
+};
+
 export const CommunicationPanel = () => {
-  const [rssi, setRssi] = useState<number | undefined>(undefined);
-  const [snr, setSnr] = useState<number | undefined>(undefined);
-  const [dataRate, setDataRate] = useState<number | undefined>(undefined);
+  const [missionDataSerialport, setMissionDataSerialport] =
+    useState<SerialPort>();
+  const [missionDataSpecStatus, setMissionDataSpecStatus] =
+    useState<SpecStatus>();
 
   const [airDataSerialport, setAirDataSerialport] = useState<SerialPort>();
+  const [airDataSpecStatus, setAirDataSpecStatus] = useState<SpecStatus>();
 
-  const changeAirDataSerialport = (newSerialport: string) => {
-    console.log(newSerialport);
+  const [systemDataSerialport, setSystemDataSerialport] =
+    useState<SerialPort>();
+  const [systemDataSpecStatus, setSystemDataSpecStatus] =
+    useState<SpecStatus>();
+
+  const changeMissionDataSerialport = (newSerialport?: string) => {
+    if (missionDataSerialport?.isOpen) missionDataSerialport.close();
+    setMissionDataSpecStatus(undefined);
+
+    if (!newSerialport) return;
+    setMissionDataSerialport(
+      new SerialPort({
+        path: newSerialport,
+        baudRate: 115200,
+      })
+    );
+  };
+
+  const changeAirDataSerialport = (newSerialport?: string) => {
+    if (airDataSerialport?.isOpen) airDataSerialport.close();
+    setAirDataSpecStatus(undefined);
+
+    if (!newSerialport) return;
+    setAirDataSerialport(
+      new SerialPort({
+        path: newSerialport,
+        baudRate: 115200,
+      })
+    );
+  };
+
+  const changeSystemDataSerialport = (newSerialport?: string) => {
+    if (systemDataSerialport?.isOpen) systemDataSerialport.close();
+    setSystemDataSpecStatus(undefined);
+
+    if (!newSerialport) return;
+    setSystemDataSerialport(
+      new SerialPort({
+        path: newSerialport,
+        baudRate: 115200,
+      })
+    );
   };
 
   useEffect(() => {
+    if (!missionDataSerialport) return;
+
+    const parser = missionDataSerialport.pipe(
+      new ReadlineParser({ delimiter: "\n" })
+    );
+
     let oldTime = new Date().getTime();
-
-    const serialport = new SerialPort({
-      path: "/dev/tty.usbmodem11201",
-      baudRate: 115200,
-    });
-
-    const parser = serialport.pipe(new ReadlineParser({ delimiter: "\n" }));
-
     parser.on("data", (data) => {
       const json = JSON.parse(data);
 
-      setRssi(json.PacketInfo.RSSI);
-      setSnr(json.PacketInfo.SNR);
+      const nowTime = new Date().getTime();
+      const timeDiff = nowTime - oldTime;
+      oldTime = nowTime;
+
+      setMissionDataSpecStatus({
+        rssi: json.PacketInfo.RSSI,
+        snr: json.PacketInfo.SNR,
+        dataRate: 1000 / timeDiff,
+      });
+    });
+  }, [missionDataSerialport]);
+
+  useEffect(() => {
+    if (!airDataSerialport) return;
+
+    const parser = airDataSerialport.pipe(
+      new ReadlineParser({ delimiter: "\n" })
+    );
+
+    let oldTime = new Date().getTime();
+    parser.on("data", (data) => {
+      const json = JSON.parse(data);
 
       const nowTime = new Date().getTime();
       const timeDiff = nowTime - oldTime;
-      setDataRate(1000 / timeDiff);
       oldTime = nowTime;
+
+      setAirDataSpecStatus({
+        rssi: json.PacketInfo.RSSI,
+        snr: json.PacketInfo.SNR,
+        dataRate: 1000 / timeDiff,
+      });
     });
-  }, []);
+  }, [airDataSerialport]);
+
+  useEffect(() => {
+    if (!systemDataSerialport) return;
+
+    const parser = systemDataSerialport.pipe(
+      new ReadlineParser({ delimiter: "\n" })
+    );
+
+    let oldTime = new Date().getTime();
+    parser.on("data", (data) => {
+      const json = JSON.parse(data);
+
+      const nowTime = new Date().getTime();
+      const timeDiff = nowTime - oldTime;
+      oldTime = nowTime;
+
+      setSystemDataSpecStatus({
+        rssi: json.PacketInfo.RSSI,
+        snr: json.PacketInfo.SNR,
+        dataRate: 1000 / timeDiff,
+      });
+    });
+  }, [systemDataSerialport]);
 
   return (
     <div className="box has-background-dark p-3">
@@ -50,9 +144,15 @@ export const CommunicationPanel = () => {
         </h2>
 
         <div>
-          <RssiIcon rssi={rssi} />
+          <RssiIcon
+            rssi1={missionDataSpecStatus?.rssi}
+            rssi2={airDataSpecStatus?.rssi}
+            rssi3={systemDataSpecStatus?.rssi}
+          />
           <SerialportSelector
+            changeMissionDataSerialport={changeMissionDataSerialport}
             changeAirDataSerialport={changeAirDataSerialport}
+            changeSystemDataSerialport={changeSystemDataSerialport}
           />
         </div>
       </div>
@@ -62,9 +162,9 @@ export const CommunicationPanel = () => {
           <p className="has-text-centered has-text-light">Mission Data</p>
           <SpecBox frequency={925_800_000} bandwidth={500_000} />
           <SpecStatusBox
-            rssi={undefined}
-            snr={undefined}
-            dataRate={undefined}
+            rssi={missionDataSpecStatus?.rssi}
+            snr={missionDataSpecStatus?.snr}
+            dataRate={missionDataSpecStatus?.dataRate}
             targetDataRate={50}
           />
         </div>
@@ -73,9 +173,9 @@ export const CommunicationPanel = () => {
           <p className="has-text-centered has-text-light">Air Data</p>
           <SpecBox frequency={923_800_000} bandwidth={500_000} />
           <SpecStatusBox
-            rssi={rssi}
-            snr={snr}
-            dataRate={dataRate}
+            rssi={airDataSpecStatus?.rssi}
+            snr={airDataSpecStatus?.snr}
+            dataRate={airDataSpecStatus?.dataRate}
             targetDataRate={20}
           />
         </div>
@@ -84,9 +184,9 @@ export const CommunicationPanel = () => {
           <p className="has-text-centered has-text-light">System Data</p>
           <SpecBox frequency={921_800_000} bandwidth={250_000} />
           <SpecStatusBox
-            rssi={undefined}
-            snr={undefined}
-            dataRate={undefined}
+            rssi={systemDataSpecStatus?.rssi}
+            snr={systemDataSpecStatus?.snr}
+            dataRate={systemDataSpecStatus?.dataRate}
             targetDataRate={10}
           />
         </div>
