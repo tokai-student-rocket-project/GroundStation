@@ -1,12 +1,42 @@
-import { SerialPort } from "serialport";
+import { useEffect, useState } from "react";
 
-SerialPort.list().then((ports) => {
-  ports.forEach((port) => {
-    console.log(`${port.path} - ${port.manufacturer}`);
-  });
-});
+import { SerialPort } from "serialport";
+import { ReadlineParser } from "serialport";
 
 export const CommunicationPanel = () => {
+  const [rssi, setRssi] = useState<number | null>(null);
+  const [snr, setSnr] = useState<number | null>(null);
+  const [dataRate, setDataRate] = useState<number | null>(null);
+
+  useEffect(() => {
+    let oldTime = new Date().getTime();
+
+    SerialPort.list().then((ports) => {
+      ports.forEach((port) => {
+        console.log(`${port.path} - ${port.manufacturer}`);
+      });
+    });
+
+    const serialport = new SerialPort({
+      path: "/dev/tty.usbmodem11201",
+      baudRate: 115200,
+    });
+
+    const parser = serialport.pipe(new ReadlineParser({ delimiter: "\n" }));
+
+    parser.on("data", (data) => {
+      const json = JSON.parse(data);
+
+      setRssi(json.PacketInfo.RSSI);
+      setSnr(json.PacketInfo.SNR);
+
+      const nowTime = new Date().getTime();
+      const timeDiff = nowTime - oldTime;
+      setDataRate(1000 / timeDiff);
+      oldTime = nowTime;
+    });
+  }, []);
+
   return (
     <div className="box has-background-dark p-3">
       <h2 className="title is-4 has-text-light has-text-weight-light">
@@ -32,18 +62,20 @@ export const CommunicationPanel = () => {
                       RSSI :
                     </p>
                   </td>
-                  <td>
+                  <td width="40m">
                     <p className=" has-text-light has-text-right is-size-7">
-                      {"----"}
+                      {"---"}
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-light has-text-right is-size-7">
+                    <p className=" has-text-light has-text-left is-size-7 ml-2">
                       dBm
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                    <p className=" has-text-grey has-text-centered is-size-7">
+                      ●
+                    </p>
                   </td>
                 </tr>
                 <tr>
@@ -58,12 +90,14 @@ export const CommunicationPanel = () => {
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-light has-text-right is-size-7">
+                    <p className="has-text-light has-text-left is-size-7 ml-2">
                       dBm
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                    <p className=" has-text-grey has-text-centered is-size-7">
+                      ●
+                    </p>
                   </td>
                 </tr>
                 <tr>
@@ -78,12 +112,14 @@ export const CommunicationPanel = () => {
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-light has-text-right is-size-7">
+                    <p className="has-text-light has-text-left is-size-7 ml-2">
                       Hz
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                    <p className=" has-text-grey has-text-centered is-size-7">
+                      ●
+                    </p>
                   </td>
                 </tr>
               </tbody>
@@ -110,18 +146,20 @@ export const CommunicationPanel = () => {
                       RSSI :
                     </p>
                   </td>
-                  <td>
+                  <td width="40m">
                     <p className=" has-text-light has-text-right is-size-7">
-                      {"----"}
+                      {rssi?.toFixed() ?? "---"}
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-light has-text-right is-size-7">
+                    <p className=" has-text-light has-text-left is-size-7 ml-2">
                       dBm
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                    <p className=" has-text-grey has-text-centered is-size-7">
+                      ●
+                    </p>
                   </td>
                 </tr>
                 <tr>
@@ -132,16 +170,18 @@ export const CommunicationPanel = () => {
                   </td>
                   <td>
                     <p className=" has-text-light has-text-right is-size-7">
-                      {"--"}
+                      {snr?.toFixed() ?? "--"}
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-light has-text-right is-size-7">
+                    <p className="has-text-light has-text-left is-size-7 ml-2">
                       dBm
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                    <p className=" has-text-grey has-text-centered is-size-7">
+                      ●
+                    </p>
                   </td>
                 </tr>
                 <tr>
@@ -152,16 +192,18 @@ export const CommunicationPanel = () => {
                   </td>
                   <td>
                     <p className=" has-text-light has-text-right is-size-7">
-                      {"--"}
+                      {dataRate?.toFixed() ?? "--"}
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-light has-text-right is-size-7">
+                    <p className="has-text-light has-text-left is-size-7 ml-2">
                       Hz
                     </p>
                   </td>
                   <td>
-                    <p className=" has-text-grey has-text-right is-size-7">●</p>
+                    <p className=" has-text-grey has-text-centered is-size-7">
+                      ●
+                    </p>
                   </td>
                 </tr>
               </tbody>
@@ -253,32 +295,16 @@ export const CommunicationPanel = () => {
             <tr>
               <td>
                 <p className=" has-text-light has-text-right is-size-7">
-                  Altitude :
+                  RSSI :
                 </p>
-              </td>
-              <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
               </td>
               <td>
                 <p className=" has-text-light has-text-right is-size-7">
-                  Temperature :
+                  {"----"}
                 </p>
               </td>
               <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
-              </td>
-              <td>
-                <p className=" has-text-light has-text-right is-size-7">
-                  Orientation :
-                </p>
-              </td>
-              <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
-              </td>
-              <td>
-                <p className=" has-text-light has-text-right is-size-7">
-                  Acceleration :
-                </p>
+                <p className=" has-text-light has-text-right is-size-7">dBm</p>
               </td>
               <td>
                 <p className=" has-text-grey has-text-right is-size-7">●</p>
@@ -287,32 +313,16 @@ export const CommunicationPanel = () => {
             <tr>
               <td>
                 <p className=" has-text-light has-text-right is-size-7">
-                  Valve :
+                  SNR :
                 </p>
-              </td>
-              <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
               </td>
               <td>
                 <p className=" has-text-light has-text-right is-size-7">
-                  Power :
+                  {"--"}
                 </p>
               </td>
               <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
-              </td>
-              <td>
-                <p className=" has-text-light has-text-right is-size-7">
-                  GNSS :
-                </p>
-              </td>
-              <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
-              </td>
-              <td>
-                <p className=" has-text-light has-text-right is-size-7">
-                  Flight Mode :
-                </p>
+                <p className=" has-text-light has-text-right is-size-7">dBm</p>
               </td>
               <td>
                 <p className=" has-text-grey has-text-right is-size-7">●</p>
@@ -320,33 +330,15 @@ export const CommunicationPanel = () => {
             </tr>
             <tr>
               <td>
-                <p className=" has-text-light has-text-right is-size-7">
-                  System Status :
-                </p>
-              </td>
-              <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
+                <p className=" has-text-light has-text-right is-size-7">DR :</p>
               </td>
               <td>
                 <p className=" has-text-light has-text-right is-size-7">
-                  Sensing Status :
+                  {"--"}
                 </p>
               </td>
               <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
-              </td>
-              <td>
-                <p className=" has-text-light has-text-right is-size-7">
-                  Event :
-                </p>
-              </td>
-              <td>
-                <p className=" has-text-grey has-text-right is-size-7">●</p>
-              </td>
-              <td>
-                <p className=" has-text-light has-text-right is-size-7">
-                  Error :
-                </p>
+                <p className=" has-text-light has-text-right is-size-7">Hz</p>
               </td>
               <td>
                 <p className=" has-text-grey has-text-right is-size-7">●</p>
