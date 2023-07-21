@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "serialport";
+
+import { AirDataContext } from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
 import { SerialportSelector } from "./children/SerialportSelector";
@@ -22,6 +24,7 @@ export const CommunicationPanel = () => {
 
   const [airDataSerialport, setAirDataSerialport] = useState<SerialPort>();
   const [airDataSpecStatus, setAirDataSpecStatus] = useState<SpecStatus>();
+  const { airData, setAirData, clearAirData } = useContext(AirDataContext);
 
   const [systemDataSerialport, setSystemDataSerialport] =
     useState<SerialPort>();
@@ -44,6 +47,7 @@ export const CommunicationPanel = () => {
   const changeAirDataSerialport = (newSerialport?: string) => {
     if (airDataSerialport?.isOpen) airDataSerialport.close();
     setAirDataSpecStatus(undefined);
+    clearAirData();
 
     if (!newSerialport) return;
     setAirDataSerialport(
@@ -99,6 +103,7 @@ export const CommunicationPanel = () => {
 
     let oldTime = new Date().getTime();
     parser.on("data", (data) => {
+      // {"PacketInfo":{"Sender":"ACM","Type":"AirData","RSSI":-31,"SNR":6},"Alt":0,"OutTemp":0,"Ori":{"x":0,"y":0,"z":0},"Lia":{"x":0,"y":0,"z":0}}
       const json = JSON.parse(data);
 
       const nowTime = new Date().getTime();
@@ -110,6 +115,19 @@ export const CommunicationPanel = () => {
         snr: json.PacketInfo.SNR,
         dataRate: 1000 / timeDiff,
       });
+
+      if (json.PacketInfo.Type == "AirData") {
+        setAirData({
+          altitude: json.Alt,
+          outsideTemperature: json.OutTemp,
+          orientationX: json.Ori.x,
+          orientationY: json.Ori.y,
+          orientationZ: json.Ori.z,
+          accelerationX: json.Lia.x,
+          accelerationY: json.Lia.y,
+          accelerationZ: json.Lia.z,
+        });
+      }
     });
   }, [airDataSerialport]);
 
