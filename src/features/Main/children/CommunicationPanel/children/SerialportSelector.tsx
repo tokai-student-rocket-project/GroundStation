@@ -31,14 +31,19 @@ export const SerialportSelector = ({
 
   const updateSerialports = () => {
     SerialPort.list().then((ports) => {
-      const newSerialports: SerialPortDisplayable[] = ports.map((port) => {
-        const newSerialport: SerialPortDisplayable = {
-          path: port.path,
-          text:
-            port.path + (port.manufacturer ? ` - ${port.manufacturer}` : ""),
-        };
-        return newSerialport;
-      });
+      const newSerialports: SerialPortDisplayable[] = [{ path: "", text: "" }];
+
+      ports
+        .filter((port) => {
+          return port.manufacturer === "Arduino LLC";
+        })
+        .map((port) => {
+          newSerialports.push({
+            path: port.path,
+            text:
+              port.path + (port.manufacturer ? ` - ${port.manufacturer}` : ""),
+          });
+        });
 
       setSerialports(newSerialports);
     });

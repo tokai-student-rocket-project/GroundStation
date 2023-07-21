@@ -36,10 +36,12 @@ export const CommunicationPanel = () => {
     setMissionDataSpecStatus(undefined);
 
     if (!newSerialport) return;
+    if (newSerialport === "") return;
     setMissionDataSerialport(
       new SerialPort({
         path: newSerialport,
         baudRate: 115200,
+        autoOpen: false,
       })
     );
   };
@@ -50,10 +52,12 @@ export const CommunicationPanel = () => {
     clearAirData();
 
     if (!newSerialport) return;
+    if (newSerialport === "") return;
     setAirDataSerialport(
       new SerialPort({
         path: newSerialport,
         baudRate: 115200,
+        autoOpen: false,
       })
     );
   };
@@ -63,10 +67,12 @@ export const CommunicationPanel = () => {
     setSystemDataSpecStatus(undefined);
 
     if (!newSerialport) return;
+    if (newSerialport === "") return;
     setSystemDataSerialport(
       new SerialPort({
         path: newSerialport,
         baudRate: 115200,
+        autoOpen: false,
       })
     );
   };
@@ -92,6 +98,16 @@ export const CommunicationPanel = () => {
         dataRate: 1000 / timeDiff,
       });
     });
+
+    missionDataSerialport.open((error) => {
+      if (!error) return;
+      if (
+        error.message ===
+        "Error Resource temporarily unavailable Cannot lock port"
+      ) {
+        alert("シリアルポートを開けません。受信機を再起動してください。");
+      }
+    });
   }, [missionDataSerialport]);
 
   useEffect(() => {
@@ -103,7 +119,6 @@ export const CommunicationPanel = () => {
 
     let oldTime = new Date().getTime();
     parser.on("data", (data) => {
-      // {"PacketInfo":{"Sender":"ACM","Type":"AirData","RSSI":-31,"SNR":6},"Alt":0,"OutTemp":0,"Ori":{"x":0,"y":0,"z":0},"Lia":{"x":0,"y":0,"z":0}}
       const json = JSON.parse(data);
 
       const nowTime = new Date().getTime();
@@ -129,6 +144,16 @@ export const CommunicationPanel = () => {
         });
       }
     });
+
+    airDataSerialport.open((error) => {
+      if (!error) return;
+      if (
+        error.message ===
+        "Error Resource temporarily unavailable Cannot lock port"
+      ) {
+        alert("シリアルポートを開けません。受信機を再起動してください。");
+      }
+    });
   }, [airDataSerialport]);
 
   useEffect(() => {
@@ -151,6 +176,16 @@ export const CommunicationPanel = () => {
         snr: json.PacketInfo.SNR,
         dataRate: 1000 / timeDiff,
       });
+    });
+
+    systemDataSerialport.open((error) => {
+      if (!error) return;
+      if (
+        error.message ===
+        "Error Resource temporarily unavailable Cannot lock port"
+      ) {
+        alert("シリアルポートを開けません。受信機を再起動してください。");
+      }
     });
   }, [systemDataSerialport]);
 
