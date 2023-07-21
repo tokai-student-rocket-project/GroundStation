@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AirDataContext } from "../../App/App";
 
 const getNorm = (x?: number, y?: number, z?: number): number | undefined => {
