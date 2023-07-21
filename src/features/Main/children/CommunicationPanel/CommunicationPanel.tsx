@@ -13,6 +13,12 @@ export const CommunicationPanel = () => {
   const [snr, setSnr] = useState<number | undefined>(undefined);
   const [dataRate, setDataRate] = useState<number | undefined>(undefined);
 
+  const [airDataSerialport, setAirDataSerialport] = useState<SerialPort>();
+
+  const changeAirDataSerialport = (newSerialport: string) => {
+    console.log(newSerialport);
+  };
+
   useEffect(() => {
     let oldTime = new Date().getTime();
 
@@ -45,7 +51,9 @@ export const CommunicationPanel = () => {
 
         <div>
           <RssiIcon rssi={rssi} />
-          <SerialportSelector />
+          <SerialportSelector
+            changeAirDataSerialport={changeAirDataSerialport}
+          />
         </div>
       </div>
 
