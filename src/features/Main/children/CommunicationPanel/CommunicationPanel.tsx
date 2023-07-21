@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "serialport";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
-
 import { RssiIcon } from "./children/RssiIcon";
+import { SerialportSelector } from "./children/SerialportSelector";
 import { SpecBox } from "./children/SpecBox";
 import { SpecStatusBox } from "./children/SpecStatusBox";
 import { RxStatusBox } from "./children/RxStatusBox";
@@ -18,12 +15,6 @@ export const CommunicationPanel = () => {
 
   useEffect(() => {
     let oldTime = new Date().getTime();
-
-    SerialPort.list().then((ports) => {
-      ports.forEach((port) => {
-        console.log(`${port.path} - ${port.manufacturer}`);
-      });
-    });
 
     const serialport = new SerialPort({
       path: "/dev/tty.usbmodem11201",
@@ -54,10 +45,7 @@ export const CommunicationPanel = () => {
 
         <div>
           <RssiIcon rssi={rssi} />
-          <FontAwesomeIcon
-            icon={faGear}
-            className="icon is-small has-text-light mx-2"
-          />
+          <SerialportSelector />
         </div>
       </div>
 
