@@ -24,10 +24,8 @@ function createWindow() {
     icon: path.join(process.env.PUBLIC, "electron-vite.svg"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      nodeIntegrationInWorker: true,
       contextIsolation: false,
       nodeIntegration: true,
-      webSecurity: false,
     },
   });
 

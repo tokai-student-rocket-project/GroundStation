@@ -2,9 +2,7 @@ import { SerialPort } from "serialport";
 
 SerialPort.list().then((ports) => {
   ports.forEach((port) => {
-    console.log(port.path);
-    console.log(port.pnpId);
-    console.log(port.manufacturer);
+    console.log(`${port.path} - ${port.manufacturer}`);
   });
 });
 
