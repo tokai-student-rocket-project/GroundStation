@@ -25,15 +25,15 @@ export const SpecStatusBox = ({
       <table width="100%">
         <tbody>
           <tr>
-            <td>
+            <td style={{ verticalAlign: "middle" }}>
               <p className=" has-text-light has-text-right is-size-7">RSSI :</p>
             </td>
-            <td width="40m">
+            <td width="40m" style={{ verticalAlign: "middle" }}>
               <p className=" has-text-light has-text-right is-size-7">
                 {rssi?.toFixed() ?? "---"}
               </p>
             </td>
-            <td>
+            <td style={{ verticalAlign: "middle" }}>
               <p className=" has-text-light has-text-left is-size-7 ml-2">
                 dBm
               </p>
@@ -48,15 +48,15 @@ export const SpecStatusBox = ({
           </tr>
 
           <tr>
-            <td>
+            <td style={{ verticalAlign: "middle" }}>
               <p className=" has-text-light has-text-right is-size-7">SNR :</p>
             </td>
-            <td>
+            <td style={{ verticalAlign: "middle" }}>
               <p className=" has-text-light has-text-right is-size-7">
                 {snr?.toFixed() ?? "--"}
               </p>
             </td>
-            <td>
+            <td style={{ verticalAlign: "middle" }}>
               <p className="has-text-light has-text-left is-size-7 ml-2">dBm</p>
             </td>
             <td>
@@ -69,15 +69,15 @@ export const SpecStatusBox = ({
           </tr>
 
           <tr>
-            <td>
+            <td style={{ verticalAlign: "middle" }}>
               <p className=" has-text-light has-text-right is-size-7">DR :</p>
             </td>
-            <td>
+            <td style={{ verticalAlign: "middle" }}>
               <p className=" has-text-light has-text-right is-size-7">
                 {dataRate?.toFixed() ?? "--"}
               </p>
             </td>
-            <td>
+            <td style={{ verticalAlign: "middle" }}>
               <p className="has-text-light has-text-left is-size-7 ml-2">Hz</p>
             </td>
             <td>
