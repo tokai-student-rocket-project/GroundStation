@@ -31,6 +31,8 @@ export const CommunicationPanel = () => {
   const [systemDataSpecStatus, setSystemDataSpecStatus] =
     useState<SpecStatus>();
 
+  const [airDataRx, setAirDataRx] = useState<boolean>(false);
+
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
     setMissionDataSpecStatus(undefined);
@@ -49,6 +51,7 @@ export const CommunicationPanel = () => {
   const changeAirDataSerialport = (newSerialport?: string) => {
     if (airDataSerialport?.isOpen) airDataSerialport.close();
     setAirDataSpecStatus(undefined);
+    setAirDataRx(false);
     clearAirData();
 
     if (!newSerialport) return;
@@ -132,6 +135,7 @@ export const CommunicationPanel = () => {
       });
 
       if (json.PacketInfo.Type == "AirData") {
+        setAirDataRx((prev) => !prev);
         setAirData({
           altitude: json.Alt,
           outsideTemperature: json.OutTemp,
@@ -245,7 +249,7 @@ export const CommunicationPanel = () => {
         </div>
       </div>
 
-      <RxStatusBox />
+      <RxStatusBox airDataRx={airDataRx} />
     </div>
   );
 };

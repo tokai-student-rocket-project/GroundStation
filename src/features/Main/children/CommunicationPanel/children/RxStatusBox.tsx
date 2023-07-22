@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
-export const RxStatusBox = () => {
+type Props = {
+  airDataRx: boolean;
+};
+
+export const RxStatusBox = ({ airDataRx }: Props) => {
   return (
     <div className="box has-background-black-ter p-2">
       <table width="100%">
@@ -16,7 +20,7 @@ export const RxStatusBox = () => {
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={"#7A7A7A"}
+                color={airDataRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>
@@ -29,7 +33,7 @@ export const RxStatusBox = () => {
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={"#7A7A7A"}
+                color={airDataRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>
@@ -42,7 +46,7 @@ export const RxStatusBox = () => {
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={"#7A7A7A"}
+                color={airDataRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>
@@ -55,7 +59,7 @@ export const RxStatusBox = () => {
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={"#7A7A7A"}
+                color={airDataRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>
