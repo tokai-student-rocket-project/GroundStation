@@ -263,7 +263,7 @@ export const CommunicationPanel = () => {
         </div>
       </div>
 
-      <RxStatusBox airDataRx={airDataRx} />
+      <RxStatusBox airDataRx={airDataRx} positionDataRx={positionDataRx} />
     </div>
   );
 };

@@ -3,9 +3,10 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   airDataRx: boolean;
+  positionDataRx: boolean;
 };
 
-export const RxStatusBox = ({ airDataRx }: Props) => {
+export const RxStatusBox = ({ airDataRx, positionDataRx }: Props) => {
   return (
     <div className="box has-background-black-ter p-2">
       <table width="100%">
@@ -94,7 +95,7 @@ export const RxStatusBox = ({ airDataRx }: Props) => {
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={"#7A7A7A"}
+                color={positionDataRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>
