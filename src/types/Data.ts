@@ -8,3 +8,8 @@ export type AirData = {
   accelerationY?: number;
   accelerationZ?: number;
 };
+
+export type PositionData = {
+  latitude?: number;
+  longitude?: number;
+};

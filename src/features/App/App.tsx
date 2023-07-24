@@ -2,6 +2,7 @@ import { useEffect, createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AirData } from "../../types/Data";
+import { PositionData } from "../../types/Data";
 import { Router } from "../../router/Router";
 
 import "bulma/css/bulma.css";
@@ -26,9 +27,26 @@ const defaultAirData = {
   accelerationZ: undefined,
 };
 
+type PositionDataContextType = {
+  positionData: PositionData;
+  setPositionData: (value: PositionData) => void;
+  clearPositionData: () => void;
+};
+export const PositionDataContext = createContext<PositionDataContextType>(
+  {} as PositionDataContextType
+);
+const defaultPositionData = {
+  latitude: undefined,
+  longitude: undefined,
+};
+
 export const App = () => {
   const [airData, setAirData] = useState<AirData>(defaultAirData);
   const clearAirData = () => setAirData(defaultAirData);
+
+  const [positionData, setPositionData] =
+    useState<PositionData>(defaultPositionData);
+  const clearPositionData = () => setPositionData(defaultPositionData);
 
   const navigate = useNavigate();
 
@@ -42,7 +60,11 @@ export const App = () => {
 
   return (
     <AirDataContext.Provider value={{ airData, setAirData, clearAirData }}>
-      <Router />
+      <PositionDataContext.Provider
+        value={{ positionData, setPositionData, clearPositionData }}
+      >
+        <Router />
+      </PositionDataContext.Provider>
     </AirDataContext.Provider>
   );
 };

@@ -3,6 +3,7 @@ import { SerialPort } from "serialport";
 import { ReadlineParser } from "serialport";
 
 import { AirDataContext } from "../../../App/App";
+import { PositionDataContext } from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
 import { SerialportSelector } from "./children/SerialportSelector";
@@ -30,8 +31,11 @@ export const CommunicationPanel = () => {
     useState<SerialPort>();
   const [systemDataSpecStatus, setSystemDataSpecStatus] =
     useState<SpecStatus>();
+  const { positionData, setPositionData, clearPositionData } =
+    useContext(PositionDataContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
+  const [positionDataRx, setPositionDataRx] = useState<boolean>(false);
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
@@ -68,6 +72,8 @@ export const CommunicationPanel = () => {
   const changeSystemDataSerialport = (newSerialport?: string) => {
     if (systemDataSerialport?.isOpen) systemDataSerialport.close();
     setSystemDataSpecStatus(undefined);
+    setPositionDataRx(false);
+    clearPositionData();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -180,6 +186,14 @@ export const CommunicationPanel = () => {
         snr: json.PacketInfo.SNR,
         dataRate: 1000 / timeDiff,
       });
+
+      if (json.PacketInfo.Type == "PositionData") {
+        setPositionDataRx((prev) => !prev);
+        setPositionData({
+          latitude: json.Latitude,
+          longitude: json.Longitude,
+        });
+      }
     });
 
     systemDataSerialport.open((error) => {
