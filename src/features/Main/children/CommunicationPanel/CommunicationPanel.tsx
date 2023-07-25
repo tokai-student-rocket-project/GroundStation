@@ -150,6 +150,7 @@ export const CommunicationPanel = () => {
         setAirDataRx((prev) => !prev);
         setAirData({
           altitude: json.Alt,
+          climbRate: json.CR,
           outsideTemperature: json.OutTemp,
           orientationX: json.Ori.x,
           orientationY: json.Ori.y,

@@ -38,7 +38,7 @@ export const TopLeftPanel = () => {
               <tr>
                 <td width="128m">
                   <p className="title has-text-light has-text-left">
-                    <p className="title has-text-light">{"---.--"}</p>
+                    {airData.climbRate?.toFixed(2) ?? "---.--"}
                   </p>
                 </td>
                 <td style={{ verticalAlign: "bottom" }}>
