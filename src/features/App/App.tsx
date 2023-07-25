@@ -12,6 +12,11 @@ import {
   PositionDataContextType,
   defaultPositionData,
 } from "../../types/PositionData";
+import {
+  SystemData,
+  SystemDataContextType,
+  defaultSystemData,
+} from "../../types/SystemData";
 
 import "bulma/css/bulma.css";
 import "./styles.css";
@@ -24,6 +29,10 @@ export const PositionDataContext = createContext<PositionDataContextType>(
   {} as PositionDataContextType
 );
 
+export const SystemDataContext = createContext<SystemDataContextType>(
+  {} as SystemDataContextType
+);
+
 export const App = () => {
   const [airData, setAirData] = useState<AirData>(defaultAirData);
   const clearAirData = () => setAirData(defaultAirData);
@@ -31,6 +40,9 @@ export const App = () => {
   const [positionData, setPositionData] =
     useState<PositionData>(defaultPositionData);
   const clearPositionData = () => setPositionData(defaultPositionData);
+
+  const [systemData, setSystemData] = useState<SystemData>(defaultSystemData);
+  const clearSystemData = () => setSystemData(defaultSystemData);
 
   const navigate = useNavigate();
 
@@ -47,7 +59,11 @@ export const App = () => {
       <PositionDataContext.Provider
         value={{ positionData, setPositionData, clearPositionData }}
       >
-        <Router />
+        <SystemDataContext.Provider
+          value={{ systemData, setSystemData, clearSystemData }}
+        >
+          <Router />
+        </SystemDataContext.Provider>
       </PositionDataContext.Provider>
     </AirDataContext.Provider>
   );

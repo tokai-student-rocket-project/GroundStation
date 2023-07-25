@@ -4,6 +4,7 @@ import { ReadlineParser } from "serialport";
 
 import { AirDataContext } from "../../../App/App";
 import { PositionDataContext } from "../../../App/App";
+import { SystemDataContext } from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
 import { SerialportSelector } from "./children/SerialportSelector";
@@ -33,9 +34,12 @@ export const CommunicationPanel = () => {
     useState<SpecStatus>();
   const { positionData, setPositionData, clearPositionData } =
     useContext(PositionDataContext);
+  const { systemData, setSystemData, clearSystemData } =
+    useContext(SystemDataContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
   const [positionDataRx, setPositionDataRx] = useState<boolean>(false);
+  const [systemDataRx, setSystemDataRx] = useState<boolean>(false);
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
@@ -73,7 +77,9 @@ export const CommunicationPanel = () => {
     if (systemDataSerialport?.isOpen) systemDataSerialport.close();
     setSystemDataSpecStatus(undefined);
     setPositionDataRx(false);
+    setSystemDataRx(false);
     clearPositionData();
+    clearSystemData();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -194,6 +200,16 @@ export const CommunicationPanel = () => {
           longitude: json.Longitude,
         });
       }
+
+      if (json.PacketInfo.Type == "SystemData") {
+        setSystemDataRx((prev) => !prev);
+        setSystemData({
+          flightMode: json.FlightMode,
+          cameraStatus: json.CameraStatus,
+          sn3Status: json.SN3Status,
+          doLogging: json.DoLogging,
+        });
+      }
     });
 
     systemDataSerialport.open((error) => {
@@ -263,7 +279,11 @@ export const CommunicationPanel = () => {
         </div>
       </div>
 
-      <RxStatusBox airDataRx={airDataRx} positionDataRx={positionDataRx} />
+      <RxStatusBox
+        airDataRx={airDataRx}
+        positionDataRx={positionDataRx}
+        systemDataRx={systemDataRx}
+      />
     </div>
   );
 };
