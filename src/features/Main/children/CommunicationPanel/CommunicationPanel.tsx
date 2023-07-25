@@ -5,6 +5,7 @@ import { ReadlineParser } from "serialport";
 import { AirDataContext } from "../../../App/App";
 import { PositionDataContext } from "../../../App/App";
 import { SystemDataContext } from "../../../App/App";
+import { PowerDataContext } from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
 import { SerialportSelector } from "./children/SerialportSelector";
@@ -36,10 +37,13 @@ export const CommunicationPanel = () => {
     useContext(PositionDataContext);
   const { systemData, setSystemData, clearSystemData } =
     useContext(SystemDataContext);
+  const { powerData, setPowerData, clearPowerData } =
+    useContext(PowerDataContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
   const [positionDataRx, setPositionDataRx] = useState<boolean>(false);
   const [systemDataRx, setSystemDataRx] = useState<boolean>(false);
+  const [powerDataRx, setPowerDataRx] = useState<boolean>(false);
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
@@ -78,8 +82,10 @@ export const CommunicationPanel = () => {
     setSystemDataSpecStatus(undefined);
     setPositionDataRx(false);
     setSystemDataRx(false);
+    setPowerDataRx(false);
     clearPositionData();
     clearSystemData();
+    clearPowerData();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -211,6 +217,15 @@ export const CommunicationPanel = () => {
           doLogging: json.DoLogging,
         });
       }
+
+      if (json.PacketInfo.Type == "PowerData") {
+        setPowerDataRx((prev) => !prev);
+        setPowerData({
+          supplyVoltage: json.SupplyVoltage,
+          poolVoltage: json.PoolVoltage,
+          batteryVoltage: json.BatteryVoltage,
+        });
+      }
     });
 
     systemDataSerialport.open((error) => {
@@ -284,6 +299,7 @@ export const CommunicationPanel = () => {
         airDataRx={airDataRx}
         positionDataRx={positionDataRx}
         systemDataRx={systemDataRx}
+        powerDataRx={powerDataRx}
       />
     </div>
   );

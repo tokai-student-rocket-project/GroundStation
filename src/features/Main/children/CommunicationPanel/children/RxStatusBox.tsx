@@ -5,12 +5,14 @@ type Props = {
   airDataRx: boolean;
   positionDataRx: boolean;
   systemDataRx: boolean;
+  powerDataRx: boolean;
 };
 
 export const RxStatusBox = ({
   airDataRx,
   positionDataRx,
   systemDataRx,
+  powerDataRx,
 }: Props) => {
   return (
     <div className="box has-background-black-ter p-2">
@@ -89,7 +91,7 @@ export const RxStatusBox = ({
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={"#7A7A7A"}
+                color={powerDataRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>
