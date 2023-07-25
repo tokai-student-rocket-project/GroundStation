@@ -37,7 +37,7 @@ export const TopRightPanel = () => {
     <nav className="level is-justify-content-center">
       <div className="level-item has-text-centered">
         <div>
-          <p className="heading has-text-light">GNSS</p>
+          <p className="heading has-text-light has-text-left">GNSS</p>
           <p className="has-text-light">
             {`N ${degToDms(positionData.latitude) ?? "--°--'--.--\""}`}
           </p>
@@ -48,7 +48,7 @@ export const TopRightPanel = () => {
       </div>
       <div className="level-item has-text-centered">
         <div>
-          <p className="heading has-text-light">Temperature</p>
+          <p className="heading has-text-light has-text-left">Temperature</p>
           <table width="100%">
             <tbody>
               <tr>
@@ -89,7 +89,7 @@ export const TopRightPanel = () => {
       </div>
       <div className="level-item has-text-centered">
         <div>
-          <p className="heading has-text-light">Current Time</p>
+          <p className="heading has-text-light has-text-left">Current Time</p>
           <p className="has-text-light" style={{ maxWidth: "200px" }}>
             {now}
           </p>

@@ -13,42 +13,70 @@ export const TopLeftPanel = () => {
     <nav className="level is-justify-content-center">
       <div className="level-item has-text-centered">
         <div>
-          <p className="heading has-text-light">Altitude</p>
-          <div className="is-flex is-align-items-end">
-            <p className="title has-text-light">
-              {airData.altitude?.toFixed(2) ?? "---.--"}
-            </p>
-            <p className="subtitle has-text-light mx-2 mb-1">m</p>
-          </div>
+          <p className="heading has-text-light has-text-left">Altitude</p>
+          <table width="100%">
+            <tbody>
+              <tr>
+                <td width="128m">
+                  <p className="title has-text-light has-text-left">
+                    {airData.altitude?.toFixed(2) ?? "---.--"}
+                  </p>
+                </td>
+                <td style={{ verticalAlign: "bottom" }}>
+                  <p className="subtitle has-text-light mx-2 mb-1">m</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div className="level-item has-text-centered">
         <div>
-          <p className="heading has-text-light">Climb Rate</p>
-          <div className="is-flex is-align-items-end">
-            <p className="title has-text-light">{"--.--"}</p>
-            <p className="subtitle has-text-light mx-2 mb-1">m/s</p>
-          </div>
+          <p className="heading has-text-light has-text-left">Climb Rate</p>
+          <table width="100%">
+            <tbody>
+              <tr>
+                <td width="128m">
+                  <p className="title has-text-light has-text-left">
+                    <p className="title has-text-light">{"---.--"}</p>
+                  </p>
+                </td>
+                <td style={{ verticalAlign: "bottom" }}>
+                  <p className="subtitle has-text-light mx-2 mb-1">m/s</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div className="level-item has-text-centered">
         <div>
-          <p className="heading has-text-light">Acceleration</p>
-          <div className="is-flex is-align-items-end">
-            <p className="title has-text-light">
-              {getNorm(
-                airData.accelerationX,
-                airData.accelerationY,
-                airData.accelerationZ
-              )?.toFixed(2) ?? "--.--"}
-            </p>
-            <p className="subtitle has-text-light mx-2 mb-1">
-              m/s
-              <span style={{ fontSize: "0.75em", verticalAlign: "top" }}>
-                2
-              </span>
-            </p>
-          </div>
+          <p className="heading has-text-light has-text-left">Acceleration</p>
+          <table width="100%">
+            <tbody>
+              <tr>
+                <td width="96m">
+                  <p className="title has-text-light has-text-left">
+                    <p className="title has-text-light">
+                      {getNorm(
+                        airData.accelerationX,
+                        airData.accelerationY,
+                        airData.accelerationZ
+                      )?.toFixed(2) ?? "--.--"}
+                    </p>
+                  </p>
+                </td>
+                <td style={{ verticalAlign: "bottom" }}>
+                  <p className="subtitle has-text-light mx-2 mb-1">
+                    m/s
+                    <span style={{ fontSize: "0.75em", verticalAlign: "top" }}>
+                      2
+                    </span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </nav>
