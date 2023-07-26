@@ -4,7 +4,7 @@ import { CommunicationPanel } from "./children/CommunicationPanel/CommunicationP
 import { CommandPanel } from "./children/CommandPanel";
 import { PowerSystemPanel } from "./children/PowerSystemPanel/PowerSystemPanel";
 import { FlightModePanel } from "./children/FlightModePanel";
-import { OrientationPanel } from "./children/OrientationPanel";
+import { OrientationPanel } from "./children/OrientationPanel/OrientationPanel";
 import { MissionPanel } from "./children/MissionPanel";
 import { SystemStatus } from "./children/SystemStatus";
 import { ValveSystemPanel } from "./children/ValveSystemPanel";
