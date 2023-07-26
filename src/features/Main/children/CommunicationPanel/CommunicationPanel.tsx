@@ -6,6 +6,7 @@ import { AirDataContext } from "../../../App/App";
 import { PositionDataContext } from "../../../App/App";
 import { SystemDataContext } from "../../../App/App";
 import { PowerDataContext } from "../../../App/App";
+import { CommandScheduleContext } from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
 import { SerialportSelector } from "./children/SerialportSelector";
@@ -39,6 +40,8 @@ export const CommunicationPanel = () => {
     useContext(SystemDataContext);
   const { powerData, setPowerData, clearPowerData } =
     useContext(PowerDataContext);
+  const { commandSchedule, setCommandSchedule, clearCommandSchedule } =
+    useContext(CommandScheduleContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
   const [positionDataRx, setPositionDataRx] = useState<boolean>(false);
@@ -239,6 +242,17 @@ export const CommunicationPanel = () => {
       }
     });
   }, [systemDataSerialport]);
+
+  useEffect(() => {
+    if (!systemDataSerialport) return;
+
+    if (commandSchedule.flightModeOn) {
+      systemDataSerialport.write("F");
+      console.log("F");
+    }
+
+    clearCommandSchedule();
+  }, [commandSchedule]);
 
   return (
     <div className="box has-background-dark p-3">

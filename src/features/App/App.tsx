@@ -22,6 +22,11 @@ import {
   PowerDataContextType,
   defaultPowerData,
 } from "../../types/PowerData";
+import {
+  CommandSchedule,
+  CommandContextType,
+  defaultCommandSchedule,
+} from "../../types/Command";
 
 import "bulma/css/bulma.css";
 import "./styles.css";
@@ -42,6 +47,10 @@ export const PowerDataContext = createContext<PowerDataContextType>(
   {} as PowerDataContextType
 );
 
+export const CommandScheduleContext = createContext<CommandContextType>(
+  {} as CommandContextType
+);
+
 export const App = () => {
   const [airData, setAirData] = useState<AirData>(defaultAirData);
   const clearAirData = () => setAirData(defaultAirData);
@@ -55,6 +64,11 @@ export const App = () => {
 
   const [powerData, setPowerData] = useState<PowerData>(defaultPowerData);
   const clearPowerData = () => setPowerData(defaultPowerData);
+
+  const [commandSchedule, setCommandSchedule] = useState<CommandSchedule>(
+    defaultCommandSchedule
+  );
+  const clearCommandSchedule = () => setCommandSchedule(defaultCommandSchedule);
 
   const navigate = useNavigate();
 
@@ -77,7 +91,15 @@ export const App = () => {
           <PowerDataContext.Provider
             value={{ powerData, setPowerData, clearPowerData }}
           >
-            <Router />
+            <CommandScheduleContext.Provider
+              value={{
+                commandSchedule,
+                setCommandSchedule,
+                clearCommandSchedule,
+              }}
+            >
+              <Router />
+            </CommandScheduleContext.Provider>
           </PowerDataContext.Provider>
         </SystemDataContext.Provider>
       </PositionDataContext.Provider>

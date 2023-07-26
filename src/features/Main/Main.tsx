@@ -5,7 +5,6 @@ import { PowerSystemPanel } from "./children/PowerSystemPanel";
 import { FlightModePanel } from "./children/FlightModePanel";
 import { MissionPanel } from "./children/MissionPanel";
 import { SystemStatus } from "./children/SystemStatus";
-import { SensingStatus } from "./children/SensingStatus";
 import { ValveSystemPanel } from "./children/ValveSystemPanel";
 
 export const Main = () => {
