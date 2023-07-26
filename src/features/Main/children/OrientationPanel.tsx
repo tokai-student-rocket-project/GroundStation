@@ -11,10 +11,10 @@ export const OrientationPanel = () => {
         <p className="heading has-text-light">Orientation</p>
       </div>
 
-      <nav className="level is-justify-content-center">
-        <div className="level-item has-text-centered mx-4">
-          <div>
-            <p className="heading has-text-light">Yaw</p>
+      <div className="is-flex">
+        <div className="mx-4">
+          <div className="my-2">
+            <p className="heading has-text-light has-text-centered">Yaw</p>
             <table width="64px">
               <tbody>
                 <tr>
@@ -29,16 +29,9 @@ export const OrientationPanel = () => {
                 </tr>
               </tbody>
             </table>
-            <progress
-              className="progress is-primary is-small"
-              value={(airData.orientationZ ?? 0) + 90}
-              max="180"
-            ></progress>
           </div>
-        </div>
-        <div className="level-item has-text-centered mx-4">
-          <div>
-            <p className="heading has-text-light">Pitch</p>
+          <div className="my-2">
+            <p className="heading has-text-light has-text-centered">Pitch</p>
             <table width="64px">
               <tbody>
                 <tr>
@@ -53,16 +46,9 @@ export const OrientationPanel = () => {
                 </tr>
               </tbody>
             </table>
-            <progress
-              className="progress is-primary is-small"
-              value={(airData.orientationX ?? 0) + 180}
-              max="360"
-            ></progress>
           </div>
-        </div>
-        <div className="level-item has-text-centered mx-4">
-          <div>
-            <p className="heading has-text-light">Roll</p>
+          <div className="my-2">
+            <p className="heading has-text-light has-text-centered">Roll</p>
             <table width="64px">
               <tbody>
                 <tr>
@@ -77,14 +63,163 @@ export const OrientationPanel = () => {
                 </tr>
               </tbody>
             </table>
-            <progress
-              className="progress is-primary is-small"
-              value={(airData.orientationY ?? 0) + 360}
-              max="720"
-            ></progress>
           </div>
         </div>
-      </nav>
+
+        <div className="mt-2">
+          <div className="is-flex">
+            <div style={{ height: "15px", width: "15px" }}></div>
+            <div
+              className="has-background-black-ter"
+              style={{ height: "15px", width: "200px", position: "relative" }}
+            >
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "1px",
+                  width: "200px",
+                  left: "50%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "15px",
+                  width: "1px",
+                  left: "50%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "15px",
+                  width: "1px",
+                  left: "0%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "15px",
+                  width: "1px",
+                  left: "100%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <p
+                className="has-text-light"
+                style={{
+                  position: "absolute",
+                  left: `${(((airData.orientationZ ?? 0) + 90) / 180) * 100}%`,
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                ◆
+              </p>
+            </div>
+          </div>
+          <div className="is-flex">
+            <div
+              className="has-background-black-ter"
+              style={{ height: "200px", width: "15px", position: "relative" }}
+            >
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "200px",
+                  width: "1px",
+                  left: "50%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "1px",
+                  width: "15px",
+                  left: "50%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "1px",
+                  width: "15px",
+                  left: "50%",
+                  top: "0%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "1px",
+                  width: "15px",
+                  left: "50%",
+                  top: "25%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "1px",
+                  width: "15px",
+                  left: "50%",
+                  top: "75%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <div
+                className="has-background-grey"
+                style={{
+                  position: "absolute",
+                  height: "1px",
+                  width: "15px",
+                  left: "50%",
+                  top: "100%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+              <p
+                className="has-text-light"
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  top: `${(((airData.orientationX ?? 0) + 180) / 360) * 100}%`,
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                ◆
+              </p>
+            </div>
+            <div
+              className="has-background-primary-dark"
+              style={{ height: "200px", width: "200px" }}
+            ></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
