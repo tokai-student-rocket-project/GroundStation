@@ -248,7 +248,6 @@ export const CommunicationPanel = () => {
 
     if (commandSchedule.flightModeOn) {
       systemDataSerialport.write("F");
-      console.log("F");
     }
 
     clearCommandSchedule();

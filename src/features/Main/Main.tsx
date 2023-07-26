@@ -4,6 +4,7 @@ import { CommunicationPanel } from "./children/CommunicationPanel/CommunicationP
 import { CommandPanel } from "./children/CommandPanel";
 import { PowerSystemPanel } from "./children/PowerSystemPanel/PowerSystemPanel";
 import { FlightModePanel } from "./children/FlightModePanel";
+import { OrientationPanel } from "./children/OrientationPanel";
 import { MissionPanel } from "./children/MissionPanel";
 import { SystemStatus } from "./children/SystemStatus";
 import { ValveSystemPanel } from "./children/ValveSystemPanel";
@@ -38,8 +39,14 @@ export const Main = () => {
               </div>
               <PowerSystemPanel />
             </div>
-            <div className="column is-one-third">
+            <div className="column is-one-third is-flex is-flex-direction-column">
               <FlightModePanel />
+              <div
+                className="is-flex is-align-items-end is-justify-content-center"
+                style={{ height: "100%" }}
+              >
+                <OrientationPanel />
+              </div>
             </div>
             <div className="column is-one-third is-flex is-flex-direction-column">
               <MissionPanel />
