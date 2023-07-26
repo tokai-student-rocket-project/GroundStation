@@ -2,7 +2,7 @@ import { MapView } from "./children/MapView";
 import { TopPanel } from "./children/TopPanel";
 import { CommunicationPanel } from "./children/CommunicationPanel/CommunicationPanel";
 import { CommandPanel } from "./children/CommandPanel";
-import { PowerSystemPanel } from "./children/PowerSystemPanel";
+import { PowerSystemPanel } from "./children/PowerSystemPanel/PowerSystemPanel";
 import { FlightModePanel } from "./children/FlightModePanel";
 import { MissionPanel } from "./children/MissionPanel";
 import { SystemStatus } from "./children/SystemStatus";
