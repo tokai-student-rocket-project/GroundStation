@@ -22,9 +22,10 @@ export const Main = () => {
             <div className="column is-half">
               <CommandPanel />
             </div>
-            <div className="column is-half"></div>
+            <div className="column is-half">
+              <SystemStatus />
+            </div>
           </div>
-
           <PowerSystemPanel />
         </div>
         <div className="column is-one-third">
@@ -32,14 +33,6 @@ export const Main = () => {
         </div>
         <div className="column is-one-third is-flex is-flex-direction-column">
           <MissionPanel />
-          <div className="columns">
-            <div className="column is-half">
-              <SystemStatus />
-            </div>
-            <div className="column is-half">
-              <SensingStatus />
-            </div>
-          </div>
           <ValveSystemPanel />
         </div>
       </div>
