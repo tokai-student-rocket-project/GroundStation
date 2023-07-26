@@ -5,7 +5,10 @@ type Props = {
 export const YawBar = ({ yaw }: Props) => {
   return (
     <>
-      <div style={{ height: "15px", width: "15px" }}></div>
+      <div
+        className="has-background-black-ter"
+        style={{ height: "15px", width: "15px" }}
+      ></div>
       <div
         className="has-background-black-ter"
         style={{

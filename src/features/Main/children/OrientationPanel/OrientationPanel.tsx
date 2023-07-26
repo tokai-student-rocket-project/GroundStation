@@ -28,7 +28,11 @@ export const OrientationPanel = () => {
           </div>
           <div className="is-flex">
             <PitchBar pitch={airData.orientationX} />
-            <OrientationModel />
+            <OrientationModel
+              yaw={airData.orientationZ}
+              pitch={airData.orientationX}
+              roll={airData.orientationY}
+            />
           </div>
         </div>
       </div>
