@@ -15,8 +15,6 @@ export const TopCenterPanel = () => {
   const { systemData, setSystemData, clearSystemData } =
     useContext(SystemDataContext);
 
-  console.log(systemData.flightTime);
-
   return (
     <div className="is-flex is-align-items-end">
       <table width="100%">

@@ -57,13 +57,11 @@ export const TopLeftPanel = () => {
               <tr>
                 <td width="96m">
                   <p className="title has-text-light has-text-left">
-                    <p className="title has-text-light">
-                      {getNorm(
-                        airData.accelerationX,
-                        airData.accelerationY,
-                        airData.accelerationZ
-                      )?.toFixed(2) ?? "--.--"}
-                    </p>
+                    {getNorm(
+                      airData.accelerationX,
+                      airData.accelerationY,
+                      airData.accelerationZ
+                    )?.toFixed(2) ?? "--.--"}
                   </p>
                 </td>
                 <td style={{ verticalAlign: "bottom" }}>
