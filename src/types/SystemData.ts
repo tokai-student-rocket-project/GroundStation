@@ -3,6 +3,7 @@ export type SystemData = {
   cameraStatus?: boolean;
   sn3Status?: boolean;
   doLogging?: boolean;
+  flightTime?: number;
 };
 
 export type SystemDataContextType = {
@@ -16,4 +17,5 @@ export const defaultSystemData = {
   cameraStatus: undefined,
   sn3Status: undefined,
   doLogging: undefined,
+  flightTime: undefined,
 };

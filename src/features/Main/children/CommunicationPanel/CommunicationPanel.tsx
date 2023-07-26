@@ -215,6 +215,7 @@ export const CommunicationPanel = () => {
           cameraStatus: json.CameraStatus,
           sn3Status: json.SN3Status,
           doLogging: json.DoLogging,
+          flightTime: json.FlightTime,
         });
       }
 
