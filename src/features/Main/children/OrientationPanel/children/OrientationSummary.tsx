@@ -7,8 +7,8 @@ type Props = {
 export const OrientationSummary = ({ yaw, pitch, roll }: Props) => {
   return (
     <div className="mx-4">
-      <div className="my-2">
-        <p className="heading has-text-light has-text-centered">Yaw</p>
+      <div className="my-4">
+        <p className="heading has-text-light has-text-left">Yaw</p>
         <table width="64px">
           <tbody>
             <tr>
@@ -24,8 +24,8 @@ export const OrientationSummary = ({ yaw, pitch, roll }: Props) => {
           </tbody>
         </table>
       </div>
-      <div className="my-2">
-        <p className="heading has-text-light has-text-centered">Pitch</p>
+      <div className="my-4">
+        <p className="heading has-text-light has-text-left">Pitch</p>
         <table width="64px">
           <tbody>
             <tr>
@@ -41,8 +41,8 @@ export const OrientationSummary = ({ yaw, pitch, roll }: Props) => {
           </tbody>
         </table>
       </div>
-      <div className="my-2">
-        <p className="heading has-text-light has-text-centered">Roll</p>
+      <div className="my-4">
+        <p className="heading has-text-light has-text-left">Roll</p>
         <table width="64px">
           <tbody>
             <tr>
