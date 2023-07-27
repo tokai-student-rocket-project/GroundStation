@@ -1,4 +1,4 @@
-import { MapView } from "./children/MapView";
+import { MapView } from "./children/MapView/MapView";
 import { TopPanel } from "./children/TopPanel";
 import { CommunicationPanel } from "./children/CommunicationPanel/CommunicationPanel";
 import { CommandPanel } from "./children/CommandPanel";
