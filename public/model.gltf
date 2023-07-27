@@ -15,35 +15,47 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "H-58 406K 500cc (1) v1",
+            "name" : "model",
             "rotation" : [
-                0,
-                0.7071068286895752,
-                0,
-                0.7071068286895752
+                0.5,
+                -0.5,
+                -0.5,
+                0.5
             ],
             "scale" : [
-                0.0015973614063113928,
-                0.0015973614063113928,
-                0.0015973614063113928
-            ],
-            "translation" : [
-                -0.0010521411895751953,
-                0.0003098156303167343,
-                -0.00014982829452492297
+                0.007053174078464508,
+                0.007053174078464508,
+                0.007053174078464508
             ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "\u30de\u30c6\u30ea\u30a2\u30eb",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.8000000715255737,
+                    0.14040808379650116,
+                    0,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5
+            }
         }
     ],
     "meshes" : [
         {
-            "name" : "H-58 406K 500cc (1) v1.001",
+            "name" : "model",
             "primitives" : [
                 {
                     "attributes" : {
                         "POSITION" : 0,
                         "NORMAL" : 1
                     },
-                    "indices" : 2
+                    "indices" : 2,
+                    "material" : 0
                 }
             ]
         }
@@ -52,52 +64,52 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 1073463,
+            "count" : 1203740,
             "max" : [
-                91.83446502685547,
-                840.1973876953125,
-                79.49812316894531
+                145.83935546875,
+                1162.0228271484375,
+                144.14410400390625
             ],
             "min" : [
-                -92.0339584350586,
-                -821.5103759765625,
-                -78.95423126220703
+                -144.78155517578125,
+                -846.9345092773438,
+                -146.47677612304688
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 1073463,
+            "count" : 1203740,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5125,
-            "count" : 1142595,
+            "count" : 1294350,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 12881556,
+            "byteLength" : 14444880,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 12881556,
-            "byteOffset" : 12881556
+            "byteLength" : 14444880,
+            "byteOffset" : 14444880
         },
         {
             "buffer" : 0,
-            "byteLength" : 4570380,
-            "byteOffset" : 25763112
+            "byteLength" : 5177400,
+            "byteOffset" : 28889760
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 30333492,
+            "byteLength" : 34067160,
             "uri" : "model.bin"
         }
     ]
