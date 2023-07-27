@@ -12,7 +12,7 @@ export const PowerSummary = ({
   source,
 }: Props) => {
   return (
-    <nav className="level is-justify-content-center">
+    <nav className="level is-justify-content-center mb-2">
       <div className="level-item has-text-centered">
         <div>
           <p className="heading has-text-light">Supply</p>

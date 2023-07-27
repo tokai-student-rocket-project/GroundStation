@@ -1,8 +1,147 @@
-export const PowerDiagram = () => {
+type Props = {
+  supplyVoltage?: number;
+  batteryVoltage?: number;
+  poolVoltage?: number;
+  isExternal?: boolean;
+};
+
+export const PowerDiagram = ({
+  supplyVoltage,
+  batteryVoltage,
+  poolVoltage,
+  isExternal,
+}: Props) => {
   return (
-    <div
-      className="has-background-primary-dark"
-      style={{ height: "100%" }}
-    ></div>
+    <>
+      <div
+        className="has-background-gray-darker"
+        style={{ height: "100%", position: "relative" }}
+      >
+        <div
+          style={{
+            background: isExternal ? "#48c78e" : "#7A7A7A",
+            position: "absolute",
+            width: "50px",
+            height: "3px",
+            left: "12%",
+            top: "66%",
+            transform: "translate(-50%, -50%)",
+          }}
+        ></div>
+        <div
+          style={{
+            background:
+              (batteryVoltage ?? 0) > 8 && !isExternal ? "#48c78e" : "#7A7A7A",
+            position: "absolute",
+            width: "150px",
+            height: "3px",
+            left: "35%",
+            top: "33%",
+            transform: "translate(-50%, -50%)",
+          }}
+        ></div>
+        <div
+          style={{
+            background: isExternal ? "#48c78e" : "#7A7A7A",
+            position: "absolute",
+            width: "150px",
+            height: "3px",
+            left: "35%",
+            top: "66%",
+            transform: "translate(-50%, -50%)",
+          }}
+        ></div>
+        <div
+          style={{
+            background: (supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A",
+            position: "absolute",
+            width: "150px",
+            height: "3px",
+            left: "66%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        ></div>
+
+        <div
+          className="box has-background-black-ter p-2 is-size-7 m-0 has-text-light"
+          style={{
+            position: "absolute",
+            left: "20%",
+            top: "33%",
+            transform: "translate(-50%, -50%)",
+            border: `solid 2px ${
+              (batteryVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"
+            }`,
+          }}
+        >
+          BATT
+        </div>
+        <div
+          className="box has-background-black-ter p-2 is-size-7 m-0 has-text-light"
+          style={{
+            position: "absolute",
+            left: "20%",
+            top: "66%",
+            transform: "translate(-50%, -50%)",
+            border: `solid 2px ${isExternal ? "#48c78e" : "#7A7A7A"}`,
+          }}
+        >
+          EXT
+        </div>
+        <div
+          className="box has-background-black-ter p-2 is-size-7 m-0 has-text-light"
+          style={{
+            position: "absolute",
+            width: "24px",
+            height: "100px",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            border: `solid 2px ${
+              (poolVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"
+            }`,
+          }}
+        ></div>
+        <div
+          className="box has-background-black-ter p-2 is-size-7 m-0 has-text-light"
+          style={{
+            position: "absolute",
+            left: "66%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            border: `solid 2px ${
+              (supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"
+            }`,
+          }}
+        >
+          LDO
+        </div>
+        <p
+          className="is-size-7 has-text-light"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "95%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          Pool
+        </p>
+        <p
+          className="is-size-7 has-text-light"
+          style={{
+            position: "absolute",
+            left: "90%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          Supply
+          <br />
+          PowerBus
+        </p>
+      </div>
+    </>
   );
 };

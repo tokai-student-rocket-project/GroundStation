@@ -64,7 +64,12 @@ export const PowerSystemPanel = () => {
         poolVoltage={powerData.poolVoltage}
         source={getSource(powerData.batteryVoltage, powerData.poolVoltage)}
       />
-      <PowerDiagram />
+      <PowerDiagram
+        supplyVoltage={powerData.supplyVoltage}
+        batteryVoltage={powerData.batteryVoltage}
+        poolVoltage={powerData.poolVoltage}
+        isExternal={isExternalSource}
+      />
     </div>
   );
 };
