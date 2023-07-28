@@ -4,7 +4,6 @@ import {
   Marker,
   Polygon,
   Circle,
-  Rectangle,
   Polyline,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -18,17 +17,12 @@ type Props = {
 };
 
 export const MapView = ({ latitude, longitude }: Props) => {
-  // const center: L.LatLngExpression = [
-  //   latitude ?? 35.365125672890144,
-  //   longitude ?? 139.27351746038084,
-  // ];
-
-  const center: L.LatLngExpression = [40.138633, 139.98485];
+  const center: L.LatLngExpression = [latitude ?? 0, longitude ?? 0];
 
   return (
     <MapContainer
       zoomControl={false}
-      center={center}
+      center={[40.138633, 139.98485]}
       zoom={17}
       style={{ position: "fixed", height: "100vh", width: "100%" }}
     >
@@ -37,14 +31,29 @@ export const MapView = ({ latitude, longitude }: Props) => {
         url="https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"
       />
       <Marker position={center} />
-      <ChangeCenter center={center} />
+      <ChangeCenter center={[40.138633, 139.98485]} />
+      <Circle
+        center={[40.138633, 139.98485]}
+        pathOptions={{
+          color: "magenta",
+          stroke: false,
+        }}
+        radius={75}
+      />
       <Circle
         center={[40.138633, 139.98485]}
         pathOptions={{ color: "magenta" }}
-        radius={10}
+        radius={5}
+      />
+      <Polyline
+        pathOptions={{ color: "magenta" }}
+        positions={[
+          [40.138633, 139.98485],
+          [40.138288, 139.984472],
+        ]}
       />
       <Polygon
-        pathOptions={{ color: "magenta" }}
+        pathOptions={{ color: "magenta", fill: false }}
         positions={[
           [40.1349508, 139.981351],
           [40.1347478, 139.981871],
