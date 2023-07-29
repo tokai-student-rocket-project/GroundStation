@@ -2,11 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "serialport";
 
-import { AirDataContext } from "../../../App/App";
-import { PositionDataContext } from "../../../App/App";
-import { SystemDataContext } from "../../../App/App";
-import { PowerDataContext } from "../../../App/App";
-import { CommandScheduleContext } from "../../../App/App";
+import {
+  AirDataContext,
+  PositionDataContext,
+  SystemDataContext,
+  PowerDataContext,
+  CommandScheduleContext,
+  ValveDataContext,
+} from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
 import { SerialportSelector } from "./children/SerialportSelector";
@@ -42,11 +45,14 @@ export const CommunicationPanel = () => {
     useContext(PowerDataContext);
   const { commandSchedule, setCommandSchedule, clearCommandSchedule } =
     useContext(CommandScheduleContext);
+  const { valveData, setValveData, clearValveData } =
+    useContext(ValveDataContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
   const [positionDataRx, setPositionDataRx] = useState<boolean>(false);
   const [systemDataRx, setSystemDataRx] = useState<boolean>(false);
   const [powerDataRx, setPowerDataRx] = useState<boolean>(false);
+  const [valveDataRx, setValveDataRx] = useState<boolean>(false);
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
@@ -86,9 +92,11 @@ export const CommunicationPanel = () => {
     setPositionDataRx(false);
     setSystemDataRx(false);
     setPowerDataRx(false);
+    setValveDataRx(false);
     clearPositionData();
     clearSystemData();
     clearPowerData();
+    clearValveData();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -228,6 +236,17 @@ export const CommunicationPanel = () => {
           supplyVoltage: json.SupplyVoltage,
           poolVoltage: json.PoolVoltage,
           batteryVoltage: json.BatteryVoltage,
+        });
+      }
+
+      if (json.PacketInfo.Type == "ValveData") {
+        setValveDataRx((prev) => !prev);
+        setValveData({
+          isWaiting: json.IsWaiting,
+          motorTemperature: json.McuTemperature,
+          mcuTemperature: json.MotorTemperature,
+          current: json.Current,
+          inputVoltage: json.InputVoltage,
         });
       }
     });

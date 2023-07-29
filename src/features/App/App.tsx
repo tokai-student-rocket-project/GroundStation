@@ -27,6 +27,11 @@ import {
   CommandContextType,
   defaultCommandSchedule,
 } from "../../types/Command";
+import {
+  ValveData,
+  ValveDataContextType,
+  defaultValveData,
+} from "../../types/ValveData";
 
 import "bulma/css/bulma.css";
 import "./styles.css";
@@ -51,6 +56,10 @@ export const CommandScheduleContext = createContext<CommandContextType>(
   {} as CommandContextType
 );
 
+export const ValveDataContext = createContext<ValveDataContextType>(
+  {} as ValveDataContextType
+);
+
 export const App = () => {
   const [airData, setAirData] = useState<AirData>(defaultAirData);
   const clearAirData = () => setAirData(defaultAirData);
@@ -69,6 +78,9 @@ export const App = () => {
     defaultCommandSchedule
   );
   const clearCommandSchedule = () => setCommandSchedule(defaultCommandSchedule);
+
+  const [valveData, setValveData] = useState<ValveData>(defaultValveData);
+  const clearValveData = () => setValveData(defaultValveData);
 
   const navigate = useNavigate();
 
@@ -98,7 +110,15 @@ export const App = () => {
                 clearCommandSchedule,
               }}
             >
-              <Router />
+              <ValveDataContext.Provider
+                value={{
+                  valveData,
+                  setValveData,
+                  clearValveData,
+                }}
+              >
+                <Router />
+              </ValveDataContext.Provider>
             </CommandScheduleContext.Provider>
           </PowerDataContext.Provider>
         </SystemDataContext.Provider>
