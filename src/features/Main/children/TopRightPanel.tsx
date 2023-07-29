@@ -28,8 +28,8 @@ export const TopRightPanel = () => {
   const [now, setNow] = useState<string>();
 
   const openGoogleMap = () => {
-    const latitude = (positionData.latitude = 40.138633);
-    const longitude = (positionData.longitude = 139.98485);
+    const latitude = positionData.latitude;
+    const longitude = positionData.longitude;
 
     if (latitude == undefined || longitude == undefined) return;
 
