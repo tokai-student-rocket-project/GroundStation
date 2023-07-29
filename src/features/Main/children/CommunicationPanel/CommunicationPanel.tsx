@@ -53,6 +53,8 @@ export const CommunicationPanel = () => {
   const [systemDataRx, setSystemDataRx] = useState<boolean>(false);
   const [powerDataRx, setPowerDataRx] = useState<boolean>(false);
   const [valveDataRx, setValveDataRx] = useState<boolean>(false);
+  const [eventRx, setEventRx] = useState<boolean>(false);
+  const [errorRx, setErrorRx] = useState<boolean>(false);
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
@@ -93,6 +95,8 @@ export const CommunicationPanel = () => {
     setSystemDataRx(false);
     setPowerDataRx(false);
     setValveDataRx(false);
+    setEventRx(false);
+    setErrorRx(false);
     clearPositionData();
     clearSystemData();
     clearPowerData();
@@ -249,6 +253,47 @@ export const CommunicationPanel = () => {
           inputVoltage: json.InputVoltage,
         });
       }
+
+      if (json.PacketInfo.Type == "Event") {
+        setEventRx((prev) => !prev);
+
+        const publisher: number = json.Publisher;
+        const eventCode: number = json.EventCode;
+        console.log(
+          `Event: [${
+            ["SM", "FM", "MM", "ACM", "SCM"][publisher]
+          }:0x${eventCode.toString(16)}] ${
+            [
+              "SETUP",
+              "RESET",
+              "FLIGHT MODE ON",
+              "IGNITION",
+              "BURNOUT",
+              "APOGEE",
+              "SEPARATE",
+              "LAND",
+              "FLIGHT MODE OFF",
+              "FORCE SEPARATE",
+              "REFERENCE PRESSURE UPDATED",
+            ][eventCode]
+          }`
+        );
+      }
+
+      if (json.PacketInfo.Type == "Error") {
+        setErrorRx((prev) => !prev);
+
+        const publisher: number = json.Publisher;
+        const errorCode: number = json.ErrorCode;
+        const errorReason: number = json.ErrorReason;
+        console.log(
+          `Error: [${
+            ["SM", "FM", "MM", "ACM", "SCM"][publisher]
+          }:0x${errorCode.toString(16)}:0x${errorReason.toString(16)}] ${
+            ["COMMAND RECEIVE FAILED", "LOGGER FAILURE"][errorCode]
+          }\nReason: ${["INVALID KEY", "INVALID SD"][errorReason]}`
+        );
+      }
     });
 
     systemDataSerialport.open((error) => {
@@ -333,6 +378,8 @@ export const CommunicationPanel = () => {
         positionDataRx={positionDataRx}
         systemDataRx={systemDataRx}
         powerDataRx={powerDataRx}
+        valveDataRx={valveDataRx}
+        eventRx={eventRx}
       />
     </div>
   );

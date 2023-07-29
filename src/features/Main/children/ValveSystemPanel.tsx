@@ -40,89 +40,93 @@ export const ValveSystemPanel = () => {
       </nav>
 
       <table width="100%" className="mt-4">
-        <tr>
-          <td width="50%">
-            <p className="heading has-text-light has-text-centered">
-              Temperature
-            </p>
-            <nav className="level is-justify-content-center mb-2">
-              <div className="level-item has-text-centered">
-                <div>
-                  <p className="heading has-text-light">MCU</p>
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td width="64m">
-                          <p className="has-text-light">
-                            {`${valveData.mcuTemperature?.toFixed() ?? "--"} ℃`}
-                          </p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+        <tbody>
+          <tr>
+            <td width="50%">
+              <p className="heading has-text-light has-text-centered">
+                Temperature
+              </p>
+              <nav className="level is-justify-content-center mb-2">
+                <div className="level-item has-text-centered">
+                  <div>
+                    <p className="heading has-text-light">MCU</p>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td width="64m">
+                            <p className="has-text-light">
+                              {`${
+                                valveData.mcuTemperature?.toFixed() ?? "--"
+                              } ℃`}
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-              <div className="level-item has-text-centered">
-                <div>
-                  <p className="heading has-text-light">Motor</p>
-                  <table width="100%">
-                    <tbody>
-                      <tr>
-                        <td width="64m">
-                          <p className="has-text-light">
-                            {`${
-                              valveData.motorTemperature?.toFixed() ?? "--"
-                            } ℃`}
-                          </p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div className="level-item has-text-centered">
+                  <div>
+                    <p className="heading has-text-light">Motor</p>
+                    <table width="100%">
+                      <tbody>
+                        <tr>
+                          <td width="64m">
+                            <p className="has-text-light">
+                              {`${
+                                valveData.motorTemperature?.toFixed() ?? "--"
+                              } ℃`}
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-            </nav>
-          </td>
+              </nav>
+            </td>
 
-          <td width="50%">
-            <p className="heading has-text-light has-text-centered">Power</p>
-            <nav className="level is-justify-content-center mb-2">
-              <div className="level-item has-text-centered">
-                <div>
-                  <p className="heading has-text-light">Voltage</p>
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td width="64m">
-                          <p className="has-text-light">
-                            {`${
-                              valveData.inputVoltage?.toFixed(1) ?? "--.-"
-                            } V`}
-                          </p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+            <td width="50%">
+              <p className="heading has-text-light has-text-centered">Power</p>
+              <nav className="level is-justify-content-center mb-2">
+                <div className="level-item has-text-centered">
+                  <div>
+                    <p className="heading has-text-light">Voltage</p>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td width="64m">
+                            <p className="has-text-light">
+                              {`${
+                                valveData.inputVoltage?.toFixed(1) ?? "--.-"
+                              } V`}
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-              <div className="level-item has-text-centered">
-                <div>
-                  <p className="heading has-text-light">Current</p>
-                  <table width="100%">
-                    <tbody>
-                      <tr>
-                        <td width="64m">
-                          <p className="has-text-light">
-                            {`${valveData.current?.toFixed() ?? "--.--"} A`}
-                          </p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div className="level-item has-text-centered">
+                  <div>
+                    <p className="heading has-text-light">Current</p>
+                    <table width="100%">
+                      <tbody>
+                        <tr>
+                          <td width="64m">
+                            <p className="has-text-light">
+                              {`${valveData.current?.toFixed() ?? "--.--"} A`}
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-            </nav>
-          </td>
-        </tr>
+              </nav>
+            </td>
+          </tr>
+        </tbody>
       </table>
 
       <div
