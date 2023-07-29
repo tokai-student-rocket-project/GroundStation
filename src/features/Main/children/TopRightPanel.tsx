@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { shell } from "electron";
 
 import { AirDataContext } from "../../App/App";
 import { PositionDataContext } from "../../App/App";
@@ -26,6 +27,17 @@ export const TopRightPanel = () => {
     useContext(PositionDataContext);
   const [now, setNow] = useState<string>();
 
+  const openGoogleMap = () => {
+    const latitude = (positionData.latitude = 40.138633);
+    const longitude = (positionData.longitude = 139.98485);
+
+    if (latitude == undefined || longitude == undefined) return;
+
+    shell.openExternal(
+      `https://www.google.com/maps?q=${latitude},${longitude}&z=17&t=k`
+    );
+  };
+
   useEffect(() => {
     setInterval(() => {
       const nowRaw = new Date();
@@ -36,15 +48,15 @@ export const TopRightPanel = () => {
   return (
     <nav className="level is-justify-content-center">
       <div className="level-item has-text-centered">
-        <div>
+        <a onClick={openGoogleMap}>
           <p className="heading has-text-light has-text-left">GNSS</p>
-          <p className="has-text-light">
+          <p className="has-text-light has-text-left">
             {`N ${degToDms(positionData.latitude) ?? "--°--'--.--\""}`}
           </p>
-          <p className="has-text-light">
+          <p className="has-text-light has-text-left">
             {`E ${degToDms(positionData.longitude) ?? "---°--'--.--\""}`}
           </p>
-        </div>
+        </a>
       </div>
       <div className="level-item has-text-centered">
         <div>
