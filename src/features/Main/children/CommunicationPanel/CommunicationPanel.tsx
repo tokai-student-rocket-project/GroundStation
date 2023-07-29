@@ -247,6 +247,9 @@ export const CommunicationPanel = () => {
         setValveDataRx((prev) => !prev);
         setValveData({
           isWaiting: json.IsWaiting,
+          currentPosition: json.CurrentPosition,
+          currentDesiredPosition: json.CurrentDesiredPosition,
+          currentVelocity: json.CurrentVelocity,
           motorTemperature: json.McuTemperature,
           mcuTemperature: json.MotorTemperature,
           current: json.Current,

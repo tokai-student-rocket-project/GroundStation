@@ -1,5 +1,8 @@
 export type ValveData = {
   isWaiting?: boolean;
+  currentPosition?: number;
+  currentDesiredPosition?: number;
+  currentVelocity?: number;
   mcuTemperature?: number;
   motorTemperature?: number;
   current?: number;
@@ -14,6 +17,9 @@ export type ValveDataContextType = {
 
 export const defaultValveData = {
   isWaiting: undefined,
+  currentPosition: undefined,
+  currentDesiredPosition: undefined,
+  currentVelocity: undefined,
   mcuTemperature: undefined,
   motorTemperature: undefined,
   current: undefined,

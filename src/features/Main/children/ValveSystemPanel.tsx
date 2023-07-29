@@ -23,6 +23,58 @@ export const ValveSystemPanel = () => {
       <nav className="level is-justify-content-center mb-2">
         <div className="level-item has-text-centered">
           <div>
+            <p className="heading has-text-light">Position</p>
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td width="64m">
+                    <p className="has-text-light">
+                      {`${valveData.currentPosition?.toFixed(2) ?? "--.--"} °`}
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="level-item has-text-centered">
+          <div>
+            <p className="heading has-text-light">Target</p>
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td width="64m">
+                    <p className="has-text-light">
+                      {`${
+                        valveData.currentDesiredPosition?.toFixed(2) ?? "--.--"
+                      } °`}
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="level-item has-text-centered">
+          <div>
+            <p className="heading has-text-light">Velocity</p>
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td width="96m">
+                    <p className="has-text-light">
+                      {`${
+                        valveData.currentVelocity?.toFixed(2) ?? "--.--"
+                      } dps`}
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="level-item has-text-centered">
+          <div>
             <p className="heading has-text-light">Mode</p>
             <table width="100%">
               <tbody>
