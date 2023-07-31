@@ -8,6 +8,7 @@ type Props = {
   powerDataRx: boolean;
   valveDataRx: boolean;
   eventRx: boolean;
+  errorRx: boolean;
 };
 
 export const RxStatusBox = ({
@@ -17,6 +18,7 @@ export const RxStatusBox = ({
   powerDataRx,
   valveDataRx,
   eventRx,
+  errorRx,
 }: Props) => {
   return (
     <div className="box has-background-black-ter p-2">
@@ -169,7 +171,7 @@ export const RxStatusBox = ({
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={"#7A7A7A"}
+                color={errorRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>

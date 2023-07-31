@@ -2,6 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "serialport";
 
+import { Console } from "console";
+const console = new Console(process.stdout, process.stderr);
+
 import {
   AirDataContext,
   PositionDataContext,
@@ -16,6 +19,8 @@ import { SerialportSelector } from "./children/SerialportSelector";
 import { SpecBox } from "./children/SpecBox";
 import { SpecStatusBox } from "./children/SpecStatusBox";
 import { RxStatusBox } from "./children/RxStatusBox";
+import { LoggerACM } from "./children/LoggerACM";
+import { LoggerSCM } from "./children/LoggerSCM";
 
 type SpecStatus = {
   rssi?: number;
@@ -55,6 +60,10 @@ export const CommunicationPanel = () => {
   const [valveDataRx, setValveDataRx] = useState<boolean>(false);
   const [eventRx, setEventRx] = useState<boolean>(false);
   const [errorRx, setErrorRx] = useState<boolean>(false);
+
+  const [latestACM, setLatestACM] = useState<string>();
+  const [latestSCM, setLatestSCM] = useState<string>();
+  const [doLogging, setDoLogging] = useState<boolean>(false);
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
@@ -156,6 +165,8 @@ export const CommunicationPanel = () => {
     let oldTime = new Date().getTime();
     parser.on("data", (data) => {
       const json = JSON.parse(data);
+      console.log(data);
+      setLatestACM(data);
 
       const nowTime = new Date().getTime();
       const timeDiff = nowTime - oldTime;
@@ -204,6 +215,8 @@ export const CommunicationPanel = () => {
     let oldTime = new Date().getTime();
     parser.on("data", (data) => {
       const json = JSON.parse(data);
+      console.log(data);
+      setLatestSCM(data);
 
       const nowTime = new Date().getTime();
       const timeDiff = nowTime - oldTime;
@@ -328,6 +341,19 @@ export const CommunicationPanel = () => {
         </h2>
 
         <div>
+          <button
+            className={
+              doLogging
+                ? "button is-small is-success is-inverted has-background-dark"
+                : "button is-small is-danger is-inverted has-background-dark"
+            }
+            onClick={() => setDoLogging((state) => !state)}
+            accessKey="l"
+          >
+            {doLogging ? "LOGGING ON" : "LOGGING OFF"}
+          </button>
+          <LoggerACM doLogging={doLogging} log={latestACM} />
+          <LoggerSCM doLogging={doLogging} log={latestSCM} />
           <RssiIcon
             rssi1={missionDataSpecStatus?.rssi}
             rssi2={airDataSpecStatus?.rssi}
@@ -383,6 +409,7 @@ export const CommunicationPanel = () => {
         powerDataRx={powerDataRx}
         valveDataRx={valveDataRx}
         eventRx={eventRx}
+        errorRx={errorRx}
       />
     </div>
   );
