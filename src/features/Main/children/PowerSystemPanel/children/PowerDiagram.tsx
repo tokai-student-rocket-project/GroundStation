@@ -1,3 +1,5 @@
+import "./flow.css";
+
 type Props = {
   supplyVoltage?: number;
   batteryVoltage?: number;
@@ -18,48 +20,79 @@ export const PowerDiagram = ({
         style={{ height: "100%", position: "relative" }}
       >
         <div
+          className={isExternal ? "flow" : ""}
           style={{
-            background: isExternal ? "#48c78e" : "#7A7A7A",
             position: "absolute",
             width: "50px",
             height: "3px",
             left: "12%",
             top: "66%",
             transform: "translate(-50%, -50%)",
+            background: `linear-gradient(90deg,${
+              isExternal ? "#48c78e" : "#7A7A7A"
+            },${isExternal ? "#48c78e" : "#7A7A7A"} 5px,${
+              isExternal ? "#257953" : "#7A7A7A"
+            } 5px,${isExternal ? "#257953" : "#7A7A7A"} 10px)`,
+            backgroundSize: "10px 6px",
+            backgroundPosition: "0px 0px",
           }}
         ></div>
         <div
+          className={(batteryVoltage ?? 0) > 8 && !isExternal ? "flow" : ""}
           style={{
-            background:
-              (batteryVoltage ?? 0) > 8 && !isExternal ? "#48c78e" : "#7A7A7A",
             position: "absolute",
             width: "150px",
             height: "3px",
             left: "35%",
             top: "33%",
             transform: "translate(-50%, -50%)",
+            background: `linear-gradient(90deg,${
+              (batteryVoltage ?? 0) > 8 && !isExternal ? "#48c78e" : "#7A7A7A"
+            },${
+              (batteryVoltage ?? 0) > 8 && !isExternal ? "#48c78e" : "#7A7A7A"
+            } 5px,${
+              (batteryVoltage ?? 0) > 8 && !isExternal ? "#257953" : "#7A7A7A"
+            } 5px,${
+              (batteryVoltage ?? 0) > 8 && !isExternal ? "#257953" : "#7A7A7A"
+            } 10px)`,
+            backgroundSize: "10px 6px",
+            backgroundPosition: "0px 0px",
           }}
         ></div>
         <div
+          className={isExternal ? "flow" : ""}
           style={{
-            background: isExternal ? "#48c78e" : "#7A7A7A",
             position: "absolute",
             width: "150px",
             height: "3px",
             left: "35%",
             top: "66%",
             transform: "translate(-50%, -50%)",
+            background: `linear-gradient(90deg,${
+              isExternal ? "#48c78e" : "#7A7A7A"
+            },${isExternal ? "#48c78e" : "#7A7A7A"} 5px,${
+              isExternal ? "#257953" : "#7A7A7A"
+            } 5px,${isExternal ? "#257953" : "#7A7A7A"} 10px)`,
+            backgroundSize: "10px 6px",
+            backgroundPosition: "0px 0px",
           }}
         ></div>
         <div
+          className={(supplyVoltage ?? 0) > 8 ? "flow" : ""}
           style={{
-            background: (supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A",
             position: "absolute",
             width: "150px",
             height: "3px",
             left: "66%",
             top: "50%",
             transform: "translate(-50%, -50%)",
+            background: `linear-gradient(90deg,${
+              (supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"
+            },${(supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"} 5px,${
+              (supplyVoltage ?? 0) > 8 ? "#257953" : "#7A7A7A"
+            } 5px,${(supplyVoltage ?? 0) > 8 ? "#257953" : "#7A7A7A"} 10px)`,
+            backgroundSize: "10px 6px",
+            backgroundPosition: "0px 0px",
           }}
         ></div>
 

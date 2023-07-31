@@ -1,5 +1,13 @@
-import { useContext, useState } from "react";
-import { ValveDataContext } from "../../App/App";
+type Props = {
+  currentPosition?: number;
+  currentDesiredPosition?: number;
+  currentVelocity?: number;
+  isWaiting?: boolean;
+  mcuTemperature?: number;
+  motorTemperature?: number;
+  inputVoltage?: number;
+  current?: number;
+};
 
 const modeToString = (isWaiting?: boolean): string => {
   if (isWaiting == undefined) return "------";
@@ -7,19 +15,18 @@ const modeToString = (isWaiting?: boolean): string => {
   return isWaiting ? "WAITING" : "LAUNCH";
 };
 
-export const ValveSystemPanel = () => {
-  const { valveData, setValveData, clearValveData } =
-    useContext(ValveDataContext);
-
+export const ValveSummary = ({
+  currentPosition,
+  currentDesiredPosition,
+  currentVelocity,
+  isWaiting,
+  mcuTemperature,
+  motorTemperature,
+  inputVoltage,
+  current,
+}: Props) => {
   return (
-    <div
-      className="box has-background-dark p-3 is-flex is-flex-direction-column"
-      style={{ height: "100%" }}
-    >
-      <h2 className="title is-4 has-text-light has-text-weight-light">
-        VALVE SYSTEM
-      </h2>
-
+    <>
       <nav className="level is-justify-content-center mb-2">
         <div className="level-item has-text-centered">
           <div>
@@ -29,7 +36,7 @@ export const ValveSystemPanel = () => {
                 <tr>
                   <td width="64m">
                     <p className="has-text-light">
-                      {`${valveData.currentPosition?.toFixed(2) ?? "--.--"} °`}
+                      {`${currentPosition?.toFixed(2) ?? "--.--"} °`}
                     </p>
                   </td>
                 </tr>
@@ -45,9 +52,7 @@ export const ValveSystemPanel = () => {
                 <tr>
                   <td width="64m">
                     <p className="has-text-light">
-                      {`${
-                        valveData.currentDesiredPosition?.toFixed(2) ?? "--.--"
-                      } °`}
+                      {`${currentDesiredPosition?.toFixed(2) ?? "--.--"} °`}
                     </p>
                   </td>
                 </tr>
@@ -63,9 +68,7 @@ export const ValveSystemPanel = () => {
                 <tr>
                   <td width="96m">
                     <p className="has-text-light">
-                      {`${
-                        valveData.currentVelocity?.toFixed(2) ?? "--.--"
-                      } dps`}
+                      {`${currentVelocity?.toFixed(2) ?? "--.--"} dps`}
                     </p>
                   </td>
                 </tr>
@@ -81,7 +84,7 @@ export const ValveSystemPanel = () => {
                 <tr>
                   <td width="64m">
                     <p className="has-text-primary has-text-weight-semibold">
-                      {modeToString(valveData.isWaiting)}
+                      {modeToString(isWaiting)}
                     </p>
                   </td>
                 </tr>
@@ -107,9 +110,7 @@ export const ValveSystemPanel = () => {
                         <tr>
                           <td width="64m">
                             <p className="has-text-light">
-                              {`${
-                                valveData.mcuTemperature?.toFixed() ?? "--"
-                              } ℃`}
+                              {`${mcuTemperature?.toFixed() ?? "--"} ℃`}
                             </p>
                           </td>
                         </tr>
@@ -125,9 +126,7 @@ export const ValveSystemPanel = () => {
                         <tr>
                           <td width="64m">
                             <p className="has-text-light">
-                              {`${
-                                valveData.motorTemperature?.toFixed() ?? "--"
-                              } ℃`}
+                              {`${motorTemperature?.toFixed() ?? "--"} ℃`}
                             </p>
                           </td>
                         </tr>
@@ -149,9 +148,7 @@ export const ValveSystemPanel = () => {
                         <tr>
                           <td width="64m">
                             <p className="has-text-light">
-                              {`${
-                                valveData.inputVoltage?.toFixed(1) ?? "--.-"
-                              } V`}
+                              {`${inputVoltage?.toFixed(1) ?? "--.-"} V`}
                             </p>
                           </td>
                         </tr>
@@ -167,7 +164,7 @@ export const ValveSystemPanel = () => {
                         <tr>
                           <td width="64m">
                             <p className="has-text-light">
-                              {`${valveData.current?.toFixed() ?? "--.--"} A`}
+                              {`${current?.toFixed() ?? "--.--"} A`}
                             </p>
                           </td>
                         </tr>
@@ -180,11 +177,6 @@ export const ValveSystemPanel = () => {
           </tr>
         </tbody>
       </table>
-
-      <div
-        className="has-background-primary-dark"
-        style={{ height: "100%" }}
-      ></div>
-    </div>
+    </>
   );
 };
