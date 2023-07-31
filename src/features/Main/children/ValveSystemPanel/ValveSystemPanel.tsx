@@ -25,7 +25,7 @@ export const ValveSystemPanel = () => {
         current={valveData.current}
       />
 
-      <ValveDiagram isWaiting={true} />
+      <ValveDiagram isWaiting={valveData.isWaiting} />
     </div>
   );
 };
