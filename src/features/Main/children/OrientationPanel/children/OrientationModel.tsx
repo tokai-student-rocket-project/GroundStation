@@ -81,7 +81,7 @@ export const OrientationModel = ({ yaw, pitch, roll }: Props) => {
             standardYaw(yaw),
             standardRoll(roll),
             standardPitch(pitch),
-            "XZY",
+            "XYZ",
           ]}
         />
         <primitive object={new GridHelper()} />
@@ -91,7 +91,7 @@ export const OrientationModel = ({ yaw, pitch, roll }: Props) => {
             standardYaw(yaw),
             standardRoll(roll),
             standardPitch(pitch),
-            "XZY",
+            "XYZ",
           ]}
         />
       </Canvas>
