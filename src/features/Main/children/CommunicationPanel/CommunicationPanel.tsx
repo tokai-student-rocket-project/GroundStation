@@ -184,6 +184,7 @@ export const CommunicationPanel = () => {
           altitude: json.Alt,
           climbRate: json.CR,
           outsideTemperature: json.OutTemp,
+          coldTemperature: json.CldTemp,
           orientationX: json.Ori.x,
           orientationY: json.Ori.y,
           orientationZ: json.Ori.z,
@@ -304,10 +305,10 @@ export const CommunicationPanel = () => {
         const errorReason: number = json.ErrorReason;
         console.log(
           `Error: [${
-            ["SM", "FM", "MM", "ACM", "SCM"][publisher]
+            ["SM", "FM", "MM", "ACM", "SCM", "VCM"][publisher]
           }:0x${errorCode.toString(16)}:0x${errorReason.toString(16)}] ${
             ["COMMAND RECEIVE FAILED", "LOGGER FAILURE"][errorCode]
-          }\nReason: ${["INVALID KEY", "INVALID SD"][errorReason]}`
+          }\nReason: ${["UNKNOWN", "INVALID KEY", "INVALID SD"][errorReason]}`
         );
       }
     });

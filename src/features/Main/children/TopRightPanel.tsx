@@ -89,7 +89,9 @@ export const TopRightPanel = () => {
                   />
                 </td>
                 <td width="40m">
-                  <p className="has-text-light">{"--.-"}</p>
+                  <p className="has-text-light">
+                    {airData.coldTemperature?.toFixed(1) ?? "--.-"}
+                  </p>
                 </td>
                 <td style={{ verticalAlign: "middle" }}>
                   <p className="has-text-light mx-1">℃</p>
