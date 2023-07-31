@@ -1,5 +1,6 @@
 export type CommandSchedule = {
   flightModeOn: boolean;
+  reset: boolean;
 };
 
 export type CommandContextType = {
@@ -10,4 +11,5 @@ export type CommandContextType = {
 
 export const defaultCommandSchedule = {
   flightModeOn: false,
+  reset: false,
 };

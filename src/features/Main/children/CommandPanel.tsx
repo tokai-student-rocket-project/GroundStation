@@ -9,7 +9,11 @@ export const CommandPanel = () => {
   const [isArmed, setIsArmed] = useState<boolean>(false);
 
   const flightModeOn = () => {
-    if (isArmed) setCommandSchedule({ flightModeOn: true });
+    if (isArmed) setCommandSchedule({ flightModeOn: true, reset: false });
+  };
+
+  const reset = () => {
+    if (isArmed) setCommandSchedule({ flightModeOn: false, reset: true });
   };
 
   const changeArmed = () => setIsArmed((state) => !state);
@@ -37,14 +41,19 @@ export const CommandPanel = () => {
       <button
         onClick={flightModeOn}
         accessKey="f"
-        className="button is-primary is-fullwidth is-outlined"
+        className="button is-primary is-fullwidth is-outlined mb-4"
         disabled={!isArmed}
       >
         <div>FLIGHT MODE ON</div>
       </button>
-      <header className="header has-text-light is-flex is-justify-content-center mx-4 my-2">
-        Ctrl + Opt + F
-      </header>
+      <button
+        onClick={reset}
+        accessKey="r"
+        className="button is-primary is-fullwidth is-outlined"
+        disabled={!isArmed}
+      >
+        <div>RESET</div>
+      </button>
     </div>
   );
 };

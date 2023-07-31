@@ -331,6 +331,10 @@ export const CommunicationPanel = () => {
       systemDataSerialport.write("F");
     }
 
+    if (commandSchedule.reset) {
+      systemDataSerialport.write("R");
+    }
+
     clearCommandSchedule();
   }, [commandSchedule]);
 
