@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 import { PowerDataContext } from "../../../App/App";
 
 import { BatteryStatus } from "./children/BatteryStatus";
@@ -10,6 +10,23 @@ export const PowerSystemPanel = () => {
     useContext(PowerDataContext);
 
   const [isExternalSource, setIsExternalSource] = useState<boolean>(false);
+
+  const PowerDiagramMemo = useMemo(
+    () => (
+      <PowerDiagram
+        supplyVoltage={powerData.supplyVoltage}
+        batteryVoltage={powerData.batteryVoltage}
+        poolVoltage={powerData.poolVoltage}
+        isExternal={isExternalSource}
+      />
+    ),
+    [
+      isExternalSource,
+      powerData.supplyVoltage,
+      powerData.batteryVoltage,
+      powerData.poolVoltage,
+    ]
+  );
 
   const getSource = (batteryVoltage?: number, poolVoltage?: number): string => {
     if (batteryVoltage == undefined || poolVoltage == undefined) return "----";
@@ -64,12 +81,8 @@ export const PowerSystemPanel = () => {
         poolVoltage={powerData.poolVoltage}
         source={getSource(powerData.batteryVoltage, powerData.poolVoltage)}
       />
-      <PowerDiagram
-        supplyVoltage={powerData.supplyVoltage}
-        batteryVoltage={powerData.batteryVoltage}
-        poolVoltage={powerData.poolVoltage}
-        isExternal={isExternalSource}
-      />
+
+      {PowerDiagramMemo}
     </div>
   );
 };

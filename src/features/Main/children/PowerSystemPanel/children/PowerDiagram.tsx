@@ -30,11 +30,11 @@ export const PowerDiagram = ({
             transform: "translate(-50%, -50%)",
             background: `linear-gradient(90deg,${
               isExternal ? "#48c78e" : "#7A7A7A"
-            },${isExternal ? "#48c78e" : "#7A7A7A"} 5px,${
+            },${isExternal ? "#48c78e" : "#7A7A7A"} 7px,${
               isExternal ? "#257953" : "#7A7A7A"
-            } 5px,${isExternal ? "#257953" : "#7A7A7A"} 10px)`,
+            } 7px,${isExternal ? "#257953" : "#7A7A7A"} 10px)`,
             backgroundSize: "10px 6px",
-            backgroundPosition: "0px 0px",
+            backgroundPositionX: "0px",
           }}
         ></div>
         <div
@@ -50,13 +50,13 @@ export const PowerDiagram = ({
               (batteryVoltage ?? 0) > 8 && !isExternal ? "#48c78e" : "#7A7A7A"
             },${
               (batteryVoltage ?? 0) > 8 && !isExternal ? "#48c78e" : "#7A7A7A"
-            } 5px,${
+            } 7px,${
               (batteryVoltage ?? 0) > 8 && !isExternal ? "#257953" : "#7A7A7A"
-            } 5px,${
+            } 7px,${
               (batteryVoltage ?? 0) > 8 && !isExternal ? "#257953" : "#7A7A7A"
             } 10px)`,
             backgroundSize: "10px 6px",
-            backgroundPosition: "0px 0px",
+            backgroundPositionX: "0px",
           }}
         ></div>
         <div
@@ -70,11 +70,11 @@ export const PowerDiagram = ({
             transform: "translate(-50%, -50%)",
             background: `linear-gradient(90deg,${
               isExternal ? "#48c78e" : "#7A7A7A"
-            },${isExternal ? "#48c78e" : "#7A7A7A"} 5px,${
+            },${isExternal ? "#48c78e" : "#7A7A7A"} 7px,${
               isExternal ? "#257953" : "#7A7A7A"
-            } 5px,${isExternal ? "#257953" : "#7A7A7A"} 10px)`,
+            } 7px,${isExternal ? "#257953" : "#7A7A7A"} 10px)`,
             backgroundSize: "10px 6px",
-            backgroundPosition: "0px 0px",
+            backgroundPositionX: "0px",
           }}
         ></div>
         <div
@@ -88,11 +88,11 @@ export const PowerDiagram = ({
             transform: "translate(-50%, -50%)",
             background: `linear-gradient(90deg,${
               (supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"
-            },${(supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"} 5px,${
+            },${(supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"} 7px,${
               (supplyVoltage ?? 0) > 8 ? "#257953" : "#7A7A7A"
-            } 5px,${(supplyVoltage ?? 0) > 8 ? "#257953" : "#7A7A7A"} 10px)`,
+            } 7px,${(supplyVoltage ?? 0) > 8 ? "#257953" : "#7A7A7A"} 10px)`,
             backgroundSize: "10px 6px",
-            backgroundPosition: "0px 0px",
+            backgroundPositionX: "0px",
           }}
         ></div>
 

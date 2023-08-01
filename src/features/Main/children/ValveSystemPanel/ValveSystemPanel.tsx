@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { ValveDataContext } from "../../../App/App";
 
 import { ValveSummary } from "./children/ValveSummary";
@@ -7,6 +7,11 @@ import { ValveDiagram } from "./children/ValveDiagram";
 export const ValveSystemPanel = () => {
   const { valveData, setValveData, clearValveData } =
     useContext(ValveDataContext);
+
+  const ValveDiagramMemo = useMemo(
+    () => <ValveDiagram isWaiting={valveData.isWaiting} />,
+    [valveData.isWaiting]
+  );
 
   return (
     <div className="box has-background-dark p-3 is-flex is-flex-direction-column">
@@ -25,7 +30,7 @@ export const ValveSystemPanel = () => {
         current={valveData.current}
       />
 
-      <ValveDiagram isWaiting={valveData.isWaiting} />
+      {ValveDiagramMemo}
     </div>
   );
 };

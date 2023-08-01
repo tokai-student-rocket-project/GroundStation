@@ -6,22 +6,22 @@ type Props = {
 
 const waitingOrLaunchToColor = (isWaiting?: boolean): string => {
   if (isWaiting == undefined) return "#7A7A7A";
-  return isWaiting ? "#3e8ed0" : "#ffe08a";
+  return isWaiting ? "#3e8ed0" : "#FF385F";
 };
 
 const waitingOrLaunchToDarkColor = (isWaiting?: boolean): string => {
   if (isWaiting == undefined) return "#7A7A7A";
-  return isWaiting ? "#296fa8" : "#946c00";
+  return isWaiting ? "#296fa8" : "#cc0f35";
 };
 
 const launchToColor = (isWaiting?: boolean): string => {
   if (isWaiting == undefined) return "#7A7A7A";
-  return isWaiting ? "#7A7A7A" : "#ffe08a";
+  return isWaiting ? "#7A7A7A" : "#FF385F";
 };
 
 const launchToDarkColor = (isWaiting?: boolean): string => {
   if (isWaiting == undefined) return "#7A7A7A";
-  return isWaiting ? "#7A7A7A" : "#946c00";
+  return isWaiting ? "#7A7A7A" : "#cc0f35";
 };
 
 const waitingToColor = (isWaiting?: boolean): string => {
@@ -54,11 +54,11 @@ export const ValveDiagram = ({ isWaiting }: Props) => {
               isWaiting
             )},${waitingOrLaunchToColor(
               isWaiting
-            )} 5px,${waitingOrLaunchToDarkColor(
+            )} 7px,${waitingOrLaunchToDarkColor(
               isWaiting
-            )} 5px,${waitingOrLaunchToDarkColor(isWaiting)} 10px)`,
+            )} 7px,${waitingOrLaunchToDarkColor(isWaiting)} 10px)`,
             backgroundSize: "10px 6px",
-            backgroundPosition: "0px 0px",
+            backgroundPositionX: "0px",
           }}
         ></div>
         <div
@@ -72,11 +72,11 @@ export const ValveDiagram = ({ isWaiting }: Props) => {
             transform: "translate(-50%, -50%)",
             background: `linear-gradient(90deg,${launchToColor(
               isWaiting
-            )},${launchToColor(isWaiting)} 5px,${launchToDarkColor(
+            )},${launchToColor(isWaiting)} 7px,${launchToDarkColor(
               isWaiting
-            )} 5px,${launchToDarkColor(isWaiting)} 10px)`,
+            )} 7px,${launchToDarkColor(isWaiting)} 10px)`,
             backgroundSize: "10px 6px",
-            backgroundPosition: "0px 0px",
+            backgroundPositionX: "0px",
           }}
         ></div>
         <div
@@ -90,11 +90,11 @@ export const ValveDiagram = ({ isWaiting }: Props) => {
             transform: "translate(-50%, -50%)",
             background: `linear-gradient(90deg,${waitingToColor(
               isWaiting
-            )},${waitingToColor(isWaiting)} 5px,${waitingToDarkColor(
+            )},${waitingToColor(isWaiting)} 7px,${waitingToDarkColor(
               isWaiting
-            )} 5px,${waitingToDarkColor(isWaiting)} 10px)`,
+            )} 7px,${waitingToDarkColor(isWaiting)} 10px)`,
             backgroundSize: "10px 6px",
-            backgroundPosition: "0px 0px",
+            backgroundPositionX: "0px",
           }}
         ></div>
         <div
