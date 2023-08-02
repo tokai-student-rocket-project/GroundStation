@@ -50,7 +50,7 @@ export const ValveDiagram = ({ isWaiting }: Props) => {
             left: "32.5%",
             top: "45%",
             transform: "translate(-50%, -50%)",
-            background: `linear-gradient(90deg,${waitingOrLaunchToColor(
+            backgroundImage: `linear-gradient(90deg,${waitingOrLaunchToColor(
               isWaiting
             )},${waitingOrLaunchToColor(
               isWaiting
@@ -70,7 +70,7 @@ export const ValveDiagram = ({ isWaiting }: Props) => {
             left: "60%",
             top: "45%",
             transform: "translate(-50%, -50%)",
-            background: `linear-gradient(90deg,${launchToColor(
+            backgroundImage: `linear-gradient(90deg,${launchToColor(
               isWaiting
             )},${launchToColor(isWaiting)} 7px,${launchToDarkColor(
               isWaiting
@@ -88,7 +88,7 @@ export const ValveDiagram = ({ isWaiting }: Props) => {
             left: "60%",
             top: "75%",
             transform: "translate(-50%, -50%)",
-            background: `linear-gradient(90deg,${waitingToColor(
+            backgroundImage: `linear-gradient(90deg,${waitingToColor(
               isWaiting
             )},${waitingToColor(isWaiting)} 7px,${waitingToDarkColor(
               isWaiting

@@ -28,7 +28,7 @@ export const PowerDiagram = ({
             left: "12%",
             top: "66%",
             transform: "translate(-50%, -50%)",
-            background: `linear-gradient(90deg,${
+            backgroundImage: `linear-gradient(90deg,${
               isExternal ? "#48c78e" : "#7A7A7A"
             },${isExternal ? "#48c78e" : "#7A7A7A"} 7px,${
               isExternal ? "#257953" : "#7A7A7A"
@@ -46,7 +46,7 @@ export const PowerDiagram = ({
             left: "35%",
             top: "33%",
             transform: "translate(-50%, -50%)",
-            background: `linear-gradient(90deg,${
+            backgroundImage: `linear-gradient(90deg,${
               (batteryVoltage ?? 0) > 8 && !isExternal ? "#48c78e" : "#7A7A7A"
             },${
               (batteryVoltage ?? 0) > 8 && !isExternal ? "#48c78e" : "#7A7A7A"
@@ -68,7 +68,7 @@ export const PowerDiagram = ({
             left: "35%",
             top: "66%",
             transform: "translate(-50%, -50%)",
-            background: `linear-gradient(90deg,${
+            backgroundImage: `linear-gradient(90deg,${
               isExternal ? "#48c78e" : "#7A7A7A"
             },${isExternal ? "#48c78e" : "#7A7A7A"} 7px,${
               isExternal ? "#257953" : "#7A7A7A"
@@ -86,7 +86,7 @@ export const PowerDiagram = ({
             left: "66%",
             top: "50%",
             transform: "translate(-50%, -50%)",
-            background: `linear-gradient(90deg,${
+            backgroundImage: `linear-gradient(90deg,${
               (supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"
             },${(supplyVoltage ?? 0) > 8 ? "#48c78e" : "#7A7A7A"} 7px,${
               (supplyVoltage ?? 0) > 8 ? "#257953" : "#7A7A7A"
