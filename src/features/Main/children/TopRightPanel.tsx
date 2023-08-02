@@ -41,7 +41,7 @@ export const TopRightPanel = () => {
   useEffect(() => {
     setInterval(() => {
       const nowRaw = new Date();
-      setNow(`${nowRaw.toDateString()}\n${nowRaw.toTimeString()}`);
+      setNow(`${nowRaw.toDateString()}\n${nowRaw.toLocaleTimeString()}`);
     }, 1000);
   }, []);
 
@@ -104,7 +104,7 @@ export const TopRightPanel = () => {
       <div className="level-item has-text-centered">
         <div>
           <p className="heading has-text-light has-text-left">Current Time</p>
-          <p className="has-text-light" style={{ maxWidth: "200px" }}>
+          <p className="has-text-light" style={{ maxWidth: "160px" }}>
             {now}
           </p>
         </div>
