@@ -17,8 +17,7 @@ const stateToLabelColor = (state?: boolean): string => {
 };
 
 export const SystemStatus = () => {
-  const { systemData, setSystemData, clearSystemData } =
-    useContext(SystemDataContext);
+  const { systemData } = useContext(SystemDataContext);
 
   return (
     <div className="box has-background-dark p-3">

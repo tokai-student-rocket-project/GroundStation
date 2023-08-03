@@ -22,9 +22,8 @@ const degToDms = (deg?: number): string | undefined => {
 };
 
 export const TopRightPanel = () => {
-  const { airData, setAirData, clearAirData } = useContext(AirDataContext);
-  const { positionData, setPositionData, clearPositionData } =
-    useContext(PositionDataContext);
+  const { airData } = useContext(AirDataContext);
+  const { positionData } = useContext(PositionDataContext);
   const [now, setNow] = useState<string>();
 
   const openGoogleMap = () => {

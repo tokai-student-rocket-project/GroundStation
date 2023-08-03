@@ -7,7 +7,7 @@ import { PitchBar } from "./children/PitchBar";
 import { OrientationModel } from "./children/OrientationModel";
 
 export const OrientationPanel = () => {
-  const { airData, setAirData, clearAirData } = useContext(AirDataContext);
+  const { airData } = useContext(AirDataContext);
 
   return (
     <div className="box has-background-dark p-3">

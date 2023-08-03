@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { PerspectiveCamera, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { EulerOrder, AxesHelper, GridHelper } from "three";
 
@@ -22,7 +22,7 @@ type GLTFResult = GLTF & {
 };
 
 const Rocket = (props: RocketProps) => {
-  const { nodes, materials } = useGLTF("/model.gltf") as GLTFResult;
+  const { nodes } = useGLTF("/model.gltf") as GLTFResult;
 
   return (
     <group {...props} dispose={null} scale={0.003}>

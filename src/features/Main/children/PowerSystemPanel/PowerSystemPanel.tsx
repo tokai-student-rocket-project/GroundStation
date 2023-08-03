@@ -6,8 +6,7 @@ import { PowerSummary } from "./children/PowerSummary";
 import { PowerDiagram } from "./children/PowerDiagram";
 
 export const PowerSystemPanel = () => {
-  const { powerData, setPowerData, clearPowerData } =
-    useContext(PowerDataContext);
+  const { powerData } = useContext(PowerDataContext);
 
   const [isExternalSource, setIsExternalSource] = useState<boolean>(false);
 

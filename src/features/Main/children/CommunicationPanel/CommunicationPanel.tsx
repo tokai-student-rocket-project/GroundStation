@@ -36,22 +36,20 @@ export const CommunicationPanel = () => {
 
   const [airDataSerialport, setAirDataSerialport] = useState<SerialPort>();
   const [airDataSpecStatus, setAirDataSpecStatus] = useState<SpecStatus>();
-  const { airData, setAirData, clearAirData } = useContext(AirDataContext);
+  const { setAirData, clearAirData } = useContext(AirDataContext);
 
   const [systemDataSerialport, setSystemDataSerialport] =
     useState<SerialPort>();
   const [systemDataSpecStatus, setSystemDataSpecStatus] =
     useState<SpecStatus>();
-  const { positionData, setPositionData, clearPositionData } =
+  const { setPositionData, clearPositionData } =
     useContext(PositionDataContext);
-  const { systemData, setSystemData, clearSystemData } =
-    useContext(SystemDataContext);
-  const { powerData, setPowerData, clearPowerData } =
-    useContext(PowerDataContext);
-  const { commandSchedule, setCommandSchedule, clearCommandSchedule } =
-    useContext(CommandScheduleContext);
-  const { valveData, setValveData, clearValveData } =
-    useContext(ValveDataContext);
+  const { setSystemData, clearSystemData } = useContext(SystemDataContext);
+  const { setPowerData, clearPowerData } = useContext(PowerDataContext);
+  const { commandSchedule, clearCommandSchedule } = useContext(
+    CommandScheduleContext
+  );
+  const { setValveData, clearValveData } = useContext(ValveDataContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
   const [positionDataRx, setPositionDataRx] = useState<boolean>(false);

@@ -7,7 +7,7 @@ const getNorm = (x?: number, y?: number, z?: number): number | undefined => {
 };
 
 export const TopLeftPanel = () => {
-  const { airData, setAirData, clearAirData } = useContext(AirDataContext);
+  const { airData } = useContext(AirDataContext);
 
   return (
     <nav className="level is-justify-content-center">

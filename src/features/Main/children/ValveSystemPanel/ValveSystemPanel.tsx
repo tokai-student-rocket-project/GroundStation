@@ -5,8 +5,7 @@ import { ValveSummary } from "./children/ValveSummary";
 import { ValveDiagram } from "./children/ValveDiagram";
 
 export const ValveSystemPanel = () => {
-  const { valveData, setValveData, clearValveData } =
-    useContext(ValveDataContext);
+  const { valveData } = useContext(ValveDataContext);
 
   const ValveDiagramMemo = useMemo(
     () => <ValveDiagram isWaiting={valveData.isWaiting} />,

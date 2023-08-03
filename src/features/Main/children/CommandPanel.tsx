@@ -3,8 +3,7 @@ import { useContext, useState } from "react";
 import { CommandScheduleContext } from "../../App/App";
 
 export const CommandPanel = () => {
-  const { commandSchedule, setCommandSchedule, clearCommandSchedule } =
-    useContext(CommandScheduleContext);
+  const { setCommandSchedule } = useContext(CommandScheduleContext);
 
   const [isArmed, setIsArmed] = useState<boolean>(false);
 

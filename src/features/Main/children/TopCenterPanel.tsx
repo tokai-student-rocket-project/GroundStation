@@ -12,8 +12,7 @@ const flightTimeToText = (flightTime?: number): string => {
 };
 
 export const TopCenterPanel = () => {
-  const { systemData, setSystemData, clearSystemData } =
-    useContext(SystemDataContext);
+  const { systemData } = useContext(SystemDataContext);
 
   return (
     <div className="is-flex is-align-items-end">
