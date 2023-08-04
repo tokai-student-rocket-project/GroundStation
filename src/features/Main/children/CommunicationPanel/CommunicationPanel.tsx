@@ -269,7 +269,7 @@ export const CommunicationPanel = () => {
         setSensingDataRx((prev) => !prev);
         setSensingData({
           referencePressure: json.ReferencePressure,
-          isSystemCalibrated: json.isSystemCalibrated,
+          isSystemCalibrated: json.IsSystemCalibrated,
           loggerUsage: json.LoggerUsage,
         });
 

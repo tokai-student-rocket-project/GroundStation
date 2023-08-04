@@ -35,7 +35,7 @@ const getFixType = (type?: number): string => {
 export const TopRightPanel = () => {
   const { airData } = useContext(AirDataContext);
   const { positionData } = useContext(PositionDataContext);
-  const [now, setNow] = useState<string>();
+  const [now, setNow] = useState<Date>(new Date());
 
   const openGoogleMap = () => {
     const latitude = positionData.latitude;
@@ -50,8 +50,7 @@ export const TopRightPanel = () => {
 
   useEffect(() => {
     setInterval(() => {
-      const nowRaw = new Date();
-      setNow(`${nowRaw.toDateString()}\n${nowRaw.toLocaleTimeString()}`);
+      setNow(new Date());
     }, 1000);
   }, []);
 
@@ -163,8 +162,17 @@ export const TopRightPanel = () => {
       <div className="level-item has-text-centered">
         <div>
           <p className="heading has-text-light has-text-left">Current Time</p>
-          <p className="has-text-light" style={{ maxWidth: "160px" }}>
-            {now}
+          <p
+            className="has-text-light has-text-left"
+            style={{ maxWidth: "160px" }}
+          >
+            {`${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`}
+          </p>
+          <p
+            className="has-text-light has-text-left"
+            style={{ maxWidth: "160px" }}
+          >
+            {`${now.toLocaleTimeString()}`}
           </p>
         </div>
       </div>
