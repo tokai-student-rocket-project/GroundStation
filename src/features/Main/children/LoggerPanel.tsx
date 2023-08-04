@@ -35,7 +35,7 @@ export const LoggerPanel = () => {
             className="has-background-black-ter"
             style={{
               height: "20px",
-              width: "50%",
+              width: "100%",
               padding: "1px",
               position: "relative",
             }}
