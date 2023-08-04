@@ -15,6 +15,13 @@ process.env.PUBLIC = app.isPackaged
   ? process.env.DIST
   : path.join(process.env.DIST, "../public");
 
+import { createServer } from "http";
+import { Server } from "socket.io";
+import { ipcMain } from "electron";
+
+const httpServer = createServer();
+const socket = new Server(httpServer);
+
 let win: BrowserWindow | null;
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
@@ -29,7 +36,11 @@ function createWindow() {
     },
   });
 
-  // ipcはここに追加
+  ipcMain.on("air-data", (_, json) => socket.emit("air-data", json));
+  ipcMain.on("position-data", (_, json) => socket.emit("position-data", json));
+  ipcMain.on("system-data", (_, json) => socket.emit("system-data", json));
+  ipcMain.on("power-data", (_, json) => socket.emit("power-data", json));
+  ipcMain.on("valve-data", (_, json) => socket.emit("valve-data", json));
 
   // Test active push message to Renderer-process.
   win.webContents.on("did-finish-load", () => {
@@ -49,3 +60,7 @@ app.on("window-all-closed", () => {
 });
 
 app.whenReady().then(createWindow);
+
+// ----------------------------------------------------------------------
+
+httpServer.listen(3010);

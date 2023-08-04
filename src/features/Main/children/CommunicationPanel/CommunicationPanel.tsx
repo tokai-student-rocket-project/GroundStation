@@ -5,6 +5,8 @@ import { ReadlineParser } from "serialport";
 import { Console } from "console";
 const console = new Console(process.stdout, process.stderr);
 
+import { ipcRenderer } from "electron";
+
 import {
   AirDataContext,
   PositionDataContext,
@@ -190,6 +192,8 @@ export const CommunicationPanel = () => {
           accelerationY: json.Lia.y,
           accelerationZ: json.Lia.z,
         });
+
+        ipcRenderer.send("air-data", json);
       }
     });
 
@@ -233,6 +237,8 @@ export const CommunicationPanel = () => {
           latitude: json.Latitude,
           longitude: json.Longitude,
         });
+
+        ipcRenderer.send("position-data", json);
       }
 
       if (json.PacketInfo.Type == "SystemData") {
@@ -244,6 +250,8 @@ export const CommunicationPanel = () => {
           doLogging: json.DoLogging,
           flightTime: json.FlightTime,
         });
+
+        ipcRenderer.send("system-data", json);
       }
 
       if (json.PacketInfo.Type == "PowerData") {
@@ -253,6 +261,8 @@ export const CommunicationPanel = () => {
           poolVoltage: json.PoolVoltage,
           batteryVoltage: json.BatteryVoltage,
         });
+
+        ipcRenderer.send("power-data", json);
       }
 
       if (json.PacketInfo.Type == "ValveData") {
@@ -267,6 +277,8 @@ export const CommunicationPanel = () => {
           current: json.Current,
           inputVoltage: json.InputVoltage,
         });
+
+        ipcRenderer.send("valve-data", json);
       }
 
       if (json.PacketInfo.Type == "Event") {
