@@ -2,6 +2,10 @@ import { useContext } from "react";
 
 import { SystemDataContext, SensingDataContext } from "../../App/App";
 
+const clampMax = (percent: number): number => {
+  return percent > 100 ? 100 : percent;
+};
+
 export const LoggerPanel = () => {
   const { systemData } = useContext(SystemDataContext);
   const { sensingData } = useContext(SensingDataContext);
@@ -52,15 +56,16 @@ export const LoggerPanel = () => {
               style={{
                 position: "absolute",
                 height: "18px",
-                width: `${systemData.loggerUsage ?? 0}%`,
+                width: `${clampMax(systemData.loggerUsage ?? 0)}%`,
               }}
             ></div>
           </div>
         </div>
 
-        <div className="has-text-light mx-2" style={{ width: "50px" }}>{`${
-          systemData.loggerUsage?.toFixed(0) ?? "0"
-        }%`}</div>
+        <div
+          className="has-text-light mx-2"
+          style={{ width: "50px" }}
+        >{`${clampMax(systemData.loggerUsage ?? 0).toFixed(0)}%`}</div>
       </div>
 
       <p className="has-text-light">SensingModule</p>
@@ -91,15 +96,16 @@ export const LoggerPanel = () => {
               style={{
                 position: "absolute",
                 height: "18px",
-                width: `${sensingData.loggerUsage ?? 0}%`,
+                width: `${clampMax(sensingData.loggerUsage ?? 0)}%`,
               }}
             ></div>
           </div>
         </div>
 
-        <div className="has-text-light mx-2" style={{ width: "50px" }}>{`${
-          sensingData.loggerUsage?.toFixed(0) ?? "0"
-        }%`}</div>
+        <div
+          className="has-text-light mx-2"
+          style={{ width: "50px" }}
+        >{`${clampMax(sensingData.loggerUsage ?? 0).toFixed(0)}%`}</div>
       </div>
     </div>
   );
