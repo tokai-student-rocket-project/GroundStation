@@ -4,6 +4,7 @@ export type SystemData = {
   sn3Status?: boolean;
   doLogging?: boolean;
   flightTime?: number;
+  loggerUsage?: number;
 };
 
 export type SystemDataContextType = {
@@ -18,4 +19,5 @@ export const defaultSystemData = {
   sn3Status: undefined,
   doLogging: undefined,
   flightTime: undefined,
+  loggerUsage: undefined,
 };

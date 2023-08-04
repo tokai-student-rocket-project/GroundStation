@@ -39,6 +39,7 @@ function createWindow() {
   ipcMain.on("air-data", (_, json) => socket.emit("air-data", json));
   ipcMain.on("position-data", (_, json) => socket.emit("position-data", json));
   ipcMain.on("system-data", (_, json) => socket.emit("system-data", json));
+  ipcMain.on("sensing-data", (_, json) => socket.emit("sensing-data", json));
   ipcMain.on("power-data", (_, json) => socket.emit("power-data", json));
   ipcMain.on("valve-data", (_, json) => socket.emit("valve-data", json));
 

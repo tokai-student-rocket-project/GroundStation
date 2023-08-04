@@ -32,6 +32,11 @@ import {
   ValveDataContextType,
   defaultValveData,
 } from "../../types/ValveData";
+import {
+  SensingData,
+  SensingDataContextType,
+  defaultSensingData,
+} from "../../types/SensingData";
 
 import "bulma/css/bulma.css";
 import "./styles.css";
@@ -60,6 +65,10 @@ export const ValveDataContext = createContext<ValveDataContextType>(
   {} as ValveDataContextType
 );
 
+export const SensingDataContext = createContext<SensingDataContextType>(
+  {} as SensingDataContextType
+);
+
 export const App = () => {
   const [airData, setAirData] = useState<AirData>(defaultAirData);
   const clearAirData = () => setAirData(defaultAirData);
@@ -81,6 +90,10 @@ export const App = () => {
 
   const [valveData, setValveData] = useState<ValveData>(defaultValveData);
   const clearValveData = () => setValveData(defaultValveData);
+
+  const [sensingData, setSensingData] =
+    useState<SensingData>(defaultSensingData);
+  const clearSensingData = () => setSensingData(defaultSensingData);
 
   const navigate = useNavigate();
 
@@ -117,7 +130,11 @@ export const App = () => {
                   clearValveData,
                 }}
               >
-                <Router />
+                <SensingDataContext.Provider
+                  value={{ sensingData, setSensingData, clearSensingData }}
+                >
+                  <Router />
+                </SensingDataContext.Provider>
               </ValveDataContext.Provider>
             </CommandScheduleContext.Provider>
           </PowerDataContext.Provider>

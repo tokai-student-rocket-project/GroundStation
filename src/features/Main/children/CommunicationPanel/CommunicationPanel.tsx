@@ -14,6 +14,7 @@ import {
   PowerDataContext,
   CommandScheduleContext,
   ValveDataContext,
+  SensingDataContext,
 } from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
@@ -52,6 +53,7 @@ export const CommunicationPanel = () => {
     CommandScheduleContext
   );
   const { setValveData, clearValveData } = useContext(ValveDataContext);
+  const { setSensingData, clearSensingData } = useContext(SensingDataContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
   const [positionDataRx, setPositionDataRx] = useState<boolean>(false);
@@ -60,6 +62,7 @@ export const CommunicationPanel = () => {
   const [valveDataRx, setValveDataRx] = useState<boolean>(false);
   const [eventRx, setEventRx] = useState<boolean>(false);
   const [errorRx, setErrorRx] = useState<boolean>(false);
+  const [sensingDataRx, setSensingDataRx] = useState<boolean>(false);
 
   const [latestACM, setLatestACM] = useState<string>();
   const [latestSCM, setLatestSCM] = useState<string>();
@@ -106,10 +109,12 @@ export const CommunicationPanel = () => {
     setValveDataRx(false);
     setEventRx(false);
     setErrorRx(false);
+    setSensingDataRx(false);
     clearPositionData();
     clearSystemData();
     clearPowerData();
     clearValveData();
+    clearSensingData();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -249,9 +254,21 @@ export const CommunicationPanel = () => {
           sn3Status: json.SN3Status,
           doLogging: json.DoLogging,
           flightTime: json.FlightTime,
+          loggerUsage: json.LoggerUsage,
         });
 
         ipcRenderer.send("system-data", json);
+      }
+
+      if (json.PacketInfo.Type == "SensingData") {
+        setSensingDataRx((prev) => !prev);
+        setSensingData({
+          referencePressure: json.ReferencePressure,
+          isSystemCalibrated: json.isSystemCalibrated,
+          loggerUsage: json.LoggerUsage,
+        });
+
+        ipcRenderer.send("sensing-data", json);
       }
 
       if (json.PacketInfo.Type == "PowerData") {
@@ -425,6 +442,7 @@ export const CommunicationPanel = () => {
         valveDataRx={valveDataRx}
         eventRx={eventRx}
         errorRx={errorRx}
+        sensingDataRx={sensingDataRx}
       />
     </div>
   );
