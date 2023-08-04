@@ -8,6 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTemperatureThreeQuarters,
   faSnowflake,
+  faSatellite,
+  faRotate,
+  faCrosshairs,
 } from "@fortawesome/free-solid-svg-icons";
 
 const degToDms = (deg?: number): string | undefined => {
@@ -19,6 +22,14 @@ const degToDms = (deg?: number): string | undefined => {
   const s = parseFloat("0." + ms.toString().split(".")[1]) * 60;
 
   return `${d.toFixed()}°${m.toFixed()}'${s.toFixed(2)}"`;
+};
+
+const getFixType = (type?: number): string => {
+  if (type == undefined) return "--";
+
+  if (type == 3) return "3D";
+  if (type == 4) return "DR";
+  return "??";
 };
 
 export const TopRightPanel = () => {
@@ -45,17 +56,66 @@ export const TopRightPanel = () => {
   }, []);
 
   return (
-    <nav className="level is-justify-content-center">
-      <div className="level-item has-text-centered">
-        <a onClick={openGoogleMap}>
-          <p className="heading has-text-light has-text-left">GNSS</p>
-          <p className="has-text-light has-text-left">
-            {`N ${degToDms(positionData.latitude) ?? "--°--'--.--\""}`}
-          </p>
-          <p className="has-text-light has-text-left">
-            {`E ${degToDms(positionData.longitude) ?? "---°--'--.--\""}`}
-          </p>
-        </a>
+    <nav className="level is-justify-content-center is-align-items-start">
+      <div className="level-item has-text-centered is-align-items-end">
+        <div className="is-flex">
+          <div>
+            <p className="heading has-text-light has-text-left">GNSS</p>
+            <div className="is-flex is-align-items-center">
+              <FontAwesomeIcon
+                icon={faSatellite}
+                className="has-text-light mx-2"
+              />
+              <p className="has-text-light">{positionData.satellites ?? "-"}</p>
+            </div>
+            <div className="is-flex is-align-items-center">
+              {positionData.isFixed ?? false ? (
+                <>
+                  <FontAwesomeIcon
+                    icon={faCrosshairs}
+                    size="xs"
+                    className="has-text-light mx-2"
+                  />
+                  <p className="has-text-light">
+                    {getFixType(positionData.fixType)}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <FontAwesomeIcon
+                    icon={faRotate}
+                    size="xs"
+                    spin
+                    className="has-text-light mx-2"
+                  />
+                  <p className="has-text-light">--</p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+        <div style={{ width: "16px" }}></div>
+        <div>
+          <a onClick={openGoogleMap}>
+            <p className="has-text-light has-text-right">
+              {`${degToDms(positionData.latitude) ?? "--°--'--.--\""} N`}
+            </p>
+            <p className="has-text-light has-text-right">
+              {`${degToDms(positionData.longitude) ?? "---°--'--.--\""} E`}
+            </p>
+          </a>
+        </div>
+        <div style={{ width: "16px" }}></div>
+        <div style={{ width: "90px" }}>
+          <a onClick={openGoogleMap}>
+            <p className="has-text-light has-text-left">
+              {`${positionData.altitude?.toFixed(2) ?? "--.--"} m`}
+            </p>
+            <p className="has-text-light has-text-left">
+              {`${positionData.speed?.toFixed(2) ?? "--.--"} m/s`}
+            </p>
+          </a>
+        </div>
       </div>
       <div className="level-item has-text-centered">
         <div>

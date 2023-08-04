@@ -239,8 +239,13 @@ export const CommunicationPanel = () => {
       if (json.PacketInfo.Type == "PositionData") {
         setPositionDataRx((prev) => !prev);
         setPositionData({
+          isFixed: json.IsFixed,
+          fixType: json.FixType,
+          satellites: json.Satellites,
           latitude: json.Latitude,
           longitude: json.Longitude,
+          altitude: json.Altitude,
+          speed: json.Speed,
         });
 
         ipcRenderer.send("position-data", json);
