@@ -5,8 +5,8 @@ import { SystemDataContext } from "../../App/App";
 const flightTimeToText = (flightTime?: number): string => {
   if (flightTime == undefined) return "--.--";
 
-  // uint32_t の -1
-  if (flightTime == 4294967295) return "--.--";
+  // uint16_t の -1
+  if (flightTime == 65535) return "--.--";
 
   return (flightTime / 1000.0).toFixed(2);
 };
