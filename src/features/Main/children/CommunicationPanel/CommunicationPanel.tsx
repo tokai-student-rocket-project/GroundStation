@@ -382,7 +382,7 @@ export const CommunicationPanel = () => {
             onClick={() => setDoLogging((state) => !state)}
             accessKey="l"
           >
-            {doLogging ? "LOGGING ON" : "LOGGING OFF"}
+            {doLogging ? "RX LOG ON" : "RX LOG OFF"}
           </button>
           <LoggerACM doLogging={doLogging} log={latestACM} />
           <LoggerSCM doLogging={doLogging} log={latestSCM} />
