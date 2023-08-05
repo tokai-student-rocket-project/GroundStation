@@ -173,7 +173,6 @@ export const CommunicationPanel = () => {
     let oldTime = new Date().getTime();
     parser.on("data", (data) => {
       const json = JSON.parse(data);
-      console.log(data);
       setLatestACM(data);
 
       const nowTime = new Date().getTime();
@@ -226,7 +225,6 @@ export const CommunicationPanel = () => {
     let oldTime = new Date().getTime();
     parser.on("data", (data) => {
       const json = JSON.parse(data);
-      console.log(data);
       setLatestSCM(data);
 
       const nowTime = new Date().getTime();
