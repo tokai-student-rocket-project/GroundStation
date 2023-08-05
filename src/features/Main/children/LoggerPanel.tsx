@@ -33,6 +33,8 @@ export const LoggerPanel = () => {
         </button>
       </div>
 
+      <p className="has-text-centered has-text-light">FRAM Usage</p>
+
       <div className="is-flex is-align-items-center mb-1">
         <div className="has-text-light mx-2" style={{ width: "50px" }}>
           FM
@@ -137,7 +139,7 @@ export const LoggerPanel = () => {
                 position: "absolute",
                 height: "16px",
                 width: "1px",
-                left: "74%",
+                left: "61%",
                 top: "50%",
                 transform: "translate(-50%, -50%)",
               }}
