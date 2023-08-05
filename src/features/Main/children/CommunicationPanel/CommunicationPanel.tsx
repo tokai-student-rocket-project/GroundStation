@@ -15,6 +15,7 @@ import {
   CommandScheduleContext,
   ValveDataContext,
   SensingDataContext,
+  MissionDataContext,
 } from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
@@ -54,6 +55,7 @@ export const CommunicationPanel = () => {
   );
   const { setValveData, clearValveData } = useContext(ValveDataContext);
   const { setSensingData, clearSensingData } = useContext(SensingDataContext);
+  const { setMissionData, clearMissionData } = useContext(MissionDataContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
   const [positionDataRx, setPositionDataRx] = useState<boolean>(false);
@@ -115,6 +117,7 @@ export const CommunicationPanel = () => {
     clearPowerData();
     clearValveData();
     clearSensingData();
+    clearMissionData();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -342,6 +345,12 @@ export const CommunicationPanel = () => {
             ["COMMAND RECEIVE FAILED", "LOGGER FAILURE"][errorCode]
           }\nReason: ${["UNKNOWN", "INVALID KEY", "INVALID SD"][errorReason]}`
         );
+      }
+
+      if (json.PacketInfo.Type == "MissionData") {
+        setMissionData({
+          loggerUsage: json.LoggerUsage,
+        });
       }
     });
 

@@ -1,6 +1,10 @@
 import { useContext } from "react";
 
-import { SystemDataContext, SensingDataContext } from "../../App/App";
+import {
+  SystemDataContext,
+  SensingDataContext,
+  MissionDataContext,
+} from "../../App/App";
 
 const clampMax = (percent: number): number => {
   return percent > 100 ? 100 : percent;
@@ -9,6 +13,7 @@ const clampMax = (percent: number): number => {
 export const LoggerPanel = () => {
   const { systemData } = useContext(SystemDataContext);
   const { sensingData } = useContext(SensingDataContext);
+  const { missionData } = useContext(MissionDataContext);
 
   return (
     <div className="box has-background-dark p-3">
@@ -28,13 +33,15 @@ export const LoggerPanel = () => {
         </button>
       </div>
 
-      <p className="has-text-light">FlightModule</p>
-      <div className="is-flex is-align-items-center mb-2">
+      <div className="is-flex is-align-items-center mb-1">
+        <div className="has-text-light mx-2" style={{ width: "50px" }}>
+          FM
+        </div>
         <div style={{ width: "100%" }}>
           <div
             className="has-background-black-ter"
             style={{
-              height: "20px",
+              height: "16px",
               width: "100%",
               padding: "1px",
               position: "relative",
@@ -44,7 +51,7 @@ export const LoggerPanel = () => {
               className="has-background-danger-dark"
               style={{
                 position: "absolute",
-                height: "20px",
+                height: "16px",
                 width: "1px",
                 left: "72%",
                 top: "50%",
@@ -55,7 +62,7 @@ export const LoggerPanel = () => {
               className="has-background-primary"
               style={{
                 position: "absolute",
-                height: "18px",
+                height: "14px",
                 width: `${clampMax(systemData.loggerUsage ?? 0)}%`,
               }}
             ></div>
@@ -64,17 +71,19 @@ export const LoggerPanel = () => {
 
         <div
           className="has-text-light mx-2"
-          style={{ width: "50px" }}
+          style={{ width: "60px" }}
         >{`${clampMax(systemData.loggerUsage ?? 0).toFixed(0)}%`}</div>
       </div>
 
-      <p className="has-text-light">SensingModule</p>
-      <div className="is-flex is-align-items-center">
+      <div className="is-flex is-align-items-center mb-1">
+        <div className="has-text-light mx-2" style={{ width: "50px" }}>
+          SM
+        </div>
         <div style={{ width: "100%" }}>
           <div
             className="has-background-black-ter"
             style={{
-              height: "20px",
+              height: "16px",
               width: "100%",
               padding: "1px",
               position: "relative",
@@ -84,7 +93,7 @@ export const LoggerPanel = () => {
               className="has-background-danger-dark"
               style={{
                 position: "absolute",
-                height: "20px",
+                height: "16px",
                 width: "1px",
                 left: "50%",
                 top: "50%",
@@ -95,7 +104,7 @@ export const LoggerPanel = () => {
               className="has-background-primary"
               style={{
                 position: "absolute",
-                height: "18px",
+                height: "14px",
                 width: `${clampMax(sensingData.loggerUsage ?? 0)}%`,
               }}
             ></div>
@@ -104,8 +113,50 @@ export const LoggerPanel = () => {
 
         <div
           className="has-text-light mx-2"
-          style={{ width: "50px" }}
+          style={{ width: "60px" }}
         >{`${clampMax(sensingData.loggerUsage ?? 0).toFixed(0)}%`}</div>
+      </div>
+
+      <div className="is-flex is-align-items-center">
+        <div className="has-text-light mx-2" style={{ width: "50px" }}>
+          MM
+        </div>
+        <div style={{ width: "100%" }}>
+          <div
+            className="has-background-black-ter"
+            style={{
+              height: "16px",
+              width: "100%",
+              padding: "1px",
+              position: "relative",
+            }}
+          >
+            <div
+              className="has-background-danger-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "74%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
+              className="has-background-primary"
+              style={{
+                position: "absolute",
+                height: "14px",
+                width: `${clampMax(missionData.loggerUsage ?? 0)}%`,
+              }}
+            ></div>
+          </div>
+        </div>
+
+        <div
+          className="has-text-light mx-2"
+          style={{ width: "60px" }}
+        >{`${clampMax(missionData.loggerUsage ?? 0).toFixed(0)}%`}</div>
       </div>
     </div>
   );
