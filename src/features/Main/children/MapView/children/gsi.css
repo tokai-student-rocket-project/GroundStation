@@ -1,0 +1,15 @@
+.leaflet-popup-content {
+  margin: 8px;
+}
+
+.leaflet-popup-content p {
+  margin: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #363636;
+}
+
+.leaflet-popup-tip {
+  background-color: #363636;
+}

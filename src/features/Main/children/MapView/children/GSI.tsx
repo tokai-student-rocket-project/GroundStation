@@ -5,9 +5,13 @@ import {
   Polygon,
   Circle,
   Polyline,
+  Popup,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+
+import tsrp from "./images/tsrp.png";
+import "./gsi.css";
 
 import { ChangeCenter } from "./ChangeCenter";
 
@@ -34,7 +38,16 @@ export const GSI = ({ latitude, longitude }: Props) => {
         attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>'
         url="https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"
       />
-      <Marker position={position} />
+      <Popup position={position} closeButton={false}>
+        <div className="is-flex is-align-items-center">
+          <figure className="image is-24x24">
+            <img src={tsrp} />
+          </figure>
+          <p className="has-text-light is-size-5" style={{ marginLeft: "4px" }}>
+            H-58
+          </p>
+        </div>
+      </Popup>
       <ChangeCenter center={center} />
       <Circle
         center={[40.138633, 139.98485]}
