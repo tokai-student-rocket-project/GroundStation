@@ -11,8 +11,6 @@ import L from "leaflet";
 
 import { ChangeCenter } from "./ChangeCenter";
 
-L.Icon.Default.imagePath = "/map/icon/";
-
 type Props = {
   latitude?: number;
   longitude?: number;
