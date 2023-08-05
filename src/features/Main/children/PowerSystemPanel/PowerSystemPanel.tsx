@@ -60,10 +60,7 @@ export const PowerSystemPanel = () => {
   };
 
   return (
-    <div
-      className="box has-background-dark p-3 is-flex is-flex-direction-column"
-      style={{ height: "100%" }}
-    >
+    <div className="box has-background-dark p-3 is-flex is-flex-direction-column">
       <div className="is-flex is-justify-content-space-between">
         <h2 className="title is-4 has-text-light has-text-weight-light">
           POWER SYSTEM

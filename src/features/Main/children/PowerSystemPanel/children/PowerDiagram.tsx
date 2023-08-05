@@ -17,7 +17,7 @@ export const PowerDiagram = ({
     <>
       <div
         className="has-background-gray-darker"
-        style={{ height: "100%", position: "relative" }}
+        style={{ height: "180px", position: "relative" }}
       >
         <div
           className={isExternal ? "flow" : ""}
