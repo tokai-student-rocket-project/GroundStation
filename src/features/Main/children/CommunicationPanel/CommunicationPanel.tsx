@@ -25,6 +25,7 @@ import { SpecStatusBox } from "./children/SpecStatusBox";
 import { RxStatusBox } from "./children/RxStatusBox";
 import { LoggerACM } from "./children/LoggerACM";
 import { LoggerSCM } from "./children/LoggerSCM";
+import { EventErrorBox } from "./children/EventErrorBox";
 
 type SpecStatus = {
   rssi?: number;
@@ -69,6 +70,9 @@ export const CommunicationPanel = () => {
   const [latestACM, setLatestACM] = useState<string>();
   const [latestSCM, setLatestSCM] = useState<string>();
   const [doLogging, setDoLogging] = useState<boolean>(false);
+
+  const [eventError, setEventError] = useState<string>();
+  const [eventErrorPrev, setEventErrorPrev] = useState<string>();
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
@@ -309,25 +313,28 @@ export const CommunicationPanel = () => {
 
         const publisher: number = json.Publisher;
         const eventCode: number = json.EventCode;
-        console.log(
-          `Event: [${
-            ["SM", "FM", "MM", "ACM", "SCM"][publisher]
-          }:0x${eventCode.toString(16)}] ${
-            [
-              "SETUP",
-              "RESET",
-              "FLIGHT MODE ON",
-              "IGNITION",
-              "BURNOUT",
-              "APOGEE",
-              "SEPARATE",
-              "LAND",
-              "FLIGHT MODE OFF",
-              "FORCE SEPARATE",
-              "REFERENCE PRESSURE UPDATED",
-            ][eventCode]
-          }`
-        );
+
+        const message = `Event: [${
+          ["SM", "FM", "MM", "ACM", "SCM"][publisher]
+        }:0x${eventCode.toString(16)}] ${
+          [
+            "SETUP",
+            "RESET",
+            "FLIGHT MODE ON",
+            "IGNITION",
+            "BURNOUT",
+            "APOGEE",
+            "SEPARATE",
+            "LAND",
+            "FLIGHT MODE OFF",
+            "FORCE SEPARATE",
+            "REFERENCE PRESSURE UPDATED",
+          ][eventCode]
+        }`;
+
+        setEventErrorPrev(eventError);
+        setEventError(message);
+        console.log(message);
       }
 
       if (json.PacketInfo.Type == "Error") {
@@ -336,13 +343,16 @@ export const CommunicationPanel = () => {
         const publisher: number = json.Publisher;
         const errorCode: number = json.ErrorCode;
         const errorReason: number = json.ErrorReason;
-        console.log(
-          `Error: [${
-            ["SM", "FM", "MM", "ACM", "SCM", "VCM"][publisher]
-          }:0x${errorCode.toString(16)}:0x${errorReason.toString(16)}] ${
-            ["COMMAND RECEIVE FAILED", "LOGGER FAILURE"][errorCode]
-          }\nReason: ${["UNKNOWN", "INVALID KEY", "INVALID SD"][errorReason]}`
-        );
+
+        const message = `Error: [${
+          ["SM", "FM", "MM", "ACM", "SCM", "VCM"][publisher]
+        }:0x${errorCode.toString(16)}:0x${errorReason.toString(16)}] ${
+          ["COMMAND RECEIVE FAILED", "LOGGER FAILURE"][errorCode]
+        }\nReason: ${["UNKNOWN", "INVALID KEY", "INVALID SD"][errorReason]}`;
+
+        setEventErrorPrev(eventError);
+        setEventError(message);
+        console.log(message);
       }
 
       if (json.PacketInfo.Type == "MissionData") {
@@ -456,6 +466,8 @@ export const CommunicationPanel = () => {
         errorRx={errorRx}
         sensingDataRx={sensingDataRx}
       />
+
+      <EventErrorBox msg1={eventError} msg2={eventErrorPrev} />
     </div>
   );
 };
