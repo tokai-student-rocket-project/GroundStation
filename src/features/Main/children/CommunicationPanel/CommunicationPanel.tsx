@@ -66,8 +66,8 @@ export const CommunicationPanel = () => {
   const [systemDataRx, setSystemDataRx] = useState<boolean>(false);
   const [powerDataRx, setPowerDataRx] = useState<boolean>(false);
   const [valveDataRx, setValveDataRx] = useState<boolean>(false);
-  const [eventRx, setEventRx] = useState<boolean>(false);
-  const [errorRx, setErrorRx] = useState<boolean>(false);
+  const [missionStatusRx, setMissionStatusRx] = useState<boolean>(false);
+  const [missionDataRx, setMissionDataRx] = useState<boolean>(false);
   const [sensingDataRx, setSensingDataRx] = useState<boolean>(false);
 
   const [latestACM, setLatestACM] = useState<string>();
@@ -78,6 +78,9 @@ export const CommunicationPanel = () => {
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
     setMissionDataSpecStatus(undefined);
+    setMissionStatusRx(false);
+    setMissionDataRx(false);
+    clearMissionStatus();
     clearMissionData();
 
     if (!newSerialport) return;
@@ -115,15 +118,12 @@ export const CommunicationPanel = () => {
     setSystemDataRx(false);
     setPowerDataRx(false);
     setValveDataRx(false);
-    setEventRx(false);
-    setErrorRx(false);
     setSensingDataRx(false);
     clearPositionData();
     clearSystemData();
     clearPowerData();
     clearValveData();
     clearSensingData();
-    clearMissionStatus();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -159,6 +159,7 @@ export const CommunicationPanel = () => {
       });
 
       if (json.PacketInfo.Type == "MissionData") {
+        setMissionDataRx((prev) => !prev);
         setMissionData({
           x: json.Acc.x,
           y: json.Acc.y,
@@ -167,8 +168,14 @@ export const CommunicationPanel = () => {
       }
 
       if (json.PacketInfo.Type == "MissionStatus") {
+        setMissionStatusRx((prev) => !prev);
         setMissionStatus({
           loggerUsage: json.LoggerUsage,
+          dataRate: json.DataRate,
+          loggerOffset: json.LoggerOffset,
+          senderOffset: json.SenderOffset,
+          doLogging: json.DoLogging,
+          doSending: json.DoSending,
         });
       }
     });
@@ -326,8 +333,6 @@ export const CommunicationPanel = () => {
       }
 
       if (json.PacketInfo.Type == "Event") {
-        setEventRx((prev) => !prev);
-
         const publisher: number = json.Publisher;
         const eventCode: number = json.EventCode;
 
@@ -353,8 +358,6 @@ export const CommunicationPanel = () => {
       }
 
       if (json.PacketInfo.Type == "Error") {
-        setErrorRx((prev) => !prev);
-
         const publisher: number = json.Publisher;
         const errorCode: number = json.ErrorCode;
         const errorReason: number = json.ErrorReason;
@@ -470,8 +473,8 @@ export const CommunicationPanel = () => {
         systemDataRx={systemDataRx}
         powerDataRx={powerDataRx}
         valveDataRx={valveDataRx}
-        eventRx={eventRx}
-        errorRx={errorRx}
+        missionStatusRx={missionStatusRx}
+        missionDataRx={missionDataRx}
         sensingDataRx={sensingDataRx}
       />
     </div>

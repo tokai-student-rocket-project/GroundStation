@@ -7,8 +7,8 @@ type Props = {
   systemDataRx: boolean;
   powerDataRx: boolean;
   valveDataRx: boolean;
-  eventRx: boolean;
-  errorRx: boolean;
+  missionStatusRx: boolean;
+  missionDataRx: boolean;
   sensingDataRx: boolean;
 };
 
@@ -18,8 +18,8 @@ export const RxStatusBox = ({
   systemDataRx,
   powerDataRx,
   valveDataRx,
-  eventRx,
-  errorRx,
+  missionStatusRx,
+  missionDataRx,
   sensingDataRx,
 }: Props) => {
   return (
@@ -156,24 +156,28 @@ export const RxStatusBox = ({
               />
             </td>
             <td style={{ verticalAlign: "middle" }}>
-              <p className="has-text-light has-text-right is-size-7">Event :</p>
+              <p className="has-text-light has-text-right is-size-7">
+                Mission Status :
+              </p>
             </td>
             <td>
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={eventRx ? "#23D160" : "#7A7A7A"}
+                color={missionStatusRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>
             <td style={{ verticalAlign: "middle" }}>
-              <p className="has-text-light has-text-right is-size-7">Error :</p>
+              <p className="has-text-light has-text-right is-size-7">
+                Mission Data :
+              </p>
             </td>
             <td>
               <FontAwesomeIcon
                 icon={faCircle}
                 size="2xs"
-                color={errorRx ? "#23D160" : "#7A7A7A"}
+                color={missionDataRx ? "#23D160" : "#7A7A7A"}
                 className="mx-2"
               />
             </td>
