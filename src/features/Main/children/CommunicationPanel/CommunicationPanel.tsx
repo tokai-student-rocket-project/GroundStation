@@ -71,9 +71,6 @@ export const CommunicationPanel = () => {
   const [latestSCM, setLatestSCM] = useState<string>();
   const [doLogging, setDoLogging] = useState<boolean>(false);
 
-  const [eventError, setEventError] = useState<string>();
-  const [eventErrorPrev, setEventErrorPrev] = useState<string>();
-
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
     setMissionDataSpecStatus(undefined);
@@ -332,8 +329,6 @@ export const CommunicationPanel = () => {
           ][eventCode]
         }`;
 
-        setEventErrorPrev(eventError);
-        setEventError(message);
         console.log(message);
       }
 
@@ -350,8 +345,6 @@ export const CommunicationPanel = () => {
           ["COMMAND RECEIVE FAILED", "LOGGER FAILURE"][errorCode]
         }\nReason: ${["UNKNOWN", "INVALID KEY", "INVALID SD"][errorReason]}`;
 
-        setEventErrorPrev(eventError);
-        setEventError(message);
         console.log(message);
       }
 
@@ -466,8 +459,6 @@ export const CommunicationPanel = () => {
         errorRx={errorRx}
         sensingDataRx={sensingDataRx}
       />
-
-      <EventErrorBox msg1={eventError} msg2={eventErrorPrev} />
     </div>
   );
 };
