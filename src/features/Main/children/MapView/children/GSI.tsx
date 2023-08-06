@@ -38,7 +38,7 @@ export const GSI = ({ latitude, longitude }: Props) => {
         attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>'
         url="https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"
       />
-      <Popup position={position} closeButton={false}>
+      <Popup position={position} closeButton={false} autoPan={false}>
         <div className="is-flex is-align-items-center">
           <figure className="image is-24x24">
             <img src={tsrp} />
