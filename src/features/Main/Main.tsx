@@ -7,6 +7,7 @@ import { PowerSystemPanel } from "./children/PowerSystemPanel/PowerSystemPanel";
 import { FlightModePanel } from "./children/FlightModePanel";
 import { OrientationPanel } from "./children/OrientationPanel/OrientationPanel";
 import { SystemStatus } from "./children/SystemStatus";
+import { MissionStatus } from "./children/MissionStatus";
 import { ValveSystemPanel } from "./children/ValveSystemPanel/ValveSystemPanel";
 
 export const Main = () => {
@@ -32,10 +33,11 @@ export const Main = () => {
               <div className="columns">
                 <div className="column is-half">
                   <CommandPanel />
-                  <SystemStatus />
+                  <MissionStatus />
                 </div>
                 <div className="column is-half">
                   <LoggerPanel />
+                  <SystemStatus />
                 </div>
               </div>
             </div>
