@@ -3,7 +3,7 @@ import { useContext } from "react";
 import {
   SystemDataContext,
   SensingDataContext,
-  MissionDataContext,
+  MissionStatusContext,
 } from "../../App/App";
 
 const clampMax = (percent: number): number => {
@@ -13,7 +13,7 @@ const clampMax = (percent: number): number => {
 export const LoggerPanel = () => {
   const { systemData } = useContext(SystemDataContext);
   const { sensingData } = useContext(SensingDataContext);
-  const { missionData } = useContext(MissionDataContext);
+  const { missionStatus } = useContext(MissionStatusContext);
 
   return (
     <div className="box has-background-dark p-3">
@@ -149,7 +149,7 @@ export const LoggerPanel = () => {
               style={{
                 position: "absolute",
                 height: "14px",
-                width: `${clampMax(missionData.loggerUsage ?? 0)}%`,
+                width: `${clampMax(missionStatus.loggerUsage ?? 0)}%`,
               }}
             ></div>
           </div>
@@ -158,7 +158,7 @@ export const LoggerPanel = () => {
         <div
           className="has-text-light mx-2"
           style={{ width: "60px" }}
-        >{`${clampMax(missionData.loggerUsage ?? 0).toFixed(0)}%`}</div>
+        >{`${clampMax(missionStatus.loggerUsage ?? 0).toFixed(0)}%`}</div>
       </div>
     </div>
   );

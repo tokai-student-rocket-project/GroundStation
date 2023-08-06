@@ -1,5 +1,7 @@
 export type MissionData = {
-  loggerUsage?: number;
+  x?: number;
+  y?: number;
+  z?: number;
 };
 
 export type MissionDataContextType = {
@@ -9,5 +11,7 @@ export type MissionDataContextType = {
 };
 
 export const defaultMissionData = {
-  loggerUsage: undefined,
+  x: undefined,
+  y: undefined,
+  z: undefined,
 };

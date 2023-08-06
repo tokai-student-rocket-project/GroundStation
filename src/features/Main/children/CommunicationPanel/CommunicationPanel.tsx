@@ -15,6 +15,7 @@ import {
   CommandScheduleContext,
   ValveDataContext,
   SensingDataContext,
+  MissionStatusContext,
   MissionDataContext,
 } from "../../../App/App";
 
@@ -25,7 +26,7 @@ import { SpecStatusBox } from "./children/SpecStatusBox";
 import { RxStatusBox } from "./children/RxStatusBox";
 import { LoggerACM } from "./children/LoggerACM";
 import { LoggerSCM } from "./children/LoggerSCM";
-import { EventErrorBox } from "./children/EventErrorBox";
+import { LoggerMM } from "./children/LoggerMM";
 
 type SpecStatus = {
   rssi?: number;
@@ -56,6 +57,8 @@ export const CommunicationPanel = () => {
   );
   const { setValveData, clearValveData } = useContext(ValveDataContext);
   const { setSensingData, clearSensingData } = useContext(SensingDataContext);
+  const { setMissionStatus, clearMissionStatus } =
+    useContext(MissionStatusContext);
   const { setMissionData, clearMissionData } = useContext(MissionDataContext);
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
@@ -69,11 +72,13 @@ export const CommunicationPanel = () => {
 
   const [latestACM, setLatestACM] = useState<string>();
   const [latestSCM, setLatestSCM] = useState<string>();
+  const [latestMM, setLatestMM] = useState<string>();
   const [doLogging, setDoLogging] = useState<boolean>(false);
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
     setMissionDataSpecStatus(undefined);
+    clearMissionData();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -118,7 +123,7 @@ export const CommunicationPanel = () => {
     clearPowerData();
     clearValveData();
     clearSensingData();
-    clearMissionData();
+    clearMissionStatus();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -141,6 +146,7 @@ export const CommunicationPanel = () => {
     let oldTime = new Date().getTime();
     parser.on("data", (data) => {
       const json = JSON.parse(data);
+      setLatestMM(data);
 
       const nowTime = new Date().getTime();
       const timeDiff = nowTime - oldTime;
@@ -151,6 +157,20 @@ export const CommunicationPanel = () => {
         snr: json.PacketInfo.SNR,
         dataRate: 1000 / timeDiff,
       });
+
+      if (json.PacketInfo.Type == "MissionData") {
+        setMissionData({
+          x: json.Acc.x,
+          y: json.Acc.y,
+          z: json.Acc.z,
+        });
+      }
+
+      if (json.PacketInfo.Type == "MissionStatus") {
+        setMissionStatus({
+          loggerUsage: json.LoggerUsage,
+        });
+      }
     });
 
     missionDataSerialport.open((error) => {
@@ -347,12 +367,6 @@ export const CommunicationPanel = () => {
 
         console.log(message);
       }
-
-      if (json.PacketInfo.Type == "MissionData") {
-        setMissionData({
-          loggerUsage: json.LoggerUsage,
-        });
-      }
     });
 
     systemDataSerialport.open((error) => {
@@ -401,6 +415,7 @@ export const CommunicationPanel = () => {
           </button>
           <LoggerACM doLogging={doLogging} log={latestACM} />
           <LoggerSCM doLogging={doLogging} log={latestSCM} />
+          <LoggerMM doLogging={doLogging} log={latestMM} />
           <RssiIcon
             rssi1={missionDataSpecStatus?.rssi}
             rssi2={airDataSpecStatus?.rssi}

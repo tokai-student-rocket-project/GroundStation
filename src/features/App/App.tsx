@@ -38,6 +38,11 @@ import {
   defaultSensingData,
 } from "../../types/SensingData";
 import {
+  MissionStatus,
+  MissionStatusContextType,
+  defaultMissionStatus,
+} from "../../types/MissionStatus";
+import {
   MissionData,
   MissionDataContextType,
   defaultMissionData,
@@ -73,6 +78,9 @@ export const ValveDataContext = createContext<ValveDataContextType>(
 export const SensingDataContext = createContext<SensingDataContextType>(
   {} as SensingDataContextType
 );
+export const MissionStatusContext = createContext<MissionStatusContextType>(
+  {} as MissionStatusContextType
+);
 export const MissionDataContext = createContext<MissionDataContextType>(
   {} as MissionDataContextType
 );
@@ -102,6 +110,10 @@ export const App = () => {
   const [sensingData, setSensingData] =
     useState<SensingData>(defaultSensingData);
   const clearSensingData = () => setSensingData(defaultSensingData);
+
+  const [missionStatus, setMissionStatus] =
+    useState<MissionStatus>(defaultMissionStatus);
+  const clearMissionStatus = () => setMissionStatus(defaultMissionStatus);
 
   const [missionData, setMissionData] =
     useState<MissionData>(defaultMissionData);
@@ -145,11 +157,19 @@ export const App = () => {
                 <SensingDataContext.Provider
                   value={{ sensingData, setSensingData, clearSensingData }}
                 >
-                  <MissionDataContext.Provider
-                    value={{ missionData, setMissionData, clearMissionData }}
+                  <MissionStatusContext.Provider
+                    value={{
+                      missionStatus,
+                      setMissionStatus,
+                      clearMissionStatus,
+                    }}
                   >
-                    <Router />
-                  </MissionDataContext.Provider>
+                    <MissionDataContext.Provider
+                      value={{ missionData, setMissionData, clearMissionData }}
+                    >
+                      <Router />
+                    </MissionDataContext.Provider>
+                  </MissionStatusContext.Provider>
                 </SensingDataContext.Provider>
               </ValveDataContext.Provider>
             </CommandScheduleContext.Provider>
