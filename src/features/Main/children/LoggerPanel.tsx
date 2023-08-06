@@ -61,6 +61,39 @@ export const LoggerPanel = () => {
               }}
             ></div>
             <div
+              className="has-background-warning-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "66%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
+              className="has-background-warning-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "6%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
+              className="has-background-info-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "44%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
               className="has-background-primary"
               style={{
                 position: "absolute",
@@ -103,6 +136,39 @@ export const LoggerPanel = () => {
               }}
             ></div>
             <div
+              className="has-background-warning-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "36%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
+              className="has-background-warning-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "14%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
+              className="has-background-info-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "64%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
               className="has-background-primary"
               style={{
                 position: "absolute",
@@ -139,7 +205,40 @@ export const LoggerPanel = () => {
                 position: "absolute",
                 height: "16px",
                 width: "1px",
-                left: "61%",
+                left: "40%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
+              className="has-background-warning-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "2%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
+              className="has-background-warning-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "38%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            ></div>
+            <div
+              className="has-background-info-dark"
+              style={{
+                position: "absolute",
+                height: "16px",
+                width: "1px",
+                left: "98%",
                 top: "50%",
                 transform: "translate(-50%, -50%)",
               }}
