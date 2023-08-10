@@ -1,7 +1,6 @@
 import {
   MapContainer,
   TileLayer,
-  Marker,
   Polygon,
   Circle,
   Polyline,
