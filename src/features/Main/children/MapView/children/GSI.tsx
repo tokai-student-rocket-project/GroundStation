@@ -1,18 +1,60 @@
+import { renderToString } from "react-dom/server";
+
 import {
   MapContainer,
   TileLayer,
   Polygon,
   Circle,
   Polyline,
-  Popup,
+  Marker,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-
 import tsrp from "./images/tsrp.png";
-import "./gsi.css";
 
 import { ChangeCenter } from "./ChangeCenter";
+
+const icon = L.divIcon({
+  className: "custom-icon",
+  html: renderToString(
+    <>
+      <div
+        style={{
+          position: "absolute",
+          left: "-50%",
+          top: "-120%",
+          width: "40px",
+          height: "20px",
+        }}
+      >
+        <div
+          className="has-background-dark"
+          style={{
+            width: "17px",
+            height: "17px",
+            transform: "rotate(45deg)",
+          }}
+        ></div>
+      </div>
+      <div
+        className="is-flex is-align-items-center has-background-dark"
+        style={{
+          position: "absolute",
+          borderRadius: "6px",
+          top: "-300%",
+          left: "-340%",
+        }}
+      >
+        <figure className="image is-24x24 mx-1">
+          <img src={tsrp} style={{ width: "24px", height: "24px" }} />
+        </figure>
+        <p className="has-text-light is-size-5" style={{ width: "52px" }}>
+          H-58
+        </p>
+      </div>
+    </>
+  ),
+});
 
 type Props = {
   latitude?: number;
@@ -37,16 +79,7 @@ export const GSI = ({ latitude, longitude }: Props) => {
         attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>'
         url="https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"
       />
-      <Popup position={position} closeButton={false} autoPan={false}>
-        <div className="is-flex is-align-items-center">
-          <figure className="image is-24x24">
-            <img src={tsrp} />
-          </figure>
-          <p className="has-text-light is-size-5" style={{ marginLeft: "4px" }}>
-            H-58
-          </p>
-        </div>
-      </Popup>
+      <Marker position={position} autoPan={false} icon={icon} />
       <ChangeCenter center={center} />
       <Circle
         center={[40.138633, 139.98485]}
