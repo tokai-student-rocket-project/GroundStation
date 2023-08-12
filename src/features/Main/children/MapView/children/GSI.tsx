@@ -66,9 +66,7 @@ export const GSI = ({ latitude, longitude }: Props) => {
     latitude ?? 40.138633,
     longitude ?? 139.98485,
   ];
-  // const position: L.LatLngExpression = [latitude ?? 0, longitude ?? 0];
-
-  const position = center;
+  const position: L.LatLngExpression = [latitude ?? 0, longitude ?? 0];
 
   return (
     <MapContainer
