@@ -219,6 +219,7 @@ export const CommunicationPanel = () => {
           altitude: json.Alt,
           climbRate: json.CR,
           outsideTemperature: json.OutTemp,
+          internalTemperature: json.inTemp,
           coldTemperature: json.CldTemp,
           orientationX: json.Ori.x,
           orientationY: json.Ori.y,

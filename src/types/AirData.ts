@@ -2,6 +2,7 @@ export type AirData = {
   altitude?: number;
   climbRate?: number;
   outsideTemperature?: number;
+  internalTemperature?: number;
   coldTemperature?: number;
   orientationX?: number;
   orientationY?: number;
@@ -21,6 +22,7 @@ export const defaultAirData = {
   altitude: undefined,
   climbRate: undefined,
   outsideTemperature: undefined,
+  internalTemperature: undefined,
   coldTemperature: undefined,
   orientationX: undefined,
   orientationY: undefined,

@@ -11,6 +11,7 @@ import {
   faSatellite,
   faRotate,
   faCrosshairs,
+  faFire,
 } from "@fortawesome/free-solid-svg-icons";
 
 const degToDms = (deg?: number): string | undefined => {
@@ -119,44 +120,67 @@ export const TopRightPanel = () => {
       <div className="level-item has-text-centered">
         <div>
           <p className="heading has-text-light has-text-left">Temperature</p>
-          <table width="100%">
-            <tbody>
-              <tr>
-                <td>
-                  <FontAwesomeIcon
-                    icon={faTemperatureThreeQuarters}
-                    size="lg"
-                    className="has-text-light mx-2"
-                  />
-                </td>
-                <td width="40m">
-                  <p className="has-text-light">
-                    {airData.outsideTemperature?.toFixed(1) ?? "--.-"}
-                  </p>
-                </td>
-                <td style={{ verticalAlign: "middle" }}>
-                  <p className="has-text-light mx-1">℃</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <FontAwesomeIcon
-                    icon={faSnowflake}
-                    size="lg"
-                    className="has-text-light mx-2"
-                  />
-                </td>
-                <td width="40m">
-                  <p className="has-text-light">
-                    {airData.coldTemperature?.toFixed(1) ?? "--.-"}
-                  </p>
-                </td>
-                <td style={{ verticalAlign: "middle" }}>
-                  <p className="has-text-light mx-1">℃</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="is-flex ">
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td>
+                    <FontAwesomeIcon
+                      icon={faTemperatureThreeQuarters}
+                      size="lg"
+                      className="has-text-light mx-2"
+                    />
+                  </td>
+                  <td width="50m">
+                    <p className="has-text-light">
+                      {airData.outsideTemperature?.toFixed(1) ?? "--.-"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className="has-text-light mx-1">℃</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td>
+                    <FontAwesomeIcon
+                      icon={faFire}
+                      size="lg"
+                      className="has-text-light mx-2"
+                    />
+                  </td>
+                  <td width="50m">
+                    <p className="has-text-light">
+                      {airData.internalTemperature?.toFixed(1) ?? "--.-"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className="has-text-light mx-1">℃</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <FontAwesomeIcon
+                      icon={faSnowflake}
+                      size="lg"
+                      className="has-text-light mx-2"
+                    />
+                  </td>
+                  <td width="50m">
+                    <p className="has-text-light">
+                      {airData.coldTemperature?.toFixed(1) ?? "--.-"}
+                    </p>
+                  </td>
+                  <td>
+                    <p className="has-text-light mx-1">℃</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <div className="level-item has-text-centered">
