@@ -436,7 +436,7 @@ export const CommunicationPanel = () => {
       <div className="columns is-variable is-1">
         <div className="column is-4">
           <p className="has-text-centered has-text-light">Mission Data</p>
-          <SpecBox frequency={925_800_000} bandwidth={500_000} />
+          <SpecBox frequency={923_400_000} bandwidth={500_000} />
           <SpecStatusBox
             rssi={missionDataSpecStatus?.rssi}
             snr={missionDataSpecStatus?.snr}
@@ -447,7 +447,7 @@ export const CommunicationPanel = () => {
 
         <div className="column is-4">
           <p className="has-text-centered has-text-light">Air Data</p>
-          <SpecBox frequency={923_800_000} bandwidth={500_000} />
+          <SpecBox frequency={922_600_000} bandwidth={500_000} />
           <SpecStatusBox
             rssi={airDataSpecStatus?.rssi}
             snr={airDataSpecStatus?.snr}
@@ -458,7 +458,7 @@ export const CommunicationPanel = () => {
 
         <div className="column is-4">
           <p className="has-text-centered has-text-light">System Data</p>
-          <SpecBox frequency={921_800_000} bandwidth={250_000} />
+          <SpecBox frequency={921_800_000} bandwidth={500_000} />
           <SpecStatusBox
             rssi={systemDataSpecStatus?.rssi}
             snr={systemDataSpecStatus?.snr}
