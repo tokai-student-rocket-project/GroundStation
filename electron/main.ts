@@ -42,6 +42,9 @@ function createWindow() {
   ipcMain.on("sensing-data", (_, json) => socket.emit("sensing-data", json));
   ipcMain.on("power-data", (_, json) => socket.emit("power-data", json));
   ipcMain.on("valve-data", (_, json) => socket.emit("valve-data", json));
+  ipcMain.on("performance-data", (_, json) =>
+    socket.emit("performance-data", json)
+  );
 
   // Test active push message to Renderer-process.
   win.webContents.on("did-finish-load", () => {

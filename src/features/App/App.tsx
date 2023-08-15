@@ -47,6 +47,11 @@ import {
   MissionDataContextType,
   defaultMissionData,
 } from "../../types/MissionData";
+import {
+  PerformanceData,
+  PerformanceDataContextType,
+  defaultPerformanceData,
+} from "../../types/PerformanceData";
 
 import "bulma/css/bulma.css";
 import "./styles.css";
@@ -84,6 +89,9 @@ export const MissionStatusContext = createContext<MissionStatusContextType>(
 export const MissionDataContext = createContext<MissionDataContextType>(
   {} as MissionDataContextType
 );
+export const PerformanceDataContext = createContext<PerformanceDataContextType>(
+  {} as PerformanceDataContextType
+);
 
 export const App = () => {
   const [airData, setAirData] = useState<AirData>(defaultAirData);
@@ -118,6 +126,11 @@ export const App = () => {
   const [missionData, setMissionData] =
     useState<MissionData>(defaultMissionData);
   const clearMissionData = () => setMissionData(defaultMissionData);
+
+  const [performanceData, setPerformanceData] = useState<PerformanceData>(
+    defaultPerformanceData
+  );
+  const clearPerformanceData = () => setPerformanceData(defaultPerformanceData);
 
   const navigate = useNavigate();
 
@@ -167,7 +180,15 @@ export const App = () => {
                     <MissionDataContext.Provider
                       value={{ missionData, setMissionData, clearMissionData }}
                     >
-                      <Router />
+                      <PerformanceDataContext.Provider
+                        value={{
+                          performanceData,
+                          setPerformanceData,
+                          clearPerformanceData,
+                        }}
+                      >
+                        <Router />
+                      </PerformanceDataContext.Provider>
                     </MissionDataContext.Provider>
                   </MissionStatusContext.Provider>
                 </SensingDataContext.Provider>

@@ -17,6 +17,7 @@ import {
   SensingDataContext,
   MissionStatusContext,
   MissionDataContext,
+  PerformanceDataContext,
 } from "../../../App/App";
 
 import { RssiIcon } from "./children/RssiIcon";
@@ -60,6 +61,9 @@ export const CommunicationPanel = () => {
   const { setMissionStatus, clearMissionStatus } =
     useContext(MissionStatusContext);
   const { setMissionData, clearMissionData } = useContext(MissionDataContext);
+  const { setPerformanceData, clearPerformanceData } = useContext(
+    PerformanceDataContext
+  );
 
   const [airDataRx, setAirDataRx] = useState<boolean>(false);
   const [positionDataRx, setPositionDataRx] = useState<boolean>(false);
@@ -124,6 +128,7 @@ export const CommunicationPanel = () => {
     clearPowerData();
     clearValveData();
     clearSensingData();
+    clearPerformanceData();
 
     if (!newSerialport) return;
     if (newSerialport === "") return;
@@ -331,6 +336,15 @@ export const CommunicationPanel = () => {
         });
 
         ipcRenderer.send("valve-data", json);
+      }
+
+      if (json.PacketInfo.Type == "PerformanceData") {
+        setPerformanceData({
+          millis: json.performanceMillis,
+          taskRate: json.performanceTaskRate,
+        });
+
+        ipcRenderer.send("performance-data", json);
       }
 
       if (json.PacketInfo.Type == "Event") {
