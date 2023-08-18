@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "serialport";
 
@@ -78,6 +78,9 @@ export const CommunicationPanel = () => {
   const [latestSCM, setLatestSCM] = useState<string>();
   const [latestMM, setLatestMM] = useState<string>();
   const [doLogging, setDoLogging] = useState<boolean>(false);
+
+  const [valveIsLaunchState, setValveIsLaunchState] = useState<boolean>(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const changeMissionDataSerialport = (newSerialport?: string) => {
     if (missionDataSerialport?.isOpen) missionDataSerialport.close();
@@ -339,6 +342,8 @@ export const CommunicationPanel = () => {
         });
 
         ipcRenderer.send("valve-data", json);
+
+        setValveIsLaunchState(!json.IsWaiting);
       }
 
       if (json.PacketInfo.Type == "PerformanceData") {
@@ -402,6 +407,16 @@ export const CommunicationPanel = () => {
   }, [systemDataSerialport]);
 
   useEffect(() => {
+    if (valveIsLaunchState) {
+      setTimeout(() => {
+        if (audioRef.current == null) return;
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }, 2000);
+    }
+  }, [valveIsLaunchState]);
+
+  useEffect(() => {
     if (!systemDataSerialport) return;
 
     if (commandSchedule.flightModeOn) {
@@ -421,6 +436,10 @@ export const CommunicationPanel = () => {
         <h2 className="title is-4 has-text-light has-text-weight-light">
           COMMUNICATION
         </h2>
+
+        <audio ref={audioRef}>
+          <source src="/opened.mp3" type="audio/mp3" />
+        </audio>
 
         <div>
           <button
