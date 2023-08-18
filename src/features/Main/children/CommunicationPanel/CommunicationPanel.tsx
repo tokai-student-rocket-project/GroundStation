@@ -166,9 +166,12 @@ export const CommunicationPanel = () => {
       if (json.PacketInfo.Type == "MissionData") {
         setMissionDataRx((prev) => !prev);
         setMissionData({
-          x: json.Acc.x,
-          y: json.Acc.y,
-          z: json.Acc.z,
+          x0: json.Data.x0,
+          x1: json.Data.x1,
+          y0: json.Data.y0,
+          y1: json.Data.y1,
+          z0: json.Data.z0,
+          z1: json.Data.z1,
         });
       }
 
