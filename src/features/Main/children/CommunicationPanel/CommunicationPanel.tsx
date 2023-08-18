@@ -408,11 +408,9 @@ export const CommunicationPanel = () => {
 
   useEffect(() => {
     if (valveIsLaunchState) {
-      setTimeout(() => {
-        if (audioRef.current == null) return;
-        audioRef.current.currentTime = 0;
-        audioRef.current.play();
-      }, 2000);
+      if (audioRef.current == null) return;
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
     }
   }, [valveIsLaunchState]);
 
