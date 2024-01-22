@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/waiwai/Projects/GroundStation/Sources/GroundStation.UI.MainView/GroundStation.UI.MainView.csproj": {}
+  },
+  "projects": {
+    "/Users/waiwai/Projects/GroundStation/Sources/GroundStation.UI.MainView/GroundStation.UI.MainView.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/waiwai/Projects/GroundStation/Sources/GroundStation.UI.MainView/GroundStation.UI.MainView.csproj",
+        "projectName": "GroundStation.UI.MainView",
+        "projectPath": "/Users/waiwai/Projects/GroundStation/Sources/GroundStation.UI.MainView/GroundStation.UI.MainView.csproj",
+        "packagesPath": "/Users/waiwai/.nuget/packages/",
+        "outputPath": "/Users/waiwai/Projects/GroundStation/Sources/GroundStation.UI.MainView/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/waiwai/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
