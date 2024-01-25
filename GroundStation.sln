@@ -2,7 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{D74D92FE-472D-4810-BFE3-3EEFFB503446}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroundStation.UI.MainView", "Sources\GroundStation.UI.MainView\GroundStation.UI.MainView.csproj", "{D2EFDD82-E7CF-4A4E-B92A-26D59B5650A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroundStation.UI.MainMonitor", "Sources\GroundStation.UI.MainMonitor\GroundStation.UI.MainMonitor.csproj", "{D2EFDD82-E7CF-4A4E-B92A-26D59B5650A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroundStation.Domain", "Sources\GroundStation.Domain\GroundStation.Domain.csproj", "{89078947-F2BB-4363-AEA0-3079E0327528}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroundStation.Infrastructure", "Sources\GroundStation.Infrastructure\GroundStation.Infrastructure.csproj", "{0854F971-6A17-4C8C-97DF-923A9515835F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,11 +15,21 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D2EFDD82-E7CF-4A4E-B92A-26D59B5650A9} = {D74D92FE-472D-4810-BFE3-3EEFFB503446}
+		{89078947-F2BB-4363-AEA0-3079E0327528} = {D74D92FE-472D-4810-BFE3-3EEFFB503446}
+		{0854F971-6A17-4C8C-97DF-923A9515835F} = {D74D92FE-472D-4810-BFE3-3EEFFB503446}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D2EFDD82-E7CF-4A4E-B92A-26D59B5650A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2EFDD82-E7CF-4A4E-B92A-26D59B5650A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2EFDD82-E7CF-4A4E-B92A-26D59B5650A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2EFDD82-E7CF-4A4E-B92A-26D59B5650A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89078947-F2BB-4363-AEA0-3079E0327528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89078947-F2BB-4363-AEA0-3079E0327528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89078947-F2BB-4363-AEA0-3079E0327528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89078947-F2BB-4363-AEA0-3079E0327528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0854F971-6A17-4C8C-97DF-923A9515835F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0854F971-6A17-4C8C-97DF-923A9515835F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0854F971-6A17-4C8C-97DF-923A9515835F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0854F971-6A17-4C8C-97DF-923A9515835F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
