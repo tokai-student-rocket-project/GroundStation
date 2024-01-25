@@ -7,18 +7,32 @@ namespace GroundStation.Infrastructure.Serial;
 
 internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
 {
+    private SerialPort? _port;
+    
     public string? PortName
     {
-        get => _port;
-        set => _port = value;
+        get => _port?.PortName;
+        set
+        {
+            if (value != PortName)
+            {
+                _port = new SerialPort(value, 115200);
+            }
+        }
     }
     
+    public bool IsPortSet => _port is not null;
+    
     public string[] GetPortNames() => SerialPort.GetPortNames();
-    private string? _port;
     
     public void Start()
     {
+        if (_port is null)
+        {
+            return;
+        }
 
+        // _port.Open();
     }
 
     public void Stop()

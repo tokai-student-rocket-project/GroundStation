@@ -13,10 +13,10 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
         get => _port?.PortName;
         set
         {
-            // if (value != PortName)
-            // {
-            //     // _port = new SerialPort(value, 115200);
-            // }
+            if (value != PortName)
+            {
+                _port = new SerialPort(value, 115200);
+            }
         }
     }
 
@@ -34,7 +34,7 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
             return;
         }
 
-        _port.Open();
+        // _port.Open();
     }
 
     public void Stop()
