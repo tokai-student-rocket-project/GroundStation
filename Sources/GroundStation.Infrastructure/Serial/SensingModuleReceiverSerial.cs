@@ -3,9 +3,9 @@ using System.IO.Ports;
 using GroundStation.Domain.Entities;
 using GroundStation.Domain.Repositories;
 
-namespace GroundStation.Infrastructure.Fake;
+namespace GroundStation.Infrastructure.Serial;
 
-internal class SensingModuleReceiverFake : ISensingModuleReceiverRepository
+internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
 {
     public string? PortName
     {
