@@ -23,20 +23,15 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
     
     public string[] GetPortNames() => SerialPort.GetPortNames();
     
-    public void Start()
+    public bool Start()
     {
-        if (_port is null)
-        {
-            return;
-        }
-        
-        _port.Open();
-        Console.WriteLine(_port.IsOpen);
+        _port?.Open();
+        return _port?.IsOpen ?? false;
     }
 
     public void Stop()
     {
-        
+        _port?.Close();
     }
     
     public FlightData GetLatest()

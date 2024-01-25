@@ -25,18 +25,15 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
         return SerialPort.GetPortNames();
     }
 
-    public void Start()
+    public bool Start()
     {
-        if (_port is null)
-        {
-            return;
-        }
-
-        _port.Open();
+        _port?.Open();
+        return _port?.IsOpen ?? false;
     }
 
     public void Stop()
     {
+        _port?.Close();
     }
 
     public FlightData GetLatest()

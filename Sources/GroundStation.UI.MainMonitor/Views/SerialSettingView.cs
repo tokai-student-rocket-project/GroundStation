@@ -54,8 +54,10 @@ public class SerialSettingView : IView
         Console.ResetColor();
 
 
+        Console.ForegroundColor = ConsoleColor.Gray;
         Console.SetCursorPosition(0, 8);
         Console.Write("[<] PREV");
+        Console.ResetColor();
 
         Console.SetCursorPosition(0, 9);
         Console.Write("[>] NEXT");
@@ -79,14 +81,10 @@ public class SerialSettingView : IView
                     new NavigationRequestEventArgs(new SensingModulePortSelectionView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository)));
                 break;
-            case ConsoleKey.LeftArrow:
-                NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new InitialView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository)));
-                break;
             case ConsoleKey.RightArrow:
-                _flightModuleReceiverRepository.Start();
-                _sensingModuleReceiverRepository.Start();
+                NavigationRequest?.Invoke(this,
+                    new NavigationRequestEventArgs(new ConnectionView(_flightModuleReceiverRepository,
+                        _sensingModuleReceiverRepository)));
                 break;
         }
     }
