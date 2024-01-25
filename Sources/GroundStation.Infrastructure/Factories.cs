@@ -9,7 +9,7 @@ public static class Factories
     {
         return new FlightModuleReceiverSerial();
     }
-    
+
     public static ISensingModuleReceiverRepository CreateSensingModuleReceiverRepository()
     {
         return new SensingModuleReceiverSerial();

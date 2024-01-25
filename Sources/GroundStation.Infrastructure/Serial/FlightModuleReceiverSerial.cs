@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.IO.Ports;
 using GroundStation.Domain.Entities;
 using GroundStation.Domain.Repositories;

@@ -9,14 +9,14 @@ public class SerialSettingView : IView
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
 
     public SerialSettingView(
-        IFlightModuleReceiverRepository flightModuleReceiverRepository, 
+        IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
     }
-    
+
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
 
     public void OnNavigated()
@@ -37,7 +37,7 @@ public class SerialSettingView : IView
 
         Console.SetCursorPosition(0, 3);
         var flightModulePortName = _flightModuleReceiverRepository.PortName;
-        Console.ForegroundColor = string.IsNullOrEmpty(flightModulePortName) ?  ConsoleColor.Yellow : ConsoleColor.Cyan;
+        Console.ForegroundColor = string.IsNullOrEmpty(flightModulePortName) ? ConsoleColor.Yellow : ConsoleColor.Cyan;
         Console.Write("[1] ");
         Console.Write(flightModulePortName ?? "----------");
         Console.ResetColor();
@@ -48,16 +48,16 @@ public class SerialSettingView : IView
 
         Console.SetCursorPosition(0, 6);
         var sensingModulePortName = _sensingModuleReceiverRepository.PortName;
-        Console.ForegroundColor = string.IsNullOrEmpty(sensingModulePortName) ?  ConsoleColor.Yellow : ConsoleColor.Cyan;
+        Console.ForegroundColor = string.IsNullOrEmpty(sensingModulePortName) ? ConsoleColor.Yellow : ConsoleColor.Cyan;
         Console.Write("[2] ");
         Console.Write(sensingModulePortName ?? "----------");
         Console.ResetColor();
-        
-        
-        Console.SetCursorPosition(0,8);
+
+
+        Console.SetCursorPosition(0, 8);
         Console.Write("[<] PREV");
-        
-        Console.SetCursorPosition(0,9);
+
+        Console.SetCursorPosition(0, 9);
         Console.Write("[>] NEXT");
 
 
@@ -71,16 +71,25 @@ public class SerialSettingView : IView
         {
             case ConsoleKey.D1:
                 NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new FlightModulePortSelectionView(_flightModuleReceiverRepository, _sensingModuleReceiverRepository)));
+                    new NavigationRequestEventArgs(new FlightModulePortSelectionView(_flightModuleReceiverRepository,
+                        _sensingModuleReceiverRepository)));
                 break;
             case ConsoleKey.D2:
-                NavigationRequest?.Invoke(this, new NavigationRequestEventArgs(new SensingModulePortSelectionView(_flightModuleReceiverRepository, _sensingModuleReceiverRepository)));
+                NavigationRequest?.Invoke(this,
+                    new NavigationRequestEventArgs(new SensingModulePortSelectionView(_flightModuleReceiverRepository,
+                        _sensingModuleReceiverRepository)));
                 break;
             case ConsoleKey.LeftArrow:
                 NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new InitialView(_flightModuleReceiverRepository, _sensingModuleReceiverRepository)));
+                    new NavigationRequestEventArgs(new InitialView(_flightModuleReceiverRepository,
+                        _sensingModuleReceiverRepository)));
                 break;
             case ConsoleKey.RightArrow:
+                if (!_flightModuleReceiverRepository.IsPortSet || !_sensingModuleReceiverRepository.IsPortSet)
+                {
+                }
+            
+                // _flightModuleReceiverRepository.Start();
                 break;
         }
     }
