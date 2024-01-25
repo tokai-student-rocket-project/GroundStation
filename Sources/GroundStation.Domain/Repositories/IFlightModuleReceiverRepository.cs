@@ -4,5 +4,5 @@ namespace GroundStation.Domain.Repositories;
 
 public interface IFlightModuleReceiverRepository : IReceiver
 {
-     FlightData GetLatest();
+    FlightData GetLatest();
 }

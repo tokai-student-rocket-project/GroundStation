@@ -2,10 +2,10 @@
 
 public class FlightData
 {
-   public  FlightData(double altitude)
+    public FlightData(double altitude)
     {
         Altitude = altitude;
     }
-    
+
     public double Altitude { get; }
 }

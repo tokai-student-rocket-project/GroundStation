@@ -1,5 +1,5 @@
 ﻿using GroundStation.Domain.Repositories;
-using GroundStation.Infrastructure.Fake;
+using GroundStation.Infrastructure.Serial;
 
 namespace GroundStation.Infrastructure;
 
@@ -7,11 +7,11 @@ public static class Factories
 {
     public static IFlightModuleReceiverRepository CreateFlightModuleReceiverRepository()
     {
-        return new FlightModuleReceiverFake();
+        return new FlightModuleReceiverSerial();
     }
-    
+
     public static ISensingModuleReceiverRepository CreateSensingModuleReceiverRepository()
     {
-        return new SensingModuleReceiverFake();
+        return new SensingModuleReceiverSerial();
     }
 }
