@@ -21,8 +21,6 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
         }
     }
     
-    public bool IsPortSet => _port is not null;
-    
     public string[] GetPortNames() => SerialPort.GetPortNames();
     
     public void Start()
@@ -31,8 +29,9 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
         {
             return;
         }
-
-        // _port.Open();
+        
+        _port.Open();
+        Console.WriteLine(_port.IsOpen);
     }
 
     public void Stop()

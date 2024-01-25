@@ -85,11 +85,8 @@ public class SerialSettingView : IView
                         _sensingModuleReceiverRepository)));
                 break;
             case ConsoleKey.RightArrow:
-                if (!_flightModuleReceiverRepository.IsPortSet || !_sensingModuleReceiverRepository.IsPortSet)
-                {
-                }
-            
-                // _flightModuleReceiverRepository.Start();
+                _flightModuleReceiverRepository.Start();
+                _sensingModuleReceiverRepository.Start();
                 break;
         }
     }

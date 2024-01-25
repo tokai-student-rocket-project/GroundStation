@@ -20,8 +20,6 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
         }
     }
 
-    public bool IsPortSet => _port is not null;
-
     public string[] GetPortNames()
     {
         return SerialPort.GetPortNames();
@@ -34,7 +32,7 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
             return;
         }
 
-        // _port.Open();
+        _port.Open();
     }
 
     public void Stop()
