@@ -29,7 +29,7 @@ public class ObsSettingView : IView
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
     
-    private bool _showPassword = true;
+    private bool _showPassword = false;
     private ObsSetting? _obsSetting;
 
     public void OnNavigated()
@@ -70,18 +70,19 @@ public class ObsSettingView : IView
                 Console.WriteLine("SETTING LOADED");
                 Console.WriteLine($"URL    {_obsSetting.URL}");
                 Console.WriteLine($"PWD    {(_showPassword ? _obsSetting.Password : @"****************")}");
+                
+                
+                Console.SetCursorPosition(0, 8);
+                Console.Write("[2] ");
+                Console.Write(_showPassword ? "HIDE PWD" : "SHOW PWD");
+                Console.ResetColor();
+        
+        
+                Console.SetCursorPosition(0, 10);
+                Console.ForegroundColor = _obsRepository.IsConnected ? ConsoleColor.Green : ConsoleColor.Red;
+                Console.Write(_obsRepository.IsConnected ? "CONNECTED" : "NOT CONNECTED");
+                Console.ResetColor();
             }
-        
-            Console.SetCursorPosition(0, 8);
-            Console.Write("[2] ");
-            Console.Write(_showPassword ? "HIDE PWD" : "SHOW PWD");
-            Console.ResetColor();
-        
-        
-            Console.SetCursorPosition(0, 10);
-            Console.ForegroundColor = _obsRepository.IsConnected ? ConsoleColor.Green : ConsoleColor.Red;
-            Console.Write(_obsRepository.IsConnected ? "CONNECTED" : "NOT CONNECTED");
-            Console.ResetColor();
         }
 
         
