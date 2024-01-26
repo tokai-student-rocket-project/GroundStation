@@ -26,4 +26,9 @@ public static class Factories
     {
         return new Obs();
     }
+    
+    public static ILogRepository CreateLogRepository()
+    {
+        return new LogFile();
+    }
 }

@@ -7,6 +7,7 @@ namespace GroundStation.Infrastructure.WebSocket;
 
 public class Obs : IObsRepository
 {
+    public bool UseObs { get; set; } = false;
     private OBSWebsocket _obs = new OBSWebsocket();
     public bool IsConnected => _obs.IsConnected;
 

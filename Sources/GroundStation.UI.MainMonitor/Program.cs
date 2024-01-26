@@ -20,7 +20,7 @@ public static class Program
         timer.Start();
 
         Navigate(new InitialView(Factories.CreateFlightModuleReceiverRepository(),
-            Factories.CreateSensingModuleReceiverRepository(), Factories.CreateObsSettingRepository(), Factories.CreateObsRepository()));
+            Factories.CreateSensingModuleReceiverRepository(), Factories.CreateObsSettingRepository(), Factories.CreateObsRepository(), Factories.CreateLogRepository()));
 
         while (true)
         {
