@@ -24,6 +24,7 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
     
     public IReceiver.Status CurrentStatus { get; private set; } = IReceiver.Status.NotSelected;
     public string CurrentStatusString => CurrentStatus.ToString("G");
+    public int ReceivedCount { get; private set; } = 0;
 
     public string[] GetPortNames() => SerialPort.GetPortNames();
     public SensingData? LatestData { get; private set; }
@@ -40,12 +41,14 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
         _port.DataReceived += OnDataReceived;
         _port.Open();
         CurrentStatus = _port.IsOpen ? IReceiver.Status.WaitingPacket : IReceiver.Status.ConnectionFailed;
+        ReceivedCount = 0;
     }
 
     public void Stop()
     {
         _port?.Close();
         CurrentStatus = IReceiver.Status.Selected;
+        ReceivedCount = 0;
     }
     
     private void OnDataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -117,6 +120,8 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
                     packet["sutegoma"]["uptime_s"].GetValue<double>(),
                     packet["sutegoma"]["taskRate_Hz"].GetValue<double>()
                     ));
+
+            ReceivedCount++;
         }
         catch (Exception)
         {

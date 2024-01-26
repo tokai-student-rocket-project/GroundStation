@@ -24,6 +24,7 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
 
     public IReceiver.Status CurrentStatus { get; private set; } = IReceiver.Status.NotSelected;
     public string CurrentStatusString => CurrentStatus.ToString("G");
+    public int ReceivedCount { get; private set; } = 0;
     
     public string[] GetPortNames() => SerialPort.GetPortNames();
     
@@ -41,12 +42,14 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
         _port.DataReceived += OnDataReceived;
         _port.Open();
         CurrentStatus = _port.IsOpen ? IReceiver.Status.WaitingPacket : IReceiver.Status.ConnectionFailed;
+        ReceivedCount = 0;
     }
 
     public void Stop()
     {
         _port?.Close();
         CurrentStatus = IReceiver.Status.Selected;
+        ReceivedCount = 0;
     }
     
     private void OnDataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -99,6 +102,8 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
                     packet["valve"]["currentDesiredPosition_deg"].GetValue<double>()
                     )
                 );
+            
+            ReceivedCount++;
         }
         catch (Exception)
         {

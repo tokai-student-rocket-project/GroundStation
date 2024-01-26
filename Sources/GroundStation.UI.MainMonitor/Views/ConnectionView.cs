@@ -42,31 +42,48 @@ public class ConnectionView : IView
         
         
         Console.SetCursorPosition(1, 2);
-        Console.Write("FLIGHT MODULE");
+        Console.Write("FLIGHT MODULE  -");
 
         Console.ForegroundColor = ConnectionStatusToColor(_flightModuleReceiverRepository.CurrentStatus);
-        Console.SetCursorPosition(17, 2);
+        Console.SetCursorPosition(18, 2);
         Console.Write(_flightModuleReceiverRepository.CurrentStatusString);
         Console.ResetColor();
+
+        if (_flightModuleReceiverRepository.CurrentStatus == IReceiver.Status.Connected)
+        {
+            Console.SetCursorPosition(0, 3);
+            Console.Write(_flightModuleReceiverRepository.ReceivedCount);
+            Console.Write(" RECEIVED    RSSI ");
+            Console.Write(_flightModuleReceiverRepository.LatestData?.PacketDataPart.RSSI);
+            Console.Write("    SNR ");
+            Console.Write(_flightModuleReceiverRepository.LatestData?.PacketDataPart.SNR.ToString("F1"));
+        }
         
         
-        Console.SetCursorPosition(1, 4);
-        Console.Write("SENSING MODULE");
+        Console.SetCursorPosition(1, 5);
+        Console.Write("SENSING MODULE -");
         
         Console.ForegroundColor = ConnectionStatusToColor(_sensingModuleReceiverRepository.CurrentStatus);
-        Console.SetCursorPosition(17, 4);
+        Console.SetCursorPosition(18, 5);
         Console.Write(_sensingModuleReceiverRepository.CurrentStatusString);
         Console.ResetColor();
         
-        Console.SetCursorPosition(0, 5);
-        Console.Write(_flightModuleReceiverRepository.LatestData?.PacketDataPart.RSSI);
+        if (_sensingModuleReceiverRepository.CurrentStatus == IReceiver.Status.Connected)
+        {
+            Console.SetCursorPosition(0, 6);
+            Console.Write(_sensingModuleReceiverRepository.ReceivedCount);
+            Console.Write(" RECEIVED    RSSI ");
+            Console.Write(_sensingModuleReceiverRepository.LatestData?.PacketDataPart.RSSI);
+            Console.Write("    SNR ");
+            Console.Write(_sensingModuleReceiverRepository.LatestData?.PacketDataPart.SNR.ToString("F1"));
+        }
         
         
-        Console.SetCursorPosition(0, 6);
+        Console.SetCursorPosition(0, 8);
         Console.Write("[<] PREV");
         
         Console.ForegroundColor = ConsoleColor.Gray;
-        Console.SetCursorPosition(0, 7);
+        Console.SetCursorPosition(0, 9);
         Console.Write("[>] NEXT");
         Console.ResetColor();
         
