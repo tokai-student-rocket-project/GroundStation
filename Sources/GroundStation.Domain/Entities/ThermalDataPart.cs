@@ -24,4 +24,13 @@ public class ThermalDataPart
     public double InsideTemperature { get; }
     public double VentPortTemperature { get; }
     public double TankAtmosphereTemperature { get; }
+    
+    public string Regulator1TemperatureString => Regulator1Temperature.ToString("F0");
+    public string Regulator2TemperatureString => Regulator2Temperature.ToString("F0");
+    public string Regulator3TemperatureString => Regulator3Temperature.ToString("F0");
+    public string ConductionTemperatureString => ConductionTemperature.ToString("F0");
+    public string OutsideTemperatureString => OutsideTemperature.ToString("F0");
+    public string InsideTemperatureString => InsideTemperature.ToString("F0");
+    public string VentPortTemperatureString => VentPortTemperature.ToString("F0");
+    public string TankAtmosphereTemperatureString => TankAtmosphereTemperature.ToString("F0");
 }

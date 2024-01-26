@@ -14,4 +14,9 @@ public class TrajectoryDataPart
     public double VerticalSpeed { get; }
     public double Apogee { get; }
     public double Estimated { get; }
+    
+    public string AltitudeString => Altitude.ToString("F0");
+    public string VerticalSpeedString => VerticalSpeed.ToString("F0");
+    public string ApogeeString => Apogee.ToString("F0");
+    public string EstimatedString => Estimated.ToString("F0");
 }

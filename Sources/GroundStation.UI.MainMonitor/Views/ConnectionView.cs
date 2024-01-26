@@ -8,16 +8,19 @@ public class ConnectionView : IView
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
     private readonly IObsSettingRepository _obsSettingRepository;
+    private readonly IObsRepository _obsRepository;
 
     public ConnectionView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
-        IObsSettingRepository obsSettingRepository
+        IObsSettingRepository obsSettingRepository,
+        IObsRepository obsRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
         _obsSettingRepository = obsSettingRepository;
+        _obsRepository = obsRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -110,12 +113,12 @@ public class ConnectionView : IView
                 
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new ObsSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SummaryView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
         }
     }

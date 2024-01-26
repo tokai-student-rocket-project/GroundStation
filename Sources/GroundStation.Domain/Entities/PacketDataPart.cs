@@ -15,4 +15,8 @@ public class PacketDataPart
     public double SNR { get; }
     public string Ident { get; }
     public double Uptime { get; }
+    
+    public string RSSIString => RSSI.ToString();
+    public string SNRString => SNR.ToString("F1");
+    public string UptimeString => Uptime.ToString("F2");
 }

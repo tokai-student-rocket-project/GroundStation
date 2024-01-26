@@ -8,16 +8,19 @@ public class SerialSettingView : IView
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
     private readonly IObsSettingRepository _obsSettingRepository;
+    private readonly IObsRepository _obsRepository;
 
     public SerialSettingView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
-        IObsSettingRepository obsSettingRepository
+        IObsSettingRepository obsSettingRepository,
+        IObsRepository obsRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
         _obsSettingRepository = obsSettingRepository;
+        _obsRepository = obsRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -77,17 +80,17 @@ public class SerialSettingView : IView
             case ConsoleKey.D1:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new FlightModulePortSelectionView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
             case ConsoleKey.D2:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SensingModulePortSelectionView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new ObsSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
         }
     }

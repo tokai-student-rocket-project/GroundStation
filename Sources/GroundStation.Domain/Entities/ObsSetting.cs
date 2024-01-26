@@ -12,4 +12,5 @@ public class ObsSetting
     public string Address { get; }
     public string Port { get; }
     public string Password { get; }
+    public string URL => $"ws://{Address}:{Port}";
 }

@@ -8,16 +8,19 @@ public class SummaryView : IView
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
     private readonly IObsSettingRepository _obsSettingRepository;
+    private readonly IObsRepository _obsRepository;
 
     public SummaryView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
-        IObsSettingRepository obsSettingRepository
+        IObsSettingRepository obsSettingRepository,
+        IObsRepository obsRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
         _obsSettingRepository = obsSettingRepository;
+        _obsRepository = obsRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -42,33 +45,23 @@ public class SummaryView : IView
         Console.Write("POS");
         
         Console.SetCursorPosition(7, 3);
-        
-        var lat = _flightModuleReceiverRepository.LatestData?.GnssDataPart.Latitude ?? 0;
-        var latD = Math.Floor(lat); 
-        var latMS = double.Parse("0." + lat.ToString("F").Split(".")[1]) * 60;
-        var latM = Math.Floor(latMS);
-        var latS = (double.Parse("0." + latMS.ToString("F").Split(".")[1]) * 60).ToString("F0");
-        
-        var lon = _flightModuleReceiverRepository.LatestData?.GnssDataPart.Longitude ?? 0;
-        var lonD = Math.Floor(lon); 
-        var lonMS = double.Parse("0." + lon.ToString("F").Split(".")[1]) * 60;
-        var lonM = Math.Floor(lonMS);
-        var lonS = (double.Parse("0." + lonMS.ToString("F").Split(".")[1]) * 60).ToString("F0");
-        
-        Console.Write($"{latD}°{latM}'{latS}\"N   {lonD}°{lonM}'{lonS}\"E");
+        Console.Write($"{_flightModuleReceiverRepository.LatestData?.GnssDataPart.LatitudeString ?? "----"}   {_flightModuleReceiverRepository.LatestData?.GnssDataPart.LongitudeString ?? "----"}");
         
         Console.SetCursorPosition(0, 4);
-        Console.Write($"ACC    {_flightModuleReceiverRepository.LatestData?.GnssDataPart.Accuracy.ToString("F1") ?? "----"} m");
+        Console.Write($"ACC    {_flightModuleReceiverRepository.LatestData?.GnssDataPart.AccuracyString ?? "----"} m");
         
         
         Console.SetCursorPosition(1, 6);
         Console.Write("VALVE");
         
         Console.SetCursorPosition(0, 7);
-        Console.Write($"MODE    {(_flightModuleReceiverRepository.LatestData?.FlightDataPart.ValveModeIsLaunch is null ? "-------" : _flightModuleReceiverRepository.LatestData.FlightDataPart.ValveModeIsLaunch ? "LAUNCH" : "WAITING")}");
+        Console.Write($"MODE    {_flightModuleReceiverRepository.LatestData?.FlightDataPart.ValveModeString ?? "------"}");
         
         Console.SetCursorPosition(0, 8);
-        Console.Write($"ANGL    {_flightModuleReceiverRepository.LatestData?.ValveDataPart.TargetPosition.ToString("F0") ?? "--"}° > {_flightModuleReceiverRepository.LatestData?.ValveDataPart.CurrentPosition.ToString("F0") ?? "--"}°");
+        Console.Write($"ANGL    {_flightModuleReceiverRepository.LatestData?.ValveDataPart.TargetPositionString ?? "--"}° > {_flightModuleReceiverRepository.LatestData?.ValveDataPart.CurrentPositionString ?? "--"}°");
+
+
+        _obsRepository.SendData(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
         
 
         if (!Console.KeyAvailable)

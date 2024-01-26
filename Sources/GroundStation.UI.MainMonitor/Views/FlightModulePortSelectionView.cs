@@ -8,6 +8,7 @@ public class FlightModulePortSelectionView : IView
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
     private readonly IObsSettingRepository _obsSettingRepository;
+    private readonly IObsRepository _obsRepository;
     
     private string[] _portNames = Array.Empty<string>();
     private int _selectedIndex;
@@ -15,12 +16,14 @@ public class FlightModulePortSelectionView : IView
     public FlightModulePortSelectionView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
-            IObsSettingRepository obsSettingRepository
+        IObsSettingRepository obsSettingRepository,
+        IObsRepository obsRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
         _obsSettingRepository = obsSettingRepository;
+        _obsRepository = obsRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -84,13 +87,13 @@ public class FlightModulePortSelectionView : IView
             case ConsoleKey.LeftArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 _flightModuleReceiverRepository.PortName = _portNames[_selectedIndex];
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
         }
     }

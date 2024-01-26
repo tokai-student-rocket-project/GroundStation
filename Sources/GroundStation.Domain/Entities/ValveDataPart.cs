@@ -16,4 +16,10 @@ public class ValveDataPart
     public double InputVoltage { get; }
     public double CurrentPosition { get; }
     public double TargetPosition { get; }
+    
+    public string MotorTemperatureString => MotorTemperature.ToString("F0");
+    public string McuTemperatureString => McuTemperature.ToString("F0");
+    public string InputVoltageString => InputVoltage.ToString("F1");
+    public string CurrentPositionString => CurrentPosition.ToString("F0");
+    public string TargetPositionString => TargetPosition.ToString("F0");
 }

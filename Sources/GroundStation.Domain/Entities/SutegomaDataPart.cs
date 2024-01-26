@@ -10,4 +10,7 @@ public class SutegomaDataPart
     
     public double Uptime { get; }
     public double TaskRate { get; }
+    
+    public string UptimeString => Uptime.ToString("F2");
+    public string TaskRateString => TaskRate.ToString("F0");
 }

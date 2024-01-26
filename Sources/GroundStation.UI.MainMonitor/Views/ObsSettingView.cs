@@ -9,16 +9,19 @@ public class ObsSettingView : IView
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
     private readonly IObsSettingRepository _obsSettingRepository;
+    private readonly IObsRepository _obsRepository;
 
     public ObsSettingView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
-            IObsSettingRepository obsSettingRepository
+        IObsSettingRepository obsSettingRepository,
+        IObsRepository obsRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
         _obsSettingRepository = obsSettingRepository;
+        _obsRepository = obsRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -58,15 +61,21 @@ public class ObsSettingView : IView
         {
             Console.SetCursorPosition(1, 5);
             Console.WriteLine("SETTING LOADED");
-            Console.WriteLine($"ADDR    ws://{_obsSetting.Address}:{_obsSetting.Port}");
-            Console.WriteLine($"PASS    {_obsSetting.Password}");
+            Console.WriteLine($"URL    {_obsSetting.URL}");
+            Console.WriteLine($"PWD    {_obsSetting.Password}");
         }
-
+        
         
         Console.SetCursorPosition(0, 9);
+        Console.ForegroundColor = _obsRepository.IsConnected ? ConsoleColor.Green : ConsoleColor.Red;
+        Console.Write(_obsRepository.IsConnected ? "CONNECTED" : "NOT CONNECTED");
+        Console.ResetColor();
+
+        
+        Console.SetCursorPosition(0, 11);
         Console.Write("[<] PREV");
 
-        Console.SetCursorPosition(0, 10);
+        Console.SetCursorPosition(0, 12);
         Console.Write("[>] NEXT");
 
 
@@ -80,16 +89,25 @@ public class ObsSettingView : IView
         {
             case ConsoleKey.D1:
                 _useObs = !_useObs;
+                if (_useObs && _obsSetting is not null)
+                {
+                    _obsRepository.Connect(_obsSetting);
+                }
+                else if (!_useObs && _obsSetting is not null)
+                {
+                    _obsRepository.DisConnect();
+                }
                 break;
+            
             case ConsoleKey.LeftArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new ConnectionView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
         }
     }

@@ -12,4 +12,9 @@ public class LoggerDataPart
     public bool DoLogging { get; }
     public int Usage { get; }
     public int Number { get; }
+    
+    private readonly string[] _yesNoStatus = { "NO", "YES"};
+    public string DoLoggingString => _yesNoStatus[Convert.ToInt32(DoLogging)];
+    public string UsageString => Usage.ToString();
+    public string NumberString => Number.ToString();
 }

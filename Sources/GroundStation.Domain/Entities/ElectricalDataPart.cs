@@ -30,4 +30,17 @@ public class ElectricalDataPart
     public double BatteryPower { get; }
     public double TiePower { get; }
     public double BusPower { get; }
+    
+    public string GroundVoltageString => GroundVoltage.ToString("F1");
+    public string BatteryVoltageString => BatteryVoltage.ToString("F1");
+    public string TieVoltageString => TieVoltage.ToString("F1");
+    public string BusVoltageString => BusVoltage.ToString("F1");
+    public string GroundCurrentString => GroundCurrent.ToString("F0");
+    public string BatteryCurrentString => BatteryCurrent.ToString("F0");
+    public string TieCurrentString => TieCurrent.ToString("F0");
+    public string BusCurrentString => BusCurrent.ToString("F0");
+    public string GroundPowerString => GroundPower.ToString("F1");
+    public string BatteryPowerString => BatteryPower.ToString("F1");
+    public string TiePowerString => TiePower.ToString("F1");
+    public string BusPowerString => BusPower.ToString("F1");
 }

@@ -26,4 +26,16 @@ public class DynamicsDataPart
     
     public double Force { get; }
     public double Jerk { get; }
+
+    public string AccelerationNormString => AccelerationNorm.ToString("F1");
+    public string AccelerationXString => AccelerationX.ToString("F1");
+    public string AccelerationYString => AccelerationY.ToString("F1");
+    public string AccelerationZString => AccelerationZ.ToString("F1");
+    
+    public string OrientationRollString => OrientationRoll.ToString("F0");
+    public string OrientationPitchString => OrientationPitch.ToString("F0");
+    public string OrientationYawString => OrientationYaw.ToString("F0");
+    
+    public string ForceString => Force.ToString("F0");
+    public string JerkString => Jerk.ToString("F0");
 }
