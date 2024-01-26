@@ -7,14 +7,17 @@ public class SummaryView : IView
 {
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
+    private readonly IObsSettingRepository _obsSettingRepository;
 
     public SummaryView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
-        ISensingModuleReceiverRepository sensingModuleReceiverRepository
+        ISensingModuleReceiverRepository sensingModuleReceiverRepository,
+        IObsSettingRepository obsSettingRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
+        _obsSettingRepository = obsSettingRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;

@@ -7,14 +7,17 @@ public class InitialView : IView
 {
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
+    private readonly IObsSettingRepository _obsSettingRepository;
 
     public InitialView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
-        ISensingModuleReceiverRepository sensingModuleReceiverRepository
+        ISensingModuleReceiverRepository sensingModuleReceiverRepository,
+        IObsSettingRepository obsSettingRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
+        _obsSettingRepository = obsSettingRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -43,6 +46,6 @@ public class InitialView : IView
         Console.ReadKey(true);
         NavigationRequest?.Invoke(this,
             new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
-                _sensingModuleReceiverRepository)));
+                _sensingModuleReceiverRepository, _obsSettingRepository)));
     }
 }

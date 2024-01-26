@@ -7,17 +7,20 @@ public class SensingModulePortSelectionView : IView
 {
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
+    private readonly IObsSettingRepository _obsSettingRepository;
     
     private string[] _portNames = Array.Empty<string>();
     private int _selectedIndex;
 
     public SensingModulePortSelectionView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
-        ISensingModuleReceiverRepository sensingModuleReceiverRepository
+        ISensingModuleReceiverRepository sensingModuleReceiverRepository,
+        IObsSettingRepository obsSettingRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
+        _obsSettingRepository = obsSettingRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -42,13 +45,13 @@ public class SensingModulePortSelectionView : IView
         for (var i = 0; i < _portNames.Length; i++)
         {
             Console.SetCursorPosition(0, 3 + i);
-
+            Console.Write($"[{i + 1}] ");
+            
             if (i == _selectedIndex)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
             }
-
-            Console.Write($"[{i + 1}] ");
+            
             Console.Write(_portNames[i]);
             Console.ResetColor();
         }
@@ -81,13 +84,13 @@ public class SensingModulePortSelectionView : IView
             case ConsoleKey.LeftArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 _sensingModuleReceiverRepository.PortName = _portNames[_selectedIndex];
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository)));
                 break;
         }
     }

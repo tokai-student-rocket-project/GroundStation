@@ -1,18 +1,16 @@
-﻿using GroundStation.Domain.Repositories;
+﻿using GroundStation.Domain.Entities;
+using GroundStation.Domain.Repositories;
 using GroundStation.UI.MainMonitor.Events;
 
 namespace GroundStation.UI.MainMonitor.Views;
 
-public class FlightModulePortSelectionView : IView
+public class ObsSettingView : IView
 {
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
     private readonly IObsSettingRepository _obsSettingRepository;
-    
-    private string[] _portNames = Array.Empty<string>();
-    private int _selectedIndex;
 
-    public FlightModulePortSelectionView(
+    public ObsSettingView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
             IObsSettingRepository obsSettingRepository
@@ -25,9 +23,12 @@ public class FlightModulePortSelectionView : IView
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
 
+    private bool _useObs = false;
+    private ObsSetting? _obsSetting;
+
     public void OnNavigated()
     {
-        _portNames = _flightModuleReceiverRepository.GetPortNames();
+        _obsSetting = _obsSettingRepository.GetObsSetting();
     }
 
     public void Render()
@@ -36,31 +37,36 @@ public class FlightModulePortSelectionView : IView
 
 
         Console.SetCursorPosition(3, 0);
-        Console.Write("RECEIVER SETTING    1/1");
-
-
+        Console.Write("OBS SETTING    2/2");
+        
+        
         Console.SetCursorPosition(1, 2);
-        Console.Write("FLIGHT MODULE PORT");
+        Console.Write("USE OBS?");
+        
+        Console.SetCursorPosition(0, 3);
+        Console.Write("[1] ");
+        Console.ForegroundColor = _useObs ? ConsoleColor.Green : ConsoleColor.Red;
+        Console.Write(_useObs ? "YES" : "NO");
+        Console.ResetColor();
 
-        for (var i = 0; i < _portNames.Length; i++)
+        if (_obsSetting is null)
         {
-            Console.SetCursorPosition(0, 3 + i);
-            Console.Write($"[{i + 1}] ");
-            
-            if (i == _selectedIndex)
-            {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-            }
-            
-            Console.Write(_portNames[i]);
-            Console.ResetColor();
+            Console.SetCursorPosition(0, 5);
+            Console.Write("SETTING NOT FOUND");
+        }
+        else
+        {
+            Console.SetCursorPosition(1, 5);
+            Console.WriteLine("SETTING LOADED");
+            Console.WriteLine($"ADDR    ws://{_obsSetting.Address}:{_obsSetting.Port}");
+            Console.WriteLine($"PASS    {_obsSetting.Password}");
         }
 
-
-        Console.SetCursorPosition(0, 5 + _portNames.Length);
+        
+        Console.SetCursorPosition(0, 9);
         Console.Write("[<] PREV");
 
-        Console.SetCursorPosition(0, 4 + _portNames.Length);
+        Console.SetCursorPosition(0, 10);
         Console.Write("[>] NEXT");
 
 
@@ -70,26 +76,19 @@ public class FlightModulePortSelectionView : IView
         }
 
         var readKey = Console.ReadKey(true);
-
-        if (int.TryParse(readKey.KeyChar.ToString(), out var unverifiedSelectedIndex))
-        {
-            if (unverifiedSelectedIndex >= 1 && unverifiedSelectedIndex <= _portNames.Length)
-            {
-                _selectedIndex = unverifiedSelectedIndex - 1;
-            }
-        }
-
         switch (readKey.Key)
         {
+            case ConsoleKey.D1:
+                _useObs = !_useObs;
+                break;
             case ConsoleKey.LeftArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository)));
                 break;
             case ConsoleKey.RightArrow:
-                _flightModuleReceiverRepository.PortName = _portNames[_selectedIndex];
                 NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
+                    new NavigationRequestEventArgs(new ConnectionView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository)));
                 break;
         }

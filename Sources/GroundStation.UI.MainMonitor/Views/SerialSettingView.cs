@@ -7,14 +7,17 @@ public class SerialSettingView : IView
 {
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
+    private readonly IObsSettingRepository _obsSettingRepository;
 
     public SerialSettingView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
-        ISensingModuleReceiverRepository sensingModuleReceiverRepository
+        ISensingModuleReceiverRepository sensingModuleReceiverRepository,
+        IObsSettingRepository obsSettingRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
         _sensingModuleReceiverRepository = sensingModuleReceiverRepository;
+        _obsSettingRepository = obsSettingRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -29,16 +32,16 @@ public class SerialSettingView : IView
 
 
         Console.SetCursorPosition(3, 0);
-        Console.Write("RECEIVER SETTING    1/1");
+        Console.Write("RECEIVER SETTING    1/2");
 
 
         Console.SetCursorPosition(1, 2);
         Console.Write("FLIGHT MODULE");
 
         Console.SetCursorPosition(0, 3);
+        Console.Write("[1] ");
         var flightModulePortName = _flightModuleReceiverRepository.PortName;
         Console.ForegroundColor = string.IsNullOrEmpty(flightModulePortName) ? ConsoleColor.Yellow : ConsoleColor.Cyan;
-        Console.Write("[1] ");
         Console.Write(flightModulePortName ?? "----------");
         Console.ResetColor();
 
@@ -47,9 +50,9 @@ public class SerialSettingView : IView
         Console.Write("SENSING MODULE");
 
         Console.SetCursorPosition(0, 6);
+        Console.Write("[2] ");
         var sensingModulePortName = _sensingModuleReceiverRepository.PortName;
         Console.ForegroundColor = string.IsNullOrEmpty(sensingModulePortName) ? ConsoleColor.Yellow : ConsoleColor.Cyan;
-        Console.Write("[2] ");
         Console.Write(sensingModulePortName ?? "----------");
         Console.ResetColor();
 
@@ -74,17 +77,17 @@ public class SerialSettingView : IView
             case ConsoleKey.D1:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new FlightModulePortSelectionView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository)));
                 break;
             case ConsoleKey.D2:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SensingModulePortSelectionView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new ConnectionView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository)));
+                    new NavigationRequestEventArgs(new ObsSettingView(_flightModuleReceiverRepository,
+                        _sensingModuleReceiverRepository, _obsSettingRepository)));
                 break;
         }
     }

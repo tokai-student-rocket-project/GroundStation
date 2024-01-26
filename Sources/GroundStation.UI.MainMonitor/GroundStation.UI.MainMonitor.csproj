@@ -17,4 +17,14 @@
     <ProjectReference Include="..\GroundStation.Infrastructure\GroundStation.Infrastructure.csproj"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\obs.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obs.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
