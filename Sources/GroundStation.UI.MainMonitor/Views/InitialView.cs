@@ -36,12 +36,20 @@ public class InitialView : IView
     {
         Console.Clear();
 
-
-        Console.SetCursorPosition(10, 1);
-        Console.Write("WELCOME!");
-
-        Console.SetCursorPosition(3, 3);
-        Console.Write("Press any key to continue...");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("            WELCOME!");
+        Console.WriteLine();
+        Console.WriteLine("  ___ _   _ ___   _   ___ _   _ ");
+        Console.WriteLine(" / __| | | | _ ) /_\\ | _ \\ | | | ");
+        Console.WriteLine(" \\__ \\ |_| | _ \\/ _ \\|   / |_| |");
+        Console.WriteLine(" |___/\\___/|___/_/ \\_\\_|_\\\\___/");
+        Console.WriteLine();
+        Console.WriteLine("                         v1.1");
+        Console.WriteLine();
+        Console.WriteLine("   Press any key to continue...");
+        Console.ResetColor();
 
 
         if (!Console.KeyAvailable)
