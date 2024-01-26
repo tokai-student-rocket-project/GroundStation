@@ -58,15 +58,18 @@ public class ConnectionView : IView
         Console.Write(_sensingModuleReceiverRepository.CurrentStatusString);
         Console.ResetColor();
         
+        Console.SetCursorPosition(0, 5);
+        Console.Write(_flightModuleReceiverRepository.LatestData?.PacketDataPart.RSSI);
         
-        // Console.SetCursorPosition(0, 10);
-        // Console.Write("[<] PREV");
-        //
-        // Console.ForegroundColor = ConsoleColor.Gray;
-        // Console.SetCursorPosition(0, 11);
-        // Console.Write("[>] NEXT");
-        // Console.ResetColor();
-        //
+        
+        Console.SetCursorPosition(0, 6);
+        Console.Write("[<] PREV");
+        
+        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.SetCursorPosition(0, 7);
+        Console.Write("[>] NEXT");
+        Console.ResetColor();
+        
         
         if (!Console.KeyAvailable)
         {

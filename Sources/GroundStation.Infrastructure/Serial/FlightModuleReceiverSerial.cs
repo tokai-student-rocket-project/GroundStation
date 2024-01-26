@@ -62,7 +62,43 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
                 ? IReceiver.Status.Connected
                 : IReceiver.Status.InvalidPacket;
             
-            LatestData = new FlightData(-100);
+            LatestData = new FlightData(
+                new PacketDataPart(
+                    packet["packet"]["rssi_dBm"].GetValue<int>(),
+                    packet["packet"]["snr_dBm"].GetValue<double>(),
+                    packet["packet"]["ident"].GetValue<string>(),
+                    packet["packet"]["uptime_s"].GetValue<double>()
+                    ),
+                new LoggerDataPart(
+                    packet["logger"]["doLogging"].GetValue<bool>(),
+                    packet["logger"]["usage"].GetValue<int>(),
+                    packet["logger"]["number"].GetValue<int>()),
+                new FlightDataPart(
+                    packet["flight"]["mode"].GetValue<int>(),
+                    packet["flight"]["time_s"].GetValue<double>(),
+                    packet["flight"]["detection"]["valveModeIsLaunch"].GetValue<bool>(),
+                    packet["flight"]["detection"]["flightPinIsOpen"].GetValue<bool>(),
+                    packet["flight"]["detection"]["isFalling"].GetValue<bool>(),
+                    packet["flight"]["separation"]["sn3IsOn"].GetValue<bool>(),
+                    packet["flight"]["separation"]["sn4IsOn"].GetValue<bool>()
+                    ),
+                new GnssDataPart(
+                    packet["gnss"]["fixType"].GetValue<int>(),
+                packet["gnss"]["satellites"].GetValue<int>(),
+            packet["gnss"]["latitude_deg"].GetValue<double>(),
+            packet["gnss"]["longitude_deg"].GetValue<double>(),
+            packet["gnss"]["height_m"].GetValue<double>(),
+            packet["gnss"]["speed_mps"].GetValue<double>(),
+            packet["gnss"]["accuracy_m"].GetValue<double>()
+                    ),
+                new ValveDataPart(
+                    packet["valve"]["motorTemperature_degC"].GetValue<double>(),
+                    packet["valve"]["mcuTemperature_degC"].GetValue<double>(),
+                    packet["valve"]["inputVoltage_V"].GetValue<double>(),
+                    packet["valve"]["currentPosition_deg"].GetValue<double>(),
+                    packet["valve"]["currentDesiredPosition_deg"].GetValue<double>()
+                    )
+                );
         }
         catch (Exception)
         {
