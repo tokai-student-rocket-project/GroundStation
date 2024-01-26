@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>GroundStation.UI.MainMonitor</RootNamespace>
+    <AssemblyName>GroundStation</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
