@@ -39,24 +39,20 @@ public class SummaryView : IView
         Console.Write("POS");
         
         Console.SetCursorPosition(7, 3);
-        var latDeg = _flightModuleReceiverRepository.LatestData?.GnssDataPart.Latitude ?? 0;
-        Console.Write(latDeg.ToString("F0"));
-        Console.Write("°");
-        var latMinuteSecond = double.Parse("0." + latDeg.ToString("F6").Split(".")[1]) * 60;
-        Console.Write(latMinuteSecond.ToString("F0"));
-        Console.Write("'");
-        Console.Write((double.Parse("0." + latMinuteSecond.ToString("F6").Split(".")[1]) * 60).ToString("F0"));
-        Console.Write('"');
-        Console.Write("N    ");
-        var lonDeg = _flightModuleReceiverRepository.LatestData?.GnssDataPart.Longitude ?? 0;
-        Console.Write(lonDeg.ToString("F0"));
-        Console.Write("°");
-        var lonMinuteSecond = double.Parse("0." + lonDeg.ToString("F6").Split(".")[1]) * 60;
-        Console.Write(lonMinuteSecond.ToString("F0"));
-        Console.Write("'");
-        Console.Write((double.Parse("0." + lonMinuteSecond.ToString("F6").Split(".")[1]) * 60).ToString("F0"));
-        Console.Write('"');
-        Console.Write('E');
+        
+        var lat = _flightModuleReceiverRepository.LatestData?.GnssDataPart.Latitude ?? 0;
+        var latD = Math.Floor(lat); 
+        var latMS = double.Parse("0." + lat.ToString("F").Split(".")[1]) * 60;
+        var latM = Math.Floor(latMS);
+        var latS = (double.Parse("0." + latMS.ToString("F").Split(".")[1]) * 60).ToString("F0");
+        
+        var lon = _flightModuleReceiverRepository.LatestData?.GnssDataPart.Longitude ?? 0;
+        var lonD = Math.Floor(lon); 
+        var lonMS = double.Parse("0." + lon.ToString("F").Split(".")[1]) * 60;
+        var lonM = Math.Floor(lonMS);
+        var lonS = (double.Parse("0." + lonMS.ToString("F").Split(".")[1]) * 60).ToString("F0");
+        
+        Console.Write($"{latD}°{latM}'{latS}\"N   {lonD}°{lonM}'{lonS}\"E");
         
         Console.SetCursorPosition(0, 4);
         Console.Write($"ACC    {_flightModuleReceiverRepository.LatestData?.GnssDataPart.Accuracy.ToString("F1") ?? "----"} m");
