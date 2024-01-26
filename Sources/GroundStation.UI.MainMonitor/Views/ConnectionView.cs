@@ -85,10 +85,10 @@ public class ConnectionView : IView
         }
         
         
-        Console.SetCursorPosition(0, 8);
+        Console.SetCursorPosition(0, 12);
         Console.Write("[<] PREV");
-        
-        Console.SetCursorPosition(0, 9);
+
+        Console.SetCursorPosition(0, 13);
         Console.Write("[>] NEXT");
         
         

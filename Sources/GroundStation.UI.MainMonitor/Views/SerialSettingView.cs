@@ -35,7 +35,7 @@ public class SerialSettingView : IView
 
 
         Console.SetCursorPosition(3, 0);
-        Console.Write("RECEIVER SETTING    1/2");
+        Console.Write("RECEIVER SETTING    1/3");
 
 
         Console.SetCursorPosition(1, 2);
@@ -61,11 +61,11 @@ public class SerialSettingView : IView
 
 
         Console.ForegroundColor = ConsoleColor.Gray;
-        Console.SetCursorPosition(0, 8);
+        Console.SetCursorPosition(0, 12);
         Console.Write("[<] PREV");
         Console.ResetColor();
 
-        Console.SetCursorPosition(0, 9);
+        Console.SetCursorPosition(0, 13);
         Console.Write("[>] NEXT");
 
 
@@ -89,7 +89,7 @@ public class SerialSettingView : IView
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new ObsSettingView(_flightModuleReceiverRepository,
+                    new NavigationRequestEventArgs(new LoggerSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository)));
                 break;
         }

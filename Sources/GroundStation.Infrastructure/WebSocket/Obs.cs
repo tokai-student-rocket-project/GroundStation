@@ -52,11 +52,11 @@ public class Obs : IObsRepository
             
             _obs.SetInputSettings("gs_flight_mode", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.ModeString + "\" }"));
             _obs.SetInputSettings("gs_flight_time", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.TimeString + "\" }"));
-            _obs.SetInputSettings("gs_flight_valveModeIsLaunch", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.ValveModeString + "\" }"));
-            _obs.SetInputSettings("gs_flight_flightPinIsOpen", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.FlightPinStateString + "\" }"));
+            _obs.SetInputSettings("gs_flight_valveMode", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.ValveModeString + "\" }"));
+            _obs.SetInputSettings("gs_flight_flightPinState", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.FlightPinStateString + "\" }"));
             _obs.SetInputSettings("gs_flight_isFalling", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.IsFallingString + "\" }"));
-            _obs.SetInputSettings("gs_flight_sn3IsOn", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.SN3StateString + "\" }"));
-            _obs.SetInputSettings("gs_flight_sn3IsOn", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.SN4StateString + "\" }"));
+            _obs.SetInputSettings("gs_flight_sn3State", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.SN3StateString + "\" }"));
+            _obs.SetInputSettings("gs_flight_sn3State", JObject.Parse("{ \"text\":\"" + flightData.FlightDataPart.SN4StateString + "\" }"));
             
             _obs.SetInputSettings("gs_gnss_fixType", JObject.Parse("{ \"text\":\"" + flightData.GnssDataPart.FixTypeString + "\" }"));
             _obs.SetInputSettings("gs_gnss_satellites", JObject.Parse("{ \"text\":\"" + flightData.GnssDataPart.SatellitesString + "\" }"));

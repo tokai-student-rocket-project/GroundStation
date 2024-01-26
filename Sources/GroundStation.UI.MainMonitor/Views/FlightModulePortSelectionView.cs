@@ -60,10 +60,10 @@ public class FlightModulePortSelectionView : IView
         }
 
 
-        Console.SetCursorPosition(0, 5 + _portNames.Length);
+        Console.SetCursorPosition(0, 12);
         Console.Write("[<] PREV");
 
-        Console.SetCursorPosition(0, 4 + _portNames.Length);
+        Console.SetCursorPosition(0, 13);
         Console.Write("[>] NEXT");
 
 
