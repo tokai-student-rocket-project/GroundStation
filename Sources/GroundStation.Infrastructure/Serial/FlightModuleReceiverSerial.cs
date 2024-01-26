@@ -17,21 +17,26 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
             if (value != PortName)
             {
                 _port = new SerialPort(value, 115200);
+                CurrentStatus = IReceiver.Status.Selected;
             }
         }
     }
+
+    public IReceiver.Status CurrentStatus { get; private set; } = IReceiver.Status.NotSelected;
+    public string CurrentStatusString => CurrentStatus.ToString("G");
     
     public string[] GetPortNames() => SerialPort.GetPortNames();
     
-    public bool Start()
+    public void Start()
     {
         _port?.Open();
-        return _port?.IsOpen ?? false;
+        CurrentStatus = (_port?.IsOpen ?? false) ? IReceiver.Status.WaitingPacket : IReceiver.Status.ConnectionFailed;
     }
 
     public void Stop()
     {
         _port?.Close();
+        CurrentStatus = IReceiver.Status.Selected;
     }
     
     public FlightData GetLatest()
