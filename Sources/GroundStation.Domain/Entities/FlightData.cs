@@ -2,10 +2,10 @@
 
 public class FlightData
 {
-    public FlightData(double altitude)
+    public FlightData(int rssi)
     {
-        Altitude = altitude;
+        RSSI = rssi;
     }
 
-    public double Altitude { get; }
+    public double RSSI { get; }
 }

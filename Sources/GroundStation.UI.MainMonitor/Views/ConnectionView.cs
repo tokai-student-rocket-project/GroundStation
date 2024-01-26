@@ -21,12 +21,12 @@ public class ConnectionView : IView
 
     public void OnNavigated()
     {
-        if (_flightModuleReceiverRepository.CurrentStatus == IReceiver.Status.Selected)
+        if (_flightModuleReceiverRepository.PortName is not null)
         {
             _flightModuleReceiverRepository.Start();
         }
         
-        if (_sensingModuleReceiverRepository.CurrentStatus == IReceiver.Status.Selected)
+        if (_sensingModuleReceiverRepository.PortName is not null)
         {
             _sensingModuleReceiverRepository.Start();
         }
@@ -43,70 +43,20 @@ public class ConnectionView : IView
         
         Console.SetCursorPosition(1, 2);
         Console.Write("FLIGHT MODULE");
-        
+
+        Console.ForegroundColor = ConnectionStatusToColor(_flightModuleReceiverRepository.CurrentStatus);
         Console.SetCursorPosition(17, 2);
         Console.Write(_flightModuleReceiverRepository.CurrentStatusString);
+        Console.ResetColor();
         
         
         Console.SetCursorPosition(1, 4);
         Console.Write("SENSING MODULE");
         
+        Console.ForegroundColor = ConnectionStatusToColor(_sensingModuleReceiverRepository.CurrentStatus);
         Console.SetCursorPosition(17, 4);
         Console.Write(_sensingModuleReceiverRepository.CurrentStatusString);
-        
-        
-        // Console.SetCursorPosition(1, 4);
-        // Console.Write("FLIGHT MODULE");
-        //
-        // Console.ForegroundColor = ConsoleColor.Red;
-        // Console.SetCursorPosition(17, 4);
-        // Console.Write("CONNECTION FAILED");
-        // Console.ResetColor();
-        //
-        //
-        // Console.SetCursorPosition(1, 6);
-        // Console.Write("FLIGHT MODULE");
-        //
-        // Console.ForegroundColor = ConsoleColor.Cyan;
-        // Console.SetCursorPosition(17, 6);
-        // Console.Write("WAITING PACKET");
-        // Console.ResetColor();
-        //
-        //
-        // Console.SetCursorPosition(1, 8);
-        // Console.Write("FLIGHT MODULE");
-        //
-        // Console.ForegroundColor = ConsoleColor.Red;
-        // Console.SetCursorPosition(17, 8);
-        // Console.Write("INVALID PACKET");
-        // Console.ResetColor();
-        //
-        //
-        // Console.SetCursorPosition(1, 10);
-        // Console.Write("FLIGHT MODULE");
-        //
-        // Console.ForegroundColor = ConsoleColor.Green;
-        // Console.SetCursorPosition(17, 10);
-        // Console.Write("CONNECTED");
-        // Console.ResetColor();
-        //
-        // Console.SetCursorPosition(0, 11);
-        // Console.Write("RECEIVED: ");
-        // Console.ForegroundColor = ConsoleColor.Green;
-        // Console.Write("99");
-        // Console.ResetColor();
-        //
-        // Console.SetCursorPosition(0, 12);
-        // Console.Write("RSSI: ");
-        // Console.ForegroundColor = ConsoleColor.Green;
-        // Console.Write("-110");
-        // Console.ResetColor();
-        //
-        // Console.SetCursorPosition(0, 13);
-        // Console.Write("SNR: ");
-        // Console.ForegroundColor = ConsoleColor.Green;
-        // Console.Write("5.0");
-        // Console.ResetColor();
+        Console.ResetColor();
         
         
         // Console.SetCursorPosition(0, 10);
@@ -127,12 +77,34 @@ public class ConnectionView : IView
         switch (readKey.Key)
         {
             case ConsoleKey.LeftArrow:
-                _flightModuleReceiverRepository.Stop();
-                _sensingModuleReceiverRepository.Stop();
+                if (_flightModuleReceiverRepository.PortName is not null)
+                {
+                    _flightModuleReceiverRepository.Stop();
+                }
+        
+                if (_sensingModuleReceiverRepository.PortName is not null)
+                {
+                    _sensingModuleReceiverRepository.Stop();
+                }
+                
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository)));
                 break;
         }
+    }
+
+    private ConsoleColor ConnectionStatusToColor(IReceiver.Status status)
+    {
+        return status switch
+        {
+            IReceiver.Status.NotSelected => ConsoleColor.Gray,
+            IReceiver.Status.Selected => ConsoleColor.Black,
+            IReceiver.Status.ConnectionFailed => ConsoleColor.Red,
+            IReceiver.Status.WaitingPacket => ConsoleColor.Cyan,
+            IReceiver.Status.InvalidPacket => ConsoleColor.Red,
+            IReceiver.Status.Connected => ConsoleColor.Green,
+            _ => ConsoleColor.Black
+        };
     }
 }

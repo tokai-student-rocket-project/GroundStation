@@ -4,5 +4,5 @@ namespace GroundStation.Domain.Repositories;
 
 public interface ISensingModuleReceiverRepository : IReceiver
 {
-    FlightData GetLatest();
+    FlightData? LatestData { get; }
 }

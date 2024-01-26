@@ -1,6 +1,7 @@
 using System.IO.Ports;
 using GroundStation.Domain.Entities;
 using GroundStation.Domain.Repositories;
+using System.Text.Json.Nodes;
 
 namespace GroundStation.Infrastructure.Serial;
 
@@ -25,11 +26,20 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
     public string CurrentStatusString => CurrentStatus.ToString("G");
 
     public string[] GetPortNames() => SerialPort.GetPortNames();
+    public FlightData? LatestData { get; private set; }
 
     public void Start()
     {
-        _port?.Open();
-        CurrentStatus = (_port?.IsOpen ?? false) ? IReceiver.Status.WaitingPacket : IReceiver.Status.ConnectionFailed;
+        if (_port is null)
+        {
+            CurrentStatus = IReceiver.Status.ConnectionFailed;
+            return;
+        }
+        
+        _port.ReadTimeout = 5;
+        _port.DataReceived += OnDataReceived;
+        _port.Open();
+        CurrentStatus = _port.IsOpen ? IReceiver.Status.WaitingPacket : IReceiver.Status.ConnectionFailed;
     }
 
     public void Stop()
@@ -37,9 +47,24 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
         _port?.Close();
         CurrentStatus = IReceiver.Status.Selected;
     }
-
-    public FlightData GetLatest()
+    
+    private void OnDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
-        return new FlightData(1000);
+        var port = (SerialPort)sender;
+
+        try
+        {
+            var rawPacket = port.ReadLine();
+            var packet = JsonNode.Parse(rawPacket);
+
+            CurrentStatus = packet?["packet"]?["module"]?.ToString() == "S"
+                ? IReceiver.Status.Connected
+                : IReceiver.Status.InvalidPacket;
+            
+            LatestData = new FlightData(-100);
+        }
+        catch (Exception)
+        {
+        }
     }
 }
