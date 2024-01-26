@@ -82,10 +82,8 @@ public class ConnectionView : IView
         Console.SetCursorPosition(0, 8);
         Console.Write("[<] PREV");
         
-        Console.ForegroundColor = ConsoleColor.Gray;
         Console.SetCursorPosition(0, 9);
         Console.Write("[>] NEXT");
-        Console.ResetColor();
         
         
         if (!Console.KeyAvailable)
@@ -109,6 +107,11 @@ public class ConnectionView : IView
                 
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
+                        _sensingModuleReceiverRepository)));
+                break;
+            case ConsoleKey.RightArrow:
+                NavigationRequest?.Invoke(this,
+                    new NavigationRequestEventArgs(new SummaryView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository)));
                 break;
         }
