@@ -57,6 +57,16 @@ public class SummaryView : IView
         Console.SetCursorPosition(0, 4);
         Console.Write($"ACC    {_flightModuleReceiverRepository.LatestData?.GnssDataPart.Accuracy.ToString("F1") ?? "----"} m");
         
+        
+        Console.SetCursorPosition(1, 6);
+        Console.Write("VALVE");
+        
+        Console.SetCursorPosition(0, 7);
+        Console.Write($"MODE    {(_flightModuleReceiverRepository.LatestData?.FlightDataPart.ValveModeIsLaunch is null ? "-------" : _flightModuleReceiverRepository.LatestData.FlightDataPart.ValveModeIsLaunch ? "LAUNCH" : "WAITING")}");
+        
+        Console.SetCursorPosition(0, 8);
+        Console.Write($"ANGL    {_flightModuleReceiverRepository.LatestData?.ValveDataPart.TargetPosition.ToString("F0") ?? "--"}° > {_flightModuleReceiverRepository.LatestData?.ValveDataPart.CurrentPosition.ToString("F0") ?? "--"}°");
+        
 
         if (!Console.KeyAvailable)
         {
