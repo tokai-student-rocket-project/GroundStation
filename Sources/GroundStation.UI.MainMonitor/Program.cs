@@ -15,7 +15,7 @@ public static class Program
         Console.Clear();
         Console.CursorVisible = false;
 
-        var timer = new Timer(50);
+        var timer = new Timer(200);
         timer.Elapsed += Refresh;
         timer.Start();
 
