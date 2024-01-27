@@ -41,26 +41,33 @@ public class SummaryView : IView
         Console.Write("SUMMARY");
         
         
-        Console.SetCursorPosition(1, 2);
+        Console.SetCursorPosition(0, 2);
+        Console.Write($"FLIGHT MODE    {_flightModuleReceiverRepository.LatestData?.FlightDataPart.ModeString ?? "------"}");
+        
+        Console.SetCursorPosition(0, 3);
+        Console.Write($"VALVE MODE     {_flightModuleReceiverRepository.LatestData?.FlightDataPart.ValveModeString ?? "------"}");
+        
+        
+        Console.SetCursorPosition(1, 5);
         Console.Write("GNSS");
 
-        Console.SetCursorPosition(0, 3);
+        Console.SetCursorPosition(0, 6);
         Console.Write("POS");
         
-        Console.SetCursorPosition(7, 3);
+        Console.SetCursorPosition(7, 6);
         Console.Write($"{_flightModuleReceiverRepository.LatestData?.GnssDataPart.LatitudeString ?? "----"}   {_flightModuleReceiverRepository.LatestData?.GnssDataPart.LongitudeString ?? "----"}");
         
-        Console.SetCursorPosition(0, 4);
+        Console.SetCursorPosition(0, 7);
         Console.Write($"ACC    {_flightModuleReceiverRepository.LatestData?.GnssDataPart.AccuracyString ?? "----"} m");
         
         
-        Console.SetCursorPosition(1, 6);
+        Console.SetCursorPosition(1, 9);
         Console.Write("VALVE");
         
-        Console.SetCursorPosition(0, 7);
+        Console.SetCursorPosition(0, 10);
         Console.Write($"MODE    {_flightModuleReceiverRepository.LatestData?.FlightDataPart.ValveModeString ?? "------"}");
         
-        Console.SetCursorPosition(0, 8);
+        Console.SetCursorPosition(0, 11);
         Console.Write($"ANGL    {_flightModuleReceiverRepository.LatestData?.ValveDataPart.TargetPositionString ?? "--"}° > {_flightModuleReceiverRepository.LatestData?.ValveDataPart.CurrentPositionString ?? "--"}°");
 
 
