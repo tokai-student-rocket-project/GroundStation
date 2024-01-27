@@ -13,7 +13,7 @@ public class LogFile : ILogRepository
     
     public void ScheduleLog()
     {
-        LogName = DateTime.Now.ToString("");
+        LogName = DateTime.Now.ToString("O");
     }
 
     public void SaveLog(FlightData? flightData, SensingData? sensingData)
