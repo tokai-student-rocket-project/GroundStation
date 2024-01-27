@@ -122,7 +122,6 @@ internal class SensingModuleReceiverSerial : ISensingModuleReceiverRepository
                     ));
 
             ReceivedCount++;
-            Console.Beep();
         }
         catch (Exception)
         {

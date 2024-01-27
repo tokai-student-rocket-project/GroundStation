@@ -37,7 +37,7 @@ public class GnssDataPart
         var latMS = double.Parse("0." + Latitude.ToString("F").Split(".")[1]) * 60;
         var latM = Math.Floor(latMS);
         var latS = (double.Parse("0." + latMS.ToString("F").Split(".")[1]) * 60).ToString("F0");
-        return $"{latD}°{latM}'{latS}\"N";
+        return $"{latD}°{latM}′{latS}″N";
     }
     
     private string LongitudeDMS()
@@ -46,6 +46,6 @@ public class GnssDataPart
         var lonMS = double.Parse("0." + Longitude.ToString("F").Split(".")[1]) * 60;
         var lonM = Math.Floor(lonMS);
         var lonS = (double.Parse("0." + lonMS.ToString("F").Split(".")[1]) * 60).ToString("F0");
-        return $"{lonD}°{lonM}'{lonS}\"E";
+        return $"{lonD}°{lonM}′{lonS}″E";
     }
 }
