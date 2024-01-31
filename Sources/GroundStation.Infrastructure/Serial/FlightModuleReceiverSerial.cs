@@ -104,6 +104,7 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
                 );
             
             ReceivedCount++;
+            Console.Beep();
         }
         catch (Exception)
         {

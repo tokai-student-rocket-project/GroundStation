@@ -70,6 +70,8 @@ public class SummaryView : IView
         Console.SetCursorPosition(0, 11);
         Console.Write($"ANGL    {_flightModuleReceiverRepository.LatestData?.ValveDataPart.TargetPositionString ?? "--"}° > {_flightModuleReceiverRepository.LatestData?.ValveDataPart.CurrentPositionString ?? "--"}°");
 
+        Console.SetCursorPosition(0, 12);
+        Console.Write($"TEMP    {_flightModuleReceiverRepository.LatestData?.ValveDataPart.MotorTemperatureString ?? "--"}°");
 
         _obsRepository.SendData(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
         _logRepository.SaveLog(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
