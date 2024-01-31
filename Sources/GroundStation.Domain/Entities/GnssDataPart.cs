@@ -2,8 +2,10 @@
 
 public class GnssDataPart
 {
-    public GnssDataPart(int fixType, int satellites, double latitude, double longitude, double height, double speed, double accuracy)
+    public GnssDataPart(int epoch, int fixType, int satellites, double latitude, double longitude, double height, double speed, double accuracy)
     {
+        var unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        Time = unixTime.AddSeconds(epoch).ToLocalTime();
         FixType = fixType;
         Satellites = satellites;
         Latitude = latitude;
@@ -13,6 +15,7 @@ public class GnssDataPart
         Accuracy = accuracy;
     }
     
+    public DateTime Time { get; } 
     public int FixType { get; }
     public int Satellites { get; }
     public double Latitude { get; }
@@ -22,6 +25,7 @@ public class GnssDataPart
     public double Accuracy { get; }
 
 
+    public string TimeString => Time.ToString();
     private readonly string[] _fixTypes = { "UNKNOWN", "UNKNOWN", "UNKNOWN", "3D", "DR" };
     public string FixTypeString => _fixTypes[FixType];
     public string SatellitesString => Satellites.ToString();

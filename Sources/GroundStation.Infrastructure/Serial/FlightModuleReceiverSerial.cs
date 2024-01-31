@@ -86,6 +86,7 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
                     packet["flight"]["separation"]["sn4IsOn"].GetValue<bool>()
                     ),
                 new GnssDataPart(
+                    packet["gnss"]["unixEpoch"].GetValue<int>(),
                     packet["gnss"]["fixType"].GetValue<int>(),
                 packet["gnss"]["satellites"].GetValue<int>(),
             packet["gnss"]["latitude_deg"].GetValue<double>(),
