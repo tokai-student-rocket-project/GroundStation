@@ -33,11 +33,12 @@ public class FlightModulePortSelectionView : IView
 
     public void OnNavigated()
     {
-        _portNames = _flightModuleReceiverRepository.GetPortNames();
     }
 
     public void Render()
     {
+        _portNames = _flightModuleReceiverRepository.GetPortNames();
+        
         Console.Clear();
 
 

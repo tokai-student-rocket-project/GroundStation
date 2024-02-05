@@ -33,11 +33,12 @@ public class SensingModulePortSelectionView : IView
 
     public void OnNavigated()
     {
-        _portNames = _sensingModuleReceiverRepository.GetPortNames();
     }
 
     public void Render()
     {
+        _portNames = _flightModuleReceiverRepository.GetPortNames();
+        
         Console.Clear();
 
 
