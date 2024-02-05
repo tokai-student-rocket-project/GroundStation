@@ -10,13 +10,15 @@ public class SerialSettingView : IView
     private readonly IObsSettingRepository _obsSettingRepository;
     private readonly IObsRepository _obsRepository;
     private readonly ILogRepository _logRepository;
+    private readonly IMobileRepository _mobileRepository;
 
     public SerialSettingView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
         IObsSettingRepository obsSettingRepository,
         IObsRepository obsRepository,
-        ILogRepository logRepository
+        ILogRepository logRepository,
+        IMobileRepository mobileRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
@@ -24,6 +26,7 @@ public class SerialSettingView : IView
         _obsSettingRepository = obsSettingRepository;
         _obsRepository = obsRepository;
         _logRepository = logRepository;
+        _mobileRepository = mobileRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -40,7 +43,7 @@ public class SerialSettingView : IView
         Console.SetCursorPosition(3, 0);
         Console.Write("RECEIVER SETTING");
         Console.SetCursorPosition(25, 0);
-        Console.Write("1/3");
+        Console.Write("1/4");
 
 
         Console.SetCursorPosition(1, 2);
@@ -85,17 +88,17 @@ public class SerialSettingView : IView
             case ConsoleKey.D1:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new FlightModulePortSelectionView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
                 break;
             case ConsoleKey.D2:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SensingModulePortSelectionView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new LoggerSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
                 break;
         }
     }

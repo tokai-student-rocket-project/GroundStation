@@ -10,13 +10,15 @@ public class ConnectionView : IView
     private readonly IObsSettingRepository _obsSettingRepository;
     private readonly IObsRepository _obsRepository;
     private readonly ILogRepository _logRepository;
+    private readonly IMobileRepository _mobileRepository;
 
     public ConnectionView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
         IObsSettingRepository obsSettingRepository,
         IObsRepository obsRepository,
-        ILogRepository logRepository
+        ILogRepository logRepository,
+        IMobileRepository mobileRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
@@ -24,6 +26,7 @@ public class ConnectionView : IView
         _obsSettingRepository = obsSettingRepository;
         _obsRepository = obsRepository;
         _logRepository = logRepository;
+        _mobileRepository = mobileRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -115,13 +118,13 @@ public class ConnectionView : IView
                 }
                 
                 NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new ObsSettingView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository)));
+                    new NavigationRequestEventArgs(new MobileSettingView(_flightModuleReceiverRepository,
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SummaryView(_flightModuleReceiverRepository,
-                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository)));
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
                 break;
         }
     }
