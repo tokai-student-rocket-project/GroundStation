@@ -4,7 +4,7 @@ using GroundStation.UI.MainMonitor.Events;
 
 namespace GroundStation.UI.MainMonitor.Views;
 
-public class ObsSettingView : IView
+public class MobileSettingView : IView
 {
     private readonly IFlightModuleReceiverRepository _flightModuleReceiverRepository;
     private readonly ISensingModuleReceiverRepository _sensingModuleReceiverRepository;
@@ -13,7 +13,7 @@ public class ObsSettingView : IView
     private readonly ILogRepository _logRepository;
     private readonly IMobileRepository _mobileRepository;
 
-    public ObsSettingView(
+    public MobileSettingView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
         IObsSettingRepository obsSettingRepository,
@@ -32,12 +32,9 @@ public class ObsSettingView : IView
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
     
-    private bool _showPassword = false;
-    private ObsSetting? _obsSetting;
 
     public void OnNavigated()
     {
-        _obsSetting = _obsSettingRepository.GetObsSetting();
     }
 
     public void Render()
@@ -46,44 +43,36 @@ public class ObsSettingView : IView
 
 
         Console.SetCursorPosition(3, 0);
-        Console.Write("OBS SETTING");
+        Console.Write("MOBILE SETTING");
         Console.SetCursorPosition(25, 0);
-        Console.Write("3/4");
+        Console.Write("4/4");
         
         
         Console.SetCursorPosition(1, 2);
-        Console.Write("USE OBS?");
+        Console.Write("USE MOBILE?");
         
         Console.SetCursorPosition(0, 3);
         Console.Write("[1] ");
-        Console.ForegroundColor = _obsRepository.UseObs ? ConsoleColor.Green : ConsoleColor.Red;
-        Console.Write(_obsRepository.UseObs ? "YES" : "NO");
+        Console.ForegroundColor = _mobileRepository.UseMobile ? ConsoleColor.Green : ConsoleColor.Red;
+        Console.Write(_mobileRepository.UseMobile ? "YES" : "NO");
         Console.ResetColor();
 
-        if (_obsRepository.UseObs)
+        if (_mobileRepository.UseMobile)
         {
-            if (_obsSetting is null)
+            Console.SetCursorPosition(0, 5);
+            Console.WriteLine($"LISTEN ON:");
+            Console.WriteLine($"LOCAL    {_mobileRepository.LocalUrl}");
+            Console.WriteLine($"GLOBAL   {_mobileRepository.GlobalUrl}");
+            
+            Console.SetCursorPosition(0, 9);
+            Console.ForegroundColor = _mobileRepository.IsConnected ? ConsoleColor.Green : ConsoleColor.Red;
+            Console.WriteLine(_mobileRepository.IsConnected ? "CONNECTED" : "NOT CONNECTED");
+            Console.ResetColor();
+
+            if (_mobileRepository.IsConnected)
             {
-                Console.SetCursorPosition(0, 5);
-                Console.Write("SETTING NOT FOUND");
-            }
-            else
-            {
-                Console.SetCursorPosition(1, 5);
-                Console.WriteLine("SETTING LOADED");
-                Console.WriteLine($"URL    {_obsSetting.URL}");
-                Console.WriteLine($"PWD    {(_showPassword ? _obsSetting.Password : @"****************")}");
-                
-                
-                Console.SetCursorPosition(0, 8);
-                Console.Write("[2] ");
-                Console.Write(_showPassword ? "HIDE PWD" : "SHOW PWD");
-                Console.ResetColor();
-        
-        
-                Console.SetCursorPosition(0, 10);
-                Console.ForegroundColor = _obsRepository.IsConnected ? ConsoleColor.Green : ConsoleColor.Red;
-                Console.Write(_obsRepository.IsConnected ? "CONNECTED" : "NOT CONNECTED");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{_mobileRepository.ClientCount} CLIENT(S)");
                 Console.ResetColor();
             }
         }
@@ -94,7 +83,7 @@ public class ObsSettingView : IView
 
         Console.SetCursorPosition(0, 13);
         Console.Write("[>] NEXT");
-
+        
 
         if (!Console.KeyAvailable)
         {
@@ -105,28 +94,24 @@ public class ObsSettingView : IView
         switch (readKey.Key)
         {
             case ConsoleKey.D1:
-                _obsRepository.UseObs = !_obsRepository.UseObs;
-                if (_obsRepository.UseObs && _obsSetting is not null)
+                _mobileRepository.UseMobile = !_mobileRepository.UseMobile;
+                if (_mobileRepository.UseMobile)
                 {
-                    _obsRepository.Connect(_obsSetting);
+                    _mobileRepository.Start();
                 }
-                else if (!_obsRepository.UseObs && _obsSetting is not null)
+                else if (!_mobileRepository.UseMobile)
                 {
-                    _obsRepository.DisConnect();
+                    _mobileRepository.Stop();
                 }
                 break;
-            case ConsoleKey.D2:
-                _showPassword = !_showPassword;
-                break;
-            
             case ConsoleKey.LeftArrow:
                 NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new LoggerSettingView(_flightModuleReceiverRepository,
+                    new NavigationRequestEventArgs(new ObsSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
-                    new NavigationRequestEventArgs(new MobileSettingView(_flightModuleReceiverRepository,
+                    new NavigationRequestEventArgs(new ConnectionView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
                 break;
         }

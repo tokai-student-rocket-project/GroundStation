@@ -10,13 +10,15 @@ public class SummaryView : IView
     private readonly IObsSettingRepository _obsSettingRepository;
     private readonly IObsRepository _obsRepository;
     private readonly ILogRepository _logRepository;
+    private readonly IMobileRepository _mobileRepository;
 
     public SummaryView(
         IFlightModuleReceiverRepository flightModuleReceiverRepository,
         ISensingModuleReceiverRepository sensingModuleReceiverRepository,
         IObsSettingRepository obsSettingRepository,
         IObsRepository obsRepository,
-        ILogRepository logRepository
+        ILogRepository logRepository,
+        IMobileRepository mobileRepository
     )
     {
         _flightModuleReceiverRepository = flightModuleReceiverRepository;
@@ -24,6 +26,7 @@ public class SummaryView : IView
         _obsSettingRepository = obsSettingRepository;
         _obsRepository = obsRepository;
         _logRepository = logRepository;
+        _mobileRepository = mobileRepository;
     }
 
     public event EventHandler<NavigationRequestEventArgs>? NavigationRequest;
@@ -83,7 +86,7 @@ public class SummaryView : IView
         Console.WriteLine($"GND    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.GroundVoltageString} V    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.GroundCurrentString} mA    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.GroundPowerString} W");
         Console.WriteLine($"BAT    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.BatteryVoltageString} V    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.BatteryCurrentString} mA    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.BatteryPowerString} W");
         Console.WriteLine($"BUS    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.BusVoltageString} V    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.BusCurrentString} mA    {_sensingModuleReceiverRepository.LatestData?.ElectricalDataPart.BusPowerString} W");
-
+        
         Console.WriteLine();
         
         Console.WriteLine(" THERMAL");
@@ -99,6 +102,7 @@ public class SummaryView : IView
         
         _obsRepository.SendData(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
         _logRepository.SaveLog(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
+        _mobileRepository.SendData(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
         
 
         if (!Console.KeyAvailable)

@@ -31,4 +31,9 @@ public static class Factories
     {
         return new LogFile();
     }
+    
+    public static IMobileRepository CreateMobileRepository()
+    {
+        return new Mobile();
+    }
 }
