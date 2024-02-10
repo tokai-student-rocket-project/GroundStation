@@ -7,7 +7,8 @@ public interface IMobileRepository
     bool UseMobile { get; set; } 
     bool IsConnected { get; } 
     int ClientCount { get;}
-    string WebsocketUrl { get; }
+    string LocalUrl { get; }
+    string GlobalUrl { get; }
 
     void Start();
     void Stop();

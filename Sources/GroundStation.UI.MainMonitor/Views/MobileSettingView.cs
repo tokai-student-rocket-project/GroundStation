@@ -61,8 +61,8 @@ public class MobileSettingView : IView
         {
             Console.SetCursorPosition(0, 5);
             Console.WriteLine($"LISTEN ON:");
-            Console.WriteLine($"WEBSOCKET    {_mobileRepository.WebsocketUrl}");
-            Console.WriteLine($"CLIENTAPP");
+            Console.WriteLine($"LOCAL    {_mobileRepository.LocalUrl}");
+            Console.WriteLine($"GLOBAL   {_mobileRepository.GlobalUrl}");
             
             Console.SetCursorPosition(0, 9);
             Console.ForegroundColor = _mobileRepository.IsConnected ? ConsoleColor.Green : ConsoleColor.Red;
@@ -83,7 +83,7 @@ public class MobileSettingView : IView
 
         Console.SetCursorPosition(0, 13);
         Console.Write("[>] NEXT");
-
+        
 
         if (!Console.KeyAvailable)
         {
