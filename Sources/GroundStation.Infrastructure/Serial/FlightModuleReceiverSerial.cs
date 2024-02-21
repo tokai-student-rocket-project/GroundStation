@@ -111,4 +111,17 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
         {
         }
     }
+
+    public void SendFlightModeOnCommand()
+    {
+        Console.Beep();
+        _port?.Write("F");
+    }
+    
+    
+    public void SendFlightModeResetCommand()
+    {
+        Console.Beep();
+        _port?.Write("R");
+    }
 }

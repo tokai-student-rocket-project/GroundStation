@@ -6,4 +6,6 @@ public interface IFlightModuleReceiverRepository : IReceiver
 {
     FlightData? LatestData { get; }
     public int ReceivedCount { get; }
+    void SendFlightModeOnCommand();
+    void SendFlightModeResetCommand();
 }

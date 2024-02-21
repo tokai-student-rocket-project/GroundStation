@@ -104,12 +104,27 @@ public class SummaryView : IView
         _logRepository.SaveLog(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
         _mobileRepository.SendData(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
         
+        Console.WriteLine();
+        
+        Console.WriteLine("[F] FLIGHT MODE ON");
+        Console.WriteLine("[R] RESET");
+        
 
         if (!Console.KeyAvailable)
         {
             return;
         }
 
-        Console.ReadKey(true);
+        var readKey = Console.ReadKey(true);
+        switch (readKey.Key)
+        {
+            case ConsoleKey.F:
+                _flightModuleReceiverRepository.SendFlightModeOnCommand();
+                break;
+            
+            case ConsoleKey.R:
+                _flightModuleReceiverRepository.SendFlightModeResetCommand();
+                break;
+        }
     }
 }
