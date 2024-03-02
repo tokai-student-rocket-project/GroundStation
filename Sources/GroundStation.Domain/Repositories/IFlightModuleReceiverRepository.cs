@@ -8,4 +8,5 @@ public interface IFlightModuleReceiverRepository : IReceiver
     public int ReceivedCount { get; }
     void SendFlightModeOnCommand();
     void SendFlightModeResetCommand();
+    void SendTimerConfig();
 }

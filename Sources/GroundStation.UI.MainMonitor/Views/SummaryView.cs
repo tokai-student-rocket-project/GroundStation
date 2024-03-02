@@ -100,6 +100,10 @@ public class SummaryView : IView
         Console.WriteLine($"UPTIME    {_sensingModuleReceiverRepository.LatestData?.SutegomaDataPart.UptimeString} s");
         Console.WriteLine($"TASKRATE    {_sensingModuleReceiverRepository.LatestData?.SutegomaDataPart.TaskRateString} Hz");
         
+        Console.WriteLine();
+        Console.WriteLine(" TIMER");
+        Console.WriteLine($"PSEP1  {_flightModuleReceiverRepository.LatestData?.TimerDataPart.Separation1ProtectionTimeString} s    FSEP1  {_flightModuleReceiverRepository.LatestData?.TimerDataPart.Separation1ForceTimeString} s    PSEP2  {_flightModuleReceiverRepository.LatestData?.TimerDataPart.Separation2ProtectionTimeString} s    FSEP2  {_flightModuleReceiverRepository.LatestData?.TimerDataPart.Separation2ForceTimeString} s    LAND  {_flightModuleReceiverRepository.LatestData?.TimerDataPart.LandingTimeString} s");
+        
         _obsRepository.SendData(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
         _logRepository.SaveLog(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
         _mobileRepository.SendData(_flightModuleReceiverRepository.LatestData, _sensingModuleReceiverRepository.LatestData);
@@ -108,6 +112,7 @@ public class SummaryView : IView
         
         Console.WriteLine("[F] FLIGHT MODE ON");
         Console.WriteLine("[R] RESET");
+        Console.WriteLine("[C] SEND CONFIG");
         
 
         if (!Console.KeyAvailable)
@@ -124,6 +129,10 @@ public class SummaryView : IView
             
             case ConsoleKey.R:
                 _flightModuleReceiverRepository.SendFlightModeResetCommand();
+                break;
+            
+            case ConsoleKey.C:
+                _flightModuleReceiverRepository.SendTimerConfig();
                 break;
         }
     }

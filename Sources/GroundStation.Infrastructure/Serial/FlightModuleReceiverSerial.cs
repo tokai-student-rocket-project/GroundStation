@@ -101,6 +101,13 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
                     packet["valve"]["inputVoltage_V"].GetValue<double>(),
                     packet["valve"]["currentPosition_deg"].GetValue<double>(),
                     packet["valve"]["currentDesiredPosition_deg"].GetValue<double>()
+                    ),
+                new TimerDataPart(
+                    packet["timer"]["separation_1_protection_time"].GetValue<double>(),
+                    packet["timer"]["separation_1_force_time"].GetValue<double>(),
+                    packet["timer"]["separation_2_protection_time"].GetValue<double>(),
+                    packet["timer"]["separation_2_force_time"].GetValue<double>(),
+                    packet["timer"]["landing_time"].GetValue<double>()
                     )
                 );
             
@@ -123,5 +130,11 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
     {
         Console.Beep();
         _port?.Write("R");
+    }
+
+    public void SendTimerConfig()
+    {
+        Console.Beep();
+        _port?.Write("C");
     }
 }
