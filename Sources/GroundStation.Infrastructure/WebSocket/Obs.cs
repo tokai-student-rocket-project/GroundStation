@@ -39,7 +39,6 @@ public class Obs : IObsRepository
             return;
         }
         
-        _obs.SetInputSettings("gs_test", JObject.Parse("{ \"text\":\"OK\" }"));
         
 
         if (flightData is not null)
@@ -114,7 +113,7 @@ public class Obs : IObsRepository
             // _obs.SetInputSettings("gs_electrical_power_ground", JObject.Parse("{ \"text\":\"" + sensingData.ElectricalDataPart.GroundPowerString + "\" }"));
             // _obs.SetInputSettings("gs_electrical_power_battery", JObject.Parse("{ \"text\":\"" + sensingData.ElectricalDataPart.BatteryPowerString + "\" }"));
             // _obs.SetInputSettings("gs_electrical_power_tie", JObject.Parse("{ \"text\":\"" + sensingData.ElectricalDataPart.TiePowerString + "\" }"));
-            _obs.SetInputSettings("gs_electrical_power_bus", JObject.Parse("{ \"text\":\"" + sensingData.ElectricalDataPart.BusPowerString + "\" }"));
+            // _obs.SetInputSettings("gs_electrical_power_bus", JObject.Parse("{ \"text\":\"" + sensingData.ElectricalDataPart.BusPowerString + "\" }"));
             //
             // _obs.SetInputSettings("gs_thermal_temperature_regulator1", JObject.Parse("{ \"text\":\"" + sensingData.ThermalDataPart.Regulator1TemperatureString + "\" }"));
             // _obs.SetInputSettings("gs_thermal_temperature_regulator2", JObject.Parse("{ \"text\":\"" + sensingData.ThermalDataPart.Regulator2TemperatureString + "\" }"));
