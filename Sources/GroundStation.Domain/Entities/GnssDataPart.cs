@@ -2,7 +2,7 @@
 
 public class GnssDataPart
 {
-    public GnssDataPart(int epoch, int fixType, int satellites, double latitude, double longitude, double height, double speed, double accuracy)
+    public GnssDataPart(int epoch, int fixType, int satellites, double latitude, double longitude, double accuracy) // double height, double speed, // 信用ならないデータなのでコメントアウト
     {
         var unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         Time = unixTime.AddSeconds(epoch).ToLocalTime();
@@ -10,8 +10,8 @@ public class GnssDataPart
         Satellites = satellites;
         Latitude = latitude;
         Longitude = longitude;
-        Height = height;
-        Speed = speed;
+        //Height = height;
+        //Speed = speed;
         Accuracy = accuracy;
     }
     
@@ -31,8 +31,8 @@ public class GnssDataPart
     public string SatellitesString => Satellites.ToString();
     public string LatitudeString => LatitudeDMS();
     public string LongitudeString => LongitudeDMS();
-    public string HeightString => Height.ToString("F1");
-    public string SpeedString => Speed.ToString("F1");
+    //public string HeightString => Height.ToString("F1");
+    //public string SpeedString => Speed.ToString("F1");
     public string AccuracyString => Accuracy.ToString("F1");
 
     private string LatitudeDMS()
@@ -40,7 +40,7 @@ public class GnssDataPart
         var latD = Math.Floor(Latitude); 
         var latMS = double.Parse("0." + Latitude.ToString("F").Split(".")[1]) * 60;
         var latM = Math.Floor(latMS);
-        var latS = (double.Parse("0." + latMS.ToString("F").Split(".")[1]) * 60).ToString("F0");
+        var latS = (double.Parse("0." + latMS.ToString("F").Split(".")[1]) * 60).ToString("F2");
         return $"{latD}°{latM}′{latS}″N";
     }
     

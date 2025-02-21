@@ -40,7 +40,7 @@ public class LoggerSettingView : IView
 
     public void Render()
     {
-        Console.Clear();
+        //Console.Clear();
 
 
         Console.SetCursorPosition(3, 0);
@@ -97,22 +97,27 @@ public class LoggerSettingView : IView
         {
             case ConsoleKey.D1:
                 _logRepository.UseLogger = !_logRepository.UseLogger;
+                Console.Clear();
                 break;
             case ConsoleKey.D2:
                 _logRepository.IsPerformance = !_logRepository.IsPerformance;
+                Console.Clear();
                 break;
             case ConsoleKey.D3:
                 _logRepository.IsFlight = !_logRepository.IsFlight;
+                Console.Clear();
                 break;
             case ConsoleKey.LeftArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new ObsSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
         }
     }

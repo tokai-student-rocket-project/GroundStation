@@ -46,9 +46,10 @@ public class ConnectionView : IView
 
     public void Render()
     {
+        Console.SetCursorPosition(0, 0);
         Console.Clear();
-        
-        
+
+
         Console.SetCursorPosition(3, 0);
         Console.Write("CONNECTION");
         
@@ -120,11 +121,13 @@ public class ConnectionView : IView
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new MobileSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SummaryView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
         }
     }

@@ -39,7 +39,7 @@ public class MobileSettingView : IView
 
     public void Render()
     {
-        Console.Clear();
+        //Console.Clear();
 
 
         Console.SetCursorPosition(3, 0);
@@ -103,16 +103,19 @@ public class MobileSettingView : IView
                 {
                     _mobileRepository.Stop();
                 }
+                Console.Clear();
                 break;
             case ConsoleKey.LeftArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new ObsSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new ConnectionView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
         }
     }

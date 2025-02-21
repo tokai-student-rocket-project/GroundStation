@@ -1,4 +1,4 @@
-using System.IO.Ports;
+﻿using System.IO.Ports;
 using GroundStation.Domain.Entities;
 using GroundStation.Domain.Repositories;
 using System.Text.Json.Nodes;
@@ -88,19 +88,21 @@ internal class FlightModuleReceiverSerial : IFlightModuleReceiverRepository
                 new GnssDataPart(
                     packet["gnss"]["unixEpoch"].GetValue<int>(),
                     packet["gnss"]["fixType"].GetValue<int>(),
-                packet["gnss"]["satellites"].GetValue<int>(),
-            packet["gnss"]["latitude_deg"].GetValue<double>(),
-            packet["gnss"]["longitude_deg"].GetValue<double>(),
-            packet["gnss"]["height_m"].GetValue<double>(),
-            packet["gnss"]["speed_mps"].GetValue<double>(),
-            packet["gnss"]["accuracy_m"].GetValue<double>()
+                    packet["gnss"]["satellites"].GetValue<int>(),
+                    packet["gnss"]["latitude_deg"].GetValue<double>(),
+                    packet["gnss"]["longitude_deg"].GetValue<double>(),
+                    //packet["gnss"]["height_m"].GetValue<double>(),
+                    //packet["gnss"]["speed_mps"].GetValue<double>(),
+                    packet["gnss"]["accuracy_m"].GetValue<double>()
                     ),
                 new ValveDataPart(
                     packet["valve"]["motorTemperature_degC"].GetValue<double>(),
                     packet["valve"]["mcuTemperature_degC"].GetValue<double>(),
                     packet["valve"]["inputVoltage_V"].GetValue<double>(),
                     packet["valve"]["currentPosition_deg"].GetValue<double>(),
-                    packet["valve"]["currentDesiredPosition_deg"].GetValue<double>()
+                    packet["valve"]["currentDesiredPosition_deg"].GetValue<double>(),
+                    packet["valve"]["currentSupplyPosition_deg"].GetValue<double>(),
+                    packet["valve"]["voltage"].GetValue<double>()
                     ),
                 new TimerDataPart(
                     packet["timer"]["separation_1_protection_time"].GetValue<double>(),

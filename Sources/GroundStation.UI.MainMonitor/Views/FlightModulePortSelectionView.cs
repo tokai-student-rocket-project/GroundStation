@@ -42,7 +42,7 @@ public class FlightModulePortSelectionView : IView
     {
         _portNames = _flightModuleReceiverRepository.GetPortNames();
         
-        Console.Clear();
+        //Console.Clear();
 
 
         Console.SetCursorPosition(3, 0);
@@ -95,12 +95,14 @@ public class FlightModulePortSelectionView : IView
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
             case ConsoleKey.RightArrow:
                 _flightModuleReceiverRepository.PortName = _portNames[_selectedIndex];
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
         }
     }

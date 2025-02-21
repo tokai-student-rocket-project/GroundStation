@@ -37,22 +37,28 @@ public class InitialView : IView
 
     public void Render()
     {
+        Console.SetCursorPosition(0, 0);
         Console.Clear();
+
+
 
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine();
         Console.WriteLine();
-        Console.WriteLine("            WELCOME!");
+        Console.WriteLine("             WELCOME!");
         Console.WriteLine();
-        Console.WriteLine("  ___ _   _ ___   _   ___ _   _ ");
-        Console.WriteLine(" / __| | | | _ ) /_\\ | _ \\ | | | ");
-        Console.WriteLine(" \\__ \\ |_| | _ \\/ _ \\|   / |_| |");
-        Console.WriteLine(" |___/\\___/|___/_/ \\_\\_|_\\\\___/");
+        Console.WriteLine("   ___ _   _ ___   _   ___ _   _ ");
+        Console.WriteLine("  / __| | | | _ ) /_\\ | _ \\ | | | ");
+        Console.WriteLine("  \\__ \\ |_| | _ \\/ _ \\|   / |_| |");
+        Console.WriteLine("  |___/\\___/|___/_/ \\_\\_|_\\\\___/");
         Console.WriteLine();
-        Console.WriteLine("                         v1.1");
+        Console.WriteLine("                          v1.2");
         Console.WriteLine();
-        Console.WriteLine("   Press any key to continue...");
+        Console.WriteLine("    Press any key to continue...");
+        Console.WriteLine("\n\n == Tokai Student Rocket Project ==");
         Console.ResetColor();
+
+
 
 
         if (!Console.KeyAvailable)
@@ -61,8 +67,11 @@ public class InitialView : IView
         }
 
         Console.ReadKey(true);
+
+
         NavigationRequest?.Invoke(this,
             new NavigationRequestEventArgs(new SerialSettingView(_flightModuleReceiverRepository,
                 _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+        Console.Clear();
     }
 }

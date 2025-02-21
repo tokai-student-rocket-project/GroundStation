@@ -37,8 +37,7 @@ public class SerialSettingView : IView
 
     public void Render()
     {
-        Console.Clear();
-
+        //Console.Clear();
 
         Console.SetCursorPosition(3, 0);
         Console.Write("RECEIVER SETTING");
@@ -89,17 +88,27 @@ public class SerialSettingView : IView
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new FlightModulePortSelectionView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
             case ConsoleKey.D2:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new SensingModulePortSelectionView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
             case ConsoleKey.RightArrow:
                 NavigationRequest?.Invoke(this,
                     new NavigationRequestEventArgs(new LoggerSettingView(_flightModuleReceiverRepository,
                         _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
+                break;
+            case ConsoleKey.LeftArrow:
+                 NavigationRequest?.Invoke(this,
+                     new NavigationRequestEventArgs(new InitialView(_flightModuleReceiverRepository,
+                        _sensingModuleReceiverRepository, _obsSettingRepository, _obsRepository, _logRepository, _mobileRepository)));
+                Console.Clear();
                 break;
         }
+        
     }
 }
